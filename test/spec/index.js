@@ -10,7 +10,27 @@ tap.test("the converter should be available", function (t) {
     t.end();
 });
 
-tap.test("it should convert simple define correctly", function (t) {
+tap.test("it should convert simple define correctly using amd-to-es6", function (t) {
+    const file1 = path.join(__dirname, "../fixture/define/input.js");
+    const file2 = path.join(__dirname, "../fixture/define/output.js");
+    const input = fs.readFileSync(file1, "utf8");
+    const output = fs.readFileSync(file2, "utf8");
+    const result = converter(input, { parser: "amd-to-es6", beautify: true });
+    t.assert(result === output);
+    t.end();
+});
+
+tap.test("it should be possible to export simple values", { todo: true }, function (t) {
+    const file1 = path.join(__dirname, "../fixture/simple/input.js");
+    const file2 = path.join(__dirname, "../fixture/simple/output.js");
+    const input = fs.readFileSync(file1, "utf8");
+    const output = fs.readFileSync(file2, "utf8");
+    const result = converter(input, { beautify: true });
+    t.assert(result === output);
+    t.end();
+});
+
+tap.test("it should convert simple define correctly using the built in parser", { todo: true }, function (t) {
     const file1 = path.join(__dirname, "../fixture/define/input.js");
     const file2 = path.join(__dirname, "../fixture/define/output.js");
     const input = fs.readFileSync(file1, "utf8");
@@ -25,7 +45,7 @@ tap.test("it should convert views correctly", function (t) {
     const file2 = path.join(__dirname, "../fixture/views/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
-    const result = converter(input, { beautify: true });
+    const result = converter(input, { parser: "amd-to-es6", beautify: true });
     t.assert(result === output);
     t.end();
 });
@@ -35,7 +55,7 @@ tap.test("it should convert controllers correctly", { todo: true }, function (t)
     const file2 = path.join(__dirname, "../fixture/controllers/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
-    const result = converter(input, { beautify: true });
+    const result = converter(input, { parser: "amd-to-es6", beautify: true });
     t.assert(result === output);
     t.end();
 });

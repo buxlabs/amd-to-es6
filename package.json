@@ -4,7 +4,7 @@
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/spec/**/*.js --100"
+    "test": "tap 'test/spec/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "amd-to-es6": "^0.1.0",
+    "escodegen": "^1.8.1",
     "glob": "^7.0.6"
   }
 }
