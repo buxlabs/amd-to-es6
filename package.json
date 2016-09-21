@@ -4,7 +4,7 @@
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
-    "test": "tap 'test/spec/**/*.js'"
+    "test": "tap \"test/spec/**/*.js\""
   },
   "repository": {
     "type": "git",
