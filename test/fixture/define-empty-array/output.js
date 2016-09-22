@@ -1,5 +1,5 @@
 export default {
     url: {
-        login: "/rest/login"
+        login: '/rest/login'
     }
 };

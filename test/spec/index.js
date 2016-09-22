@@ -15,9 +15,9 @@ tap.test("the converter should be available", function (t) {
     t.end();
 });
 
-tap.test("it should convert simple define correctly using amd-to-es6", function (t) {
-    const file1 = path.join(__dirname, "../fixture/define/input.js");
-    const file2 = path.join(__dirname, "../fixture/define/output.js");
+tap.test("it should convert define correctly using amd-to-es6", function (t) {
+    const file1 = path.join(__dirname, "../fixture/define-empty-array/input.js");
+    const file2 = path.join(__dirname, "../fixture/define-empty-array/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input, { parser: "amd-to-es6", beautify: true });
@@ -25,9 +25,9 @@ tap.test("it should convert simple define correctly using amd-to-es6", function 
     t.end();
 });
 
-tap.test("it should be possible to export simple values", { todo: true }, function (t) {
-    const file1 = path.join(__dirname, "../fixture/simple/input.js");
-    const file2 = path.join(__dirname, "../fixture/simple/output.js");
+tap.test("it should convert define correctly using the built in parser", function (t) {
+    const file1 = path.join(__dirname, "../fixture/define-empty-array/input.js");
+    const file2 = path.join(__dirname, "../fixture/define-empty-array/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input, { beautify: true });
@@ -35,9 +35,9 @@ tap.test("it should be possible to export simple values", { todo: true }, functi
     t.end();
 });
 
-tap.test("it should convert simple define correctly using the built in parser", { todo: true }, function (t) {
-    const file1 = path.join(__dirname, "../fixture/define/input.js");
-    const file2 = path.join(__dirname, "../fixture/define/output.js");
+tap.test("it should convert define with callback only correctly using the built in parser", function (t) {
+    const file1 = path.join(__dirname, "../fixture/define-callback-only/input.js");
+    const file2 = path.join(__dirname, "../fixture/define-callback-only/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input, { beautify: true });
@@ -46,8 +46,8 @@ tap.test("it should convert simple define correctly using the built in parser", 
 });
 
 tap.test("it should convert views correctly", function (t) {
-    const file1 = path.join(__dirname, "../fixture/views/input.js");
-    const file2 = path.join(__dirname, "../fixture/views/output.js");
+    const file1 = path.join(__dirname, "../fixture/app/view_1/input.js");
+    const file2 = path.join(__dirname, "../fixture/app/view_1/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input, { parser: "amd-to-es6", beautify: true });
@@ -55,12 +55,42 @@ tap.test("it should convert views correctly", function (t) {
     t.end();
 });
 
-tap.test("it should convert controllers correctly", { todo: true }, function (t) {
-    const file1 = path.join(__dirname, "../fixture/controllers/input.js");
-    const file2 = path.join(__dirname, "../fixture/controllers/output.js");
+tap.test("it should convert controllers correctly", function (t) {
+    const file1 = path.join(__dirname, "../fixture/app/controller_1/input.js");
+    const file2 = path.join(__dirname, "../fixture/app/controller_1/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
-    const result = converter(input, { parser: "amd-to-es6", beautify: true });
+    const result = converter(input, { beautify: true });
+    t.assert(compare(result, output));
+    t.end();
+});
+
+tap.test("it should convert subapps correctly", function (t) {
+    const file1 = path.join(__dirname, "../fixture/app/subapp_1/input.js");
+    const file2 = path.join(__dirname, "../fixture/app/subapp_1/output.js");
+    const input = fs.readFileSync(file1, "utf8");
+    const output = fs.readFileSync(file2, "utf8");
+    const result = converter(input, { beautify: true });
+    t.assert(compare(result, output));
+    t.end();
+});
+
+tap.test("it should convert modules with functions after the return correctly", function (t) {
+    const file1 = path.join(__dirname, "../fixture/app/view_1/input.js");
+    const file2 = path.join(__dirname, "../fixture/app/view_1/output.js");
+    const input = fs.readFileSync(file1, "utf8");
+    const output = fs.readFileSync(file2, "utf8");
+    const result = converter(input, { beautify: true });
+    t.assert(compare(result, output));
+    t.end();
+});
+
+tap.test("it should convert modules with require sugar correctly", function (t) {
+    const file1 = path.join(__dirname, "../fixture/app/module_1/input.js");
+    const file2 = path.join(__dirname, "../fixture/app/module_1/output.js");
+    const input = fs.readFileSync(file1, "utf8");
+    const output = fs.readFileSync(file2, "utf8");
+    const result = converter(input, { beautify: true });
     t.assert(compare(result, output));
     t.end();
 });

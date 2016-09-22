@@ -1,16 +1,14 @@
 define([
-    "core/controller/authorization.controller"
+    'core/controller/authorization.controller'
 ], function (AuthorizationController) {
-    "use strict";
+    'use strict';
 
     return AuthorizationController.extend({
         show: function () {
             require([
-                "subapp/logs/show/controller/show.controller"
+                'subapp/logs/show/controller/show.controller'
             ], function (Controller) {
-                new Controller({
-                    region: region
-                });
+                new Controller();
             });
         }
     });
