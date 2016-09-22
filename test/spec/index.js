@@ -48,6 +48,11 @@ tap.test("it should convert modules with functions after the return correctly", 
     t.end();
 });
 
+tap.test("it should convert modules with constructors assigned to variables correctly", { todo: true }, function (t) {
+    t.assert(test("app/view_3"));
+    t.end();
+});
+
 tap.test("it should convert subapps correctly", function (t) {
     t.assert(test("app/subapp_1"));
     t.end();
