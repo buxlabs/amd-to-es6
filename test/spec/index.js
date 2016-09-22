@@ -38,6 +38,11 @@ tap.test("it should convert controllers correctly", function (t) {
     t.end();
 });
 
+tap.test("it should leave empty var statements", { todo: true }, function (t) {
+    t.assert(test("app/helper_1"));
+    t.end();
+});
+
 tap.test("it should convert views correctly", function (t) {
     t.assert(test("app/view_1"));
     t.end();
