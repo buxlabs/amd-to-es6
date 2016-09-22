@@ -1,15 +1,11 @@
 define([
     'core/view',
-    'subapp/logs/show/template/layout.jst'
-], function (View, jst) {
+    'subapp/hello/template/layout'
+], function (View, template) {
     'use strict';
 
     return View.extend({
-        template: jst,
-        className: 'logs-layout-view',
-        triggers: {
-            'click .js-exceptions': 'exceptions:clicked'
-        }
+        template: template
     });
 
 });
