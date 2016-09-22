@@ -10,8 +10,8 @@ function compare (result, output) {
 }
 
 function test (dir) {
-    const file1 = path.join(__dirname, `../fixture/${dir}/input.js`);
-    const file2 = path.join(__dirname, `../fixture/${dir}/output.js`);
+    const file1 = path.join(__dirname, "../fixture/", dir, "/input.js");
+    const file2 = path.join(__dirname, "../fixture/", dir, "/output.js");
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input);
