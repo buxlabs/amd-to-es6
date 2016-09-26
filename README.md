@@ -1,4 +1,4 @@
-# buxlabs.amd-to-es6 v0.3.2
+# buxlabs.amd-to-es6 v0.3.3
 convert amd to es6
 
 examples:
@@ -57,3 +57,7 @@ export default Marionette.Object.extend({
     }
 });
 ```
+
+inspired by:
+
+https://github.com/jonbretman/amd-to-as6
