@@ -38,8 +38,13 @@ tap.test("it should convert controllers correctly", function (t) {
     t.end();
 });
 
-tap.test("it should leave empty var statements", { todo: true }, function (t) {
+tap.test("it should leave empty var statements", function (t) {
     t.assert(test("app/helper_1"));
+    t.end();
+});
+
+tap.test("it should leave empty var statements", function (t) {
+    t.assert(test("app/helper_2"));
     t.end();
 });
 
@@ -58,7 +63,7 @@ tap.test("it should convert modules with functions after the return correctly", 
     t.end();
 });
 
-tap.test("it should convert modules with constructors assigned to variables correctly", { todo: true }, function (t) {
+tap.test("it should convert modules with constructors assigned to variables correctly", function (t) {
     t.assert(test("app/view_3"));
     t.end();
 });
