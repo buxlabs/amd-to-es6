@@ -64,6 +64,41 @@ tap.test("it should be possible to convert multiple files recursively", function
 
 });
 
+tap.test("should be possible to replace given file with a compiled one", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var content = "define(function () { return 123; });";
+    var src = "test/fixture/cli/input.js";
+    var filepath = path.join(__dirname, "../../../", src);
+    fs.writeFileSync(filepath, content);
+    var result = shell.exec(`node ${bin} ${src} --replace`, { silent: true });
+    var output = fs.readFileSync(filepath, "utf8");
+    t.ok(result.stdout === output);
+    fs.unlinkSync(filepath);
+    t.end();
+
+});
+
+tap.test("should be possible to replace given files within a directory", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var dir = "test/fixture/cli/replace-files";
+    var dirpath = path.join(__dirname, "../../../", dir); 
+    fs.mkdirSync(dirpath);
+    var content = "define(function () { return 712; });";
+    var src = "test/fixture/cli/replace-files/input.js";
+    var filepath = path.join(__dirname, "../../../", src);
+    fs.writeFileSync(filepath, content);
+    var result = shell.exec(`node ${bin} --src=${dirpath} --replace`, { silent: true });
+    var output = fs.readFileSync(filepath, "utf8");
+    t.ok(result.code === 0);
+    t.ok(output === "export default 712;");
+    fs.unlinkSync(filepath);
+    fs.rmdirSync(dirpath);
+    t.end();
+
+});
+
 tap.test("it should throw an error if dest is not provided", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
