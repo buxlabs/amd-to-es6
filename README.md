@@ -1,4 +1,4 @@
-# buxlabs.amd-to-es6 v0.2.0
+# buxlabs.amd-to-es6 v0.3.0
 convert amd to es6
 
 examples:
