@@ -71,9 +71,9 @@ tap.test("should be possible to replace given file with a compiled one", functio
     var src = "test/fixture/cli/input.js";
     var filepath = path.join(__dirname, "../../../", src);
     fs.writeFileSync(filepath, content);
-    var result = shell.exec(`node ${bin} ${src} --replace`, { silent: true });
+    shell.exec(`node ${bin} ${src} --replace`, { silent: true });
     var output = fs.readFileSync(filepath, "utf8");
-    t.ok(result.stdout === output);
+    t.ok(output === "export default 123;");
     fs.unlinkSync(filepath);
     t.end();
 
@@ -94,6 +94,44 @@ tap.test("should be possible to replace given files within a directory", functio
     t.ok(result.code === 0);
     t.ok(output === "export default 712;");
     fs.unlinkSync(filepath);
+    fs.rmdirSync(dirpath);
+    t.end();
+
+});
+
+tap.test("should be possible to convert a single file and change it's suffix", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var content = "define(function () { return 142; });";
+    var src = "test/fixture/cli/input-replace-suffix.js";
+    var filepath = path.join(__dirname, "../../../", src);
+    fs.writeFileSync(filepath, content);
+    var result = shell.exec(`node ${bin} ${src} --replace --suffix=es6`, { silent: true });
+    var destpath = filepath.replace(/\.js$/, ".es6");
+    var output = fs.readFileSync(destpath, "utf8");
+    fs.unlinkSync(destpath);
+    t.ok(result.code === 0);
+    t.ok(output === "export default 142;");
+    t.end();
+
+});
+
+tap.test("should be possible to convert multiple files and change their suffix", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var dir = "test/fixture/cli/replace-suffix-files";
+    var dirpath = path.join(__dirname, "../../../", dir); 
+    fs.mkdirSync(dirpath);
+    var content = "define(function () { return 617; });";
+    var src = "test/fixture/cli/replace-suffix-files/input.js";
+    var filepath = path.join(__dirname, "../../../", src);
+    fs.writeFileSync(filepath, content);
+    var result = shell.exec(`node ${bin} --src=${dirpath} --replace --suffix=es6`, { silent: true });
+    var destpath = filepath.replace(/\.js$/, ".es6");
+    var output = fs.readFileSync(destpath, "utf8");
+    t.ok(result.code === 0);
+    t.ok(output === "export default 617;");
+    fs.unlinkSync(destpath);
     fs.rmdirSync(dirpath);
     t.end();
 

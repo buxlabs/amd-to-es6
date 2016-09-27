@@ -11,15 +11,25 @@ program
     .option("--glob [glob]", "Glob pattern for the src")
     .option("--dest <dirname>", "Directory of the destination files")
     .option("--replace", "Replace the input files with results")
+    .option("--suffix <string>", "Replace suffix of the files")
     .parse(process.argv);
+
+function replaceSuffix (filename, suffix) {
+    return suffix ? filename.replace(/\.js$/, "." + suffix) : filename;
+}
 
 function convertFile (file) {
     var filepath = path.join(process.cwd(), file);
     var content = fs.readFileSync(filepath, "utf8");
     var compiled = amdtoes6(content);
-    process.stdout.write(compiled);
     if (program.replace) {
-        fs.writeFileSync(filepath, compiled);
+        var destpath = replaceSuffix(filepath, program.suffix);
+        if (program.suffix) {
+            fs.unlinkSync(filepath);
+        }
+        fs.writeFileSync(destpath, compiled);
+    } else {
+        process.stdout.write(compiled);
     }
 }
 
@@ -29,6 +39,10 @@ function convertFiles (files) {
         var content = fs.readFileSync(filepath, "utf8");
         var compiled = amdtoes6(content);
         var destpath = program.replace ? filepath : path.join(program.dest, file);
+        if (program.suffix) {
+            fs.unlinkSync(filepath);
+        }
+        destpath = replaceSuffix(destpath, program.suffix);
         fs.writeFileSync(destpath, compiled);
     });
 }
