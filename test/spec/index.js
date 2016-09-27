@@ -23,13 +23,33 @@ tap.test("the converter should be available", function (t) {
     t.end();
 });
 
-tap.test("it should convert empty define correctly", function (t) {
-    t.assert(test("define-empty-array"));
+tap.test("it should convert empty array in define correctly", function (t) {
+    t.assert(test("define-callback-empty-array"));
+    t.end();
+});
+
+tap.test("it should convert empty array in define with array function correctly", function (t) {
+    t.assert(test("define-arrow-function-callback-empty-array"));
     t.end();
 });
 
 tap.test("it should convert define with callback only correctly using the built in parser", function (t) {
     t.assert(test("define-callback-only"));
+    t.end();
+});
+
+tap.test("it should convert empty define with arrow function correctly", function (t) {
+    t.assert(test("define-arrow-function-callback-only"));
+    t.end();
+});
+
+tap.test("it should convert define with deps correctly", function (t) {
+    t.assert(test("define-arrow-function-callback-with-deps"));
+    t.end();
+});
+
+tap.test("it should convert define with deps with arrow function correctly", function (t) {
+    t.assert(test("define-callback-with-deps"));
     t.end();
 });
 
