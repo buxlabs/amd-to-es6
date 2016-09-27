@@ -1,6 +1,7 @@
 "use strict";
 
 const isUseStrict = require("./isUseStrict");
+const isObjectExpression = require("./isObjectExpression");
 const isRequireSugarVariableDeclarator = require("./isRequireSugarVariableDeclarator");
 const isReturnStatement = require("./isReturnStatement");
 const isVariableDeclaration = require("./isVariableDeclaration");
@@ -19,12 +20,19 @@ function changeReturnToExportDefaultDeclaration (node) {
 function changeVariableDeclaration (node) {
     return node.declarations.map(function (declarator) {
         var param = declarator.id.name;
-        if (isRequireSugarVariableDeclarator(declarator)) {            
+        if (isRequireSugarVariableDeclarator(declarator)) {
             var element = declarator.init && declarator.init.arguments && declarator.init.arguments[0].value;
             return getImportDeclaration(element, param);
         }
         return getVariableDeclaration(declarator, param);
     });
+}
+
+function changeObjectExpressionToExportDefaultDeclaration (node) {
+    return {
+        type: "ExportDefaultDeclaration",
+        declaration: node
+    };
 }
 
 module.exports = function (source, code) {
@@ -37,6 +45,9 @@ module.exports = function (source, code) {
         }
         if (isReturnStatement(node)) {
             return changeReturnToExportDefaultDeclaration(node);
+        }
+        if (isObjectExpression(node)) {
+            return changeObjectExpressionToExportDefaultDeclaration(node);
         }
         return node;
     });

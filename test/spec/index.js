@@ -53,6 +53,11 @@ tap.test("it should convert define with deps with arrow function correctly", fun
     t.end();
 });
 
+tap.test("it should convert define with an object in callback only correctly", function (t) {
+    t.assert(test("define-object-only"));
+    t.end();
+});
+
 tap.test("it should convert controllers correctly", function (t) {
     t.assert(test("app/controller_1"));
     t.end();

@@ -12,8 +12,7 @@ module.exports = function (source, options) {
     var dependencies = getDependencies(source);
     var code = getModuleCode(source);
     var imports = generateImports(dependencies);
-    var code = generateCode(source, code);
+    code = generateCode(source, code);
     var program = { type: "Program", body: imports.concat(code) };
     return escodegen.generate(program);
 };
-
