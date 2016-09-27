@@ -15,6 +15,10 @@ function test (dir) {
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input);
+    if (dir === "app/behavior_1") {
+        console.log(output);
+        console.log(result);
+    }
     return compare(result, output);
 }
 
@@ -55,6 +59,11 @@ tap.test("it should convert define with deps with arrow function correctly", fun
 
 tap.test("it should convert define with an object in callback only correctly", function (t) {
     t.assert(test("define-object-only"));
+    t.end();
+});
+
+tap.test("it should keep dependencies with side effects", { todo: true }, function (t) {
+    t.assert(test("app/behavior_1"));
     t.end();
 });
 
