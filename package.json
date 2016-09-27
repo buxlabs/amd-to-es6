@@ -1,6 +1,6 @@
 {
   "name": "buxlabs.amd-to-es6",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
