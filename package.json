@@ -10,6 +10,9 @@
   "bin": {
     "amdtoes6": "./bin/cli.js"
   },
+  "engines" : {
+    "node" : ">=6.1.0" 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/buxlabs/buxlabs.amd-to-es6.git"
