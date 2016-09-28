@@ -5,6 +5,7 @@ const isObjectExpression = require("./isObjectExpression");
 const isRequireSugarVariableDeclarator = require("./isRequireSugarVariableDeclarator");
 const isReturnStatement = require("./isReturnStatement");
 const isVariableDeclaration = require("./isVariableDeclaration");
+const isRequireCallExpression = require("./isRequireCallExpression");
 const getImportDeclaration = require("./getImportDeclaration");
 const getVariableDeclaration = require("./getVariableDeclaration");
 const hasDefineWithCallback = require("./hasDefineWithCallback");
@@ -33,15 +34,6 @@ function changeObjectExpressionToExportDefaultDeclaration (node) {
         type: "ExportDefaultDeclaration",
         declaration: node
     };
-}
-
-function isRequireCallExpression (node) {
-    return node.type === "ExpressionStatement" &&
-        node.expression &&
-        node.expression.type === "CallExpression" &&
-        node.expression.callee &&
-        node.expression.callee.type === "Identifier" &&
-        node.expression.callee.name === "require";
 }
 
 function changeRequireCallExpressionToImportDeclaration (node) {
