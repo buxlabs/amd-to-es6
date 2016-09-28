@@ -1,5 +1,5 @@
 import Marionette from 'backbone.marionette';
-import sideEffect from 'side-effect';
+import 'side-effect';
 
 export default Marionette.Object.extend({
 

@@ -1,5 +1,5 @@
 import Behavior from 'core/behavior';
-import typeahead from 'typeahead';
+import 'typeahead';
 
 export default Behavior.extend({
     ui: {
