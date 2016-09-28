@@ -58,6 +58,11 @@ tap.test("it should convert define with an object in callback only correctly", (
     t.end();
 });
 
+tap.test("it should convert define with unused deps correctly", (t) => {
+    t.assert(test("define-callback-with-mismatch-deps"));
+    t.end();
+});
+
 tap.test("it should keep dependencies with side effects", (t) => {
     t.assert(test("app/behavior_1"));
     t.end();

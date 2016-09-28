@@ -1,5 +1,5 @@
 import Behavior from 'core/behavior';
-import jquerySwing from 'jquery.swing';
+import 'jquery.swing';
 
 export default Behavior.extend({
     ui: {

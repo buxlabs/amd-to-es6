@@ -1,6 +1,6 @@
 define([
     "core/behavior",
-    "swap"
+    "typeahead"
 ], function (Behavior) {
     "use strict";
 
@@ -9,7 +9,7 @@ define([
             hello: ".world"
         },
         onRender: function () {
-            this.ui.hello.swap();
+            this.ui.hello.typeahead();
         }
     });
 
