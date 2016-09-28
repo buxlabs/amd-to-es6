@@ -58,8 +58,13 @@ tap.test("it should convert define with an object in callback only correctly", (
     t.end();
 });
 
-tap.test("it should keep dependencies with side effects", { todo: true }, (t) => {
+tap.test("it should keep dependencies with side effects", (t) => {
     t.assert(test("app/behavior_1"));
+    t.end();
+});
+
+tap.test("it should keep dependencies with side effects", (t) => {
+    t.assert(test("app/behavior_2"));
     t.end();
 });
 
@@ -68,8 +73,13 @@ tap.test("it should convert controllers correctly", (t) => {
     t.end();
 });
 
-tap.test("it should keep dependencies with side effects", { todo: true }, (t) => {
+tap.test("it should keep dependencies with side effects", (t) => {
     t.assert(test("app/controller_2"));
+    t.end();
+});
+
+tap.test("it should keep custom object assignments", (t) => {
+    t.assert(test("app/enum_1"));
     t.end();
 });
 
@@ -88,6 +98,11 @@ tap.test("it should leave empty var statements", (t) => {
     t.end();
 });
 
+tap.test("it should handle returns of objects", (t) => {
+    t.assert(test("app/model_2"));
+    t.end();
+});
+
 tap.test("it should convert views correctly", (t) => {
     t.assert(test("app/view_1"));
     t.end();
@@ -100,6 +115,11 @@ tap.test("it should convert modules with functions after the return correctly", 
 
 tap.test("it should convert modules with constructors assigned to variables correctly", (t) => {
     t.assert(test("app/view_3"));
+    t.end();
+});
+
+tap.test("it should handle a var declaration which is moved to a separate line", (t) => {
+    t.assert(test("app/view_4"));
     t.end();
 });
 

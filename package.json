@@ -10,8 +10,8 @@
   "bin": {
     "amdtoes6": "./bin/cli.js"
   },
-  "engines" : {
-    "node" : ">=6.1.0" 
+  "engines": {
+    "node": ">=6.1.0"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "acorn": "4.0.3",
     "commander": "2.9.0",
     "escodegen": "1.8.1",
-    "glob": "7.0.6"
+    "glob": "7.0.6",
+    "underscore.string": "^3.3.4"
   }
 }

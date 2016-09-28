@@ -1,5 +1,7 @@
 "use strict";
 
+const string = require("underscore.string");
+
 module.exports = function (element, param) {
     return {
         type: "ImportDeclaration",
@@ -8,7 +10,7 @@ module.exports = function (element, param) {
                 type: "ImportDefaultSpecifier",
                 local: {
                     type: "Identifier",
-                    name: param
+                    name: param || string.camelize(element.replace(".", "-"))
                 }
             }
         ],

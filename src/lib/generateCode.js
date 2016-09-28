@@ -35,6 +35,19 @@ function changeObjectExpressionToExportDefaultDeclaration (node) {
     };
 }
 
+function isRequireCallExpression (node) {
+    return node.type === "ExpressionStatement" &&
+        node.expression &&
+        node.expression.type === "CallExpression" &&
+        node.expression.callee &&
+        node.expression.callee.type === "Identifier" &&
+        node.expression.callee.name === "require";
+}
+
+function changeRequireCallExpressionToImportDeclaration (node) {
+    return getImportDeclaration(node.expression.arguments[0].value);
+}
+
 module.exports = function (source, code) {
     var canHaveRequireSugar = hasDefineWithCallback(source);
     var array = code.filter(function (node) {
@@ -42,6 +55,9 @@ module.exports = function (source, code) {
     }).map(function (node) {
         if (canHaveRequireSugar && isVariableDeclaration(node)) {
             return changeVariableDeclaration(node);
+        }
+        if (isRequireCallExpression(node)) {
+            return changeRequireCallExpressionToImportDeclaration(node);
         }
         if (isReturnStatement(node)) {
             return changeReturnToExportDefaultDeclaration(node);
