@@ -1,11 +1,11 @@
 import Behavior from 'core/behavior';
-import swap from 'swap';
+import 'typeahead';
 
 export default Behavior.extend({
     ui: {
         hello: '.world'
     },
     onRender: function () {
-        this.ui.hello.swap();
+        this.ui.hello.typeahead();
     }
 });
