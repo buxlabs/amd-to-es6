@@ -7,8 +7,8 @@ const amdtoes6 = require("../index");
 
 program
     .option("--src <dirname>", "Directory of the source files")
-    .option("--glob [glob]", "Glob pattern for the src")
     .option("--dest <dirname>", "Directory of the destination files")
+    .option("--glob [glob]", "Glob pattern for the src")
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
     .parse(process.argv);

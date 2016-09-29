@@ -23,6 +23,26 @@ tap.test("the converter should be available", (t) => {
     t.end();
 });
 
+tap.test("it should work for an anonymous module", (t) => {
+    t.assert(test("amdjs-api/anonymous-module"));
+    t.end();
+});
+
+tap.test("it should work for a dependency free module", (t) => {
+    t.assert(test("amdjs-api/dependency-free-module"));
+    t.end();
+});
+
+tap.test("it should work for an anonymous module", (t) => {
+    t.assert(test("rjs-examples/simple-define"));
+    t.end();
+});
+
+tap.test("it should work for named dependencies", (t) => {
+    t.assert(test("rjs-examples/function-wrapping"));
+    t.end();
+});
+
 tap.test("it should convert empty array in define correctly", (t) => {
     t.assert(test("define-callback-empty-array"));
     t.end();
@@ -95,6 +115,11 @@ tap.test("it should leave empty var statements", (t) => {
 
 tap.test("it should leave empty var statements", (t) => {
     t.assert(test("app/helper_2"));
+    t.end();
+});
+
+tap.test("it should work for named dependencies", (t) => {
+    t.assert(test("app/helper_3"));
     t.end();
 });
 

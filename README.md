@@ -1,11 +1,32 @@
-# buxlabs.amd-to-es6 v0.5.0
-convert amd to es6
+# AMD to ES6 converter
+
+## Installation
+
+`npm install -g buxlabs.amd-to-es6`
+
+## Usage
+
+Convert a single file with:
+
+`amdtoes6 app.js > app-es6.js`
+
+Convert multiple files in given dir with:
+
+`amdtoes6 --src=src --dest=build`
+
+Convert multiple files in given dir recursively with:
+
+`amdtoes6 --src=src --dest=build --glob=**/*.js`
+
+Convert multiple files and replace them with:
+
+`amdtoes6 --src=src --replace`
 
 [ ![Codeship Status for buxlabs/buxlabs.amd-to-es6](https://app.codeship.com/projects/f6299130-6721-0134-f3f9-02d00f1d3243/status?branch=master)](https://app.codeship.com/projects/176125)
 
 ## Examples:
 
-in:
+**AMD**
 
 ```javascript
 define([
@@ -21,7 +42,7 @@ define([
 });
 ```
 
-out:
+**ES6**
 
 ```javascript
 import View from 'core/view';
@@ -32,7 +53,7 @@ export default View.extend({
 });
 ```
 
-in:
+**AMD**
 
 ```javascript
 define(function (require) {
@@ -48,7 +69,7 @@ define(function (require) {
 });
 ```
 
-out:
+**ES6**
 
 ```javascript
 import Marionette from 'marionette';
@@ -58,6 +79,23 @@ export default Marionette.Object.extend({
         console.log('hello world');
     }
 });
+```
+
+There are more examples in the test/fixture directory
+
+### Options
+```sh
+
+  Usage: amdtoes6 [options]
+
+  Options:
+
+    --src <dirname>     Directory of the source files
+    --dest <dirname>    Directory of the destination files
+    --glob [glob]       Glob pattern for the src to match for input files
+    --replace           Replace the input files with results
+    --suffix <string>   Replace suffix of the files
+
 ```
 
 ## Inspired by:
