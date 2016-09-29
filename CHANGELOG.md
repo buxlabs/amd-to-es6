@@ -1,3 +1,7 @@
+## 0.5.4
+
+* add: const/let support for require sugar
+
 ## 0.5.3
 
 * add: --recursive flag

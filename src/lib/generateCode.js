@@ -25,7 +25,7 @@ function changeVariableDeclaration (node) {
             var element = declarator.init && declarator.init.arguments && declarator.init.arguments[0].value;
             return getImportDeclaration(element, param);
         }
-        return getVariableDeclaration(declarator, param);
+        return getVariableDeclaration(node, declarator, param);
     });
 }
 

@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function (element, param) {
+module.exports = function (node, element, param) {
 
     var declaration = {
         type: "VariableDeclaration",
@@ -13,7 +13,7 @@ module.exports = function (element, param) {
                 }
             }
         ],
-        kind: "var"
+        kind: node.kind
     };
 
     if (element.init) {

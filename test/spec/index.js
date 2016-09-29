@@ -103,6 +103,16 @@ tap.test("it should keep dependencies with side effects", (t) => {
     t.end();
 });
 
+tap.test("it should work with const", (t) => {
+    t.assert(test("app/controller_3"));
+    t.end();
+});
+
+tap.test("it should work with let", (t) => {
+    t.assert(test("app/controller_4"));
+    t.end();
+});
+
 tap.test("it should keep custom object assignments", (t) => {
     t.assert(test("app/enum_1"));
     t.end();

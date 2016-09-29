@@ -171,8 +171,6 @@ tap.test("should be possible to beautify the output", function (t) {
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/beautify-file/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --beautify ${args}`, { silent: true });
     t.ok(replaceNewlines(output) === replaceNewlines(result.stdout));
-    fs.writeFileSync("test1.log", output);
-    fs.writeFileSync("test2.log", output);
     t.end();
 
 });
