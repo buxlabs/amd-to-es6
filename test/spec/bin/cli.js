@@ -137,6 +137,23 @@ tap.test("should be possible to convert multiple files and change their suffix",
 
 });
 
+tap.test("should be possible to beautify the output", function (t) {
+
+    function replaceNewlines (str) {
+        return str.replace(/(?:\r\n|\r|\n)/g, "\n");
+    }
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var args = "test/fixture/cli/beautify-file/input.js";
+    var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/beautify-file/output.js"), "utf8");
+    var result = shell.exec(`node ${bin} --beautify ${args}`, { silent: true });
+    t.ok(replaceNewlines(output) === replaceNewlines(result.stdout));
+    fs.writeFileSync("test1.log", output);
+    fs.writeFileSync("test2.log", output);
+    t.end();
+
+});
+
 tap.test("it should throw an error if dest is not provided", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");

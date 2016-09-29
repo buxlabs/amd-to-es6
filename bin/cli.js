@@ -11,16 +11,17 @@ program
     .option("--glob [glob]", "Glob pattern for the src")
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
+    .option("--beautify", "Beautify the output")
     .parse(process.argv);
 
 function replaceSuffix (filename, suffix) {
     return suffix ? filename.replace(/\.js$/, "." + suffix) : filename;
 }
 
-function convertFile (file) {
+function convertFile (file, options) {
     var filepath = path.join(process.cwd(), file);
     var content = fs.readFileSync(filepath, "utf8");
-    var compiled = amdtoes6(content);
+    var compiled = amdtoes6(content, options);
     if (program.replace) {
         var destpath = replaceSuffix(filepath, program.suffix);
         if (program.suffix) {
@@ -32,11 +33,11 @@ function convertFile (file) {
     }
 }
 
-function convertFiles (files) {
+function convertFiles (files, options) {
     files.forEach(function (file) {
         var filepath = path.join(program.src, file);
         var content = fs.readFileSync(filepath, "utf8");
-        var compiled = amdtoes6(content);
+        var compiled = amdtoes6(content, options);
         var destpath = program.replace ? filepath : path.join(program.dest, file);
         if (program.suffix) {
             fs.unlinkSync(filepath);
@@ -48,13 +49,13 @@ function convertFiles (files) {
 
 if (!program.src) {
     var file = program.args[0];
-    convertFile(file);
+    convertFile(file, program);
     return process.exit(0);
 }
 
 if (program.src && (program.dest || program.replace)) {
     var files = glob.sync(program.glob || "*.js", { cwd: program.src });
-    convertFiles(files);
+    convertFiles(files, program);
     return process.exit(0);
 }
 
