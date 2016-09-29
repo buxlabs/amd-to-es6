@@ -1,3 +1,7 @@
+## 0.5.3
+
+* add: --recursive flag
+
 ## 0.5.2
 
 * add: --beautify flag

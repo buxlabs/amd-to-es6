@@ -40,13 +40,36 @@ tap.test("it should be possible to convert multiple files within a directory", f
 
 });
 
-tap.test("it should be possible to convert multiple files recursively", function (t) {
+tap.test("it should be possible to convert multiple files recursively using the glob option", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var src = "test/fixture/cli/multiple-files-recursive/inputs";
     var glob = "**/*.js";
     var dest = "test/fixture/cli/multiple-files-recursive/outputs";
     var args = `--src=${src} --glob=${glob} --dest=${dest}`;
+    var result = shell.exec(`node ${bin} ${args}`, { silent: true });
+    var input1 = path.join(__dirname, "../../../", dest, "input1.js");
+    var input2 = path.join(__dirname, "../../../", dest, "dir/input2.js");
+    var output1 = path.join(__dirname, "../../../", dest, "output1.js");
+    var output2 = path.join(__dirname, "../../../", dest, "dir/output2.js");
+    var content1 = fs.readFileSync(input1, "utf8");
+    var content2 = fs.readFileSync(input2, "utf8");
+    var result1 = fs.readFileSync(output1, "utf8");
+    var result2 = fs.readFileSync(output2, "utf8");
+    t.ok(content1 === result1);
+    t.ok(content2 === result2);
+    fs.unlinkSync(input1);
+    fs.unlinkSync(input2);
+    t.end();
+
+});
+
+tap.test("it should be possible to convert multiple files recursively using the recursive option", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var src = "test/fixture/cli/multiple-files-recursive/inputs";
+    var dest = "test/fixture/cli/multiple-files-recursive/outputs";
+    var args = `--src=${src} --dest=${dest} --recursive`;
     var result = shell.exec(`node ${bin} ${args}`, { silent: true });
     var input1 = path.join(__dirname, "../../../", dest, "input1.js");
     var input2 = path.join(__dirname, "../../../", dest, "dir/input2.js");

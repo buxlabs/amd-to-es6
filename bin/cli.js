@@ -9,6 +9,7 @@ program
     .option("--src <dirname>", "Directory of the source files")
     .option("--dest <dirname>", "Directory of the destination files")
     .option("--glob [glob]", "Glob pattern for the src")
+    .option("--recursive", "Set glob pattern to **/*.js with no hassle")
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
     .option("--beautify", "Beautify the output")
@@ -16,6 +17,13 @@ program
 
 function replaceSuffix (filename, suffix) {
     return suffix ? filename.replace(/\.js$/, "." + suffix) : filename;
+}
+
+function getGlob (options) {
+    if (options.recursive) {
+        return "**/*.js";
+    }
+    return program.glob || "*.js";
 }
 
 function convertFile (file, options) {
@@ -54,7 +62,7 @@ if (!program.src) {
 }
 
 if (program.src && (program.dest || program.replace)) {
-    var files = glob.sync(program.glob || "*.js", { cwd: program.src });
+    var files = glob.sync(getGlob(program), { cwd: program.src });
     convertFiles(files, program);
     return process.exit(0);
 }
