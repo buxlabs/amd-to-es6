@@ -93,6 +93,7 @@ There are more examples in the test/fixture directory
     --src <dirname>     Directory of the source files
     --dest <dirname>    Directory of the destination files
     --glob [glob]       Glob pattern for the src to match for input files
+    --recursive         Set glob pattern to **/*.js with no hassle
     --replace           Replace the input files with results
     --suffix <string>   Replace suffix of the files
     --beautify          Beautify the output
