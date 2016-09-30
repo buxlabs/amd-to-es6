@@ -163,8 +163,18 @@ tap.test("it should handle a var declaration which is moved to a separate line",
     t.end();
 });
 
+tap.test("it should drop an empty define", (t) => {
+    t.assert(test("app/view_spec_1"));
+    t.end();
+});
+
 tap.test("it should convert subapps correctly", (t) => {
     t.assert(test("app/subapp_1"));
+    t.end();
+});
+
+tap.test("it should covert subapp specs correctly", (t) => {
+    t.assert(test("app/subapp_spec_1"));
     t.end();
 });
 
@@ -175,5 +185,10 @@ tap.test("it should convert modules with one require sugar call expression corre
 
 tap.test("it should convert modules with multiple require sugar call expressions correctly", (t) => {
     t.assert(test("app/module_2"));
+    t.end();
+});
+
+tap.test("it should convert module specs correctly", (t) => {
+    t.assert(test("app/module_spec_1"));
     t.end();
 });
