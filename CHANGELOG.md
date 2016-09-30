@@ -1,3 +1,7 @@
+## 0.5.5
+
+* add: check if the module has define
+
 ## 0.5.4
 
 * add: const/let support for require sugar
