@@ -33,6 +33,16 @@ tap.test("it should work for a dependency free module", (t) => {
     t.end();
 });
 
+tap.test("it should work for simplified commonjs wrapping", { todo: true }, (t) => {
+    t.assert(test("amdjs-api/simplified-commonjs-wrapping"));
+    t.end();
+});
+
+tap.test("it should work for named simplified commonjs wrapping", { todo: true }, (t) => {
+    t.assert(test("amdjs-api/named-simplified-commonjs-wrapping"));
+    t.end();
+});
+
 tap.test("it should work for an anonymous module", (t) => {
     t.assert(test("rjs-examples/simple-define"));
     t.end();
