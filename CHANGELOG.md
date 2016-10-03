@@ -1,3 +1,7 @@
+## 0.6.0
+
+* add: basic support for simplified commonjs wrapping
+
 ## 0.5.5
 
 * add: check if the module has define

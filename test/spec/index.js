@@ -33,13 +33,23 @@ tap.test("it should work for a dependency free module", (t) => {
     t.end();
 });
 
-tap.test("it should work for simplified commonjs wrapping", { todo: true }, (t) => {
+tap.test("it should work for simplified commonjs wrapping", (t) => {
     t.assert(test("amdjs-api/simplified-commonjs-wrapping"));
     t.end();
 });
 
-tap.test("it should work for named simplified commonjs wrapping", { todo: true }, (t) => {
+tap.test("it should work for simplified commonjs wrapping that returns a literal", (t) => {
+    t.assert(test("amdjs-api/simplified-commonjs-wrapping-returns-literal"));
+    t.end();
+});
+
+tap.test("it should work for named simplified commonjs wrapping", (t) => {
     t.assert(test("amdjs-api/named-simplified-commonjs-wrapping"));
+    t.end();
+});
+
+tap.test("it should work for named simplified commonjs wrapping with sugar", { todo: true }, (t) => {
+    t.assert(test("amdjs-api/named-simplified-commonjs-wrapping-with-sugar"));
     t.end();
 });
 

@@ -6,6 +6,7 @@ const isRequireSugarVariableDeclarator = require("./isRequireSugarVariableDeclar
 const isReturnStatement = require("./isReturnStatement");
 const isVariableDeclaration = require("./isVariableDeclaration");
 const isRequireCallExpression = require("./isRequireCallExpression");
+const isExportsAssignmentExpression = require("./isExportsAssignmentExpression");
 const getImportDeclaration = require("./getImportDeclaration");
 const getVariableDeclaration = require("./getVariableDeclaration");
 const hasDefineWithCallback = require("./hasDefineWithCallback");
@@ -36,6 +37,37 @@ function changeObjectExpressionToExportDefaultDeclaration (node) {
     };
 }
 
+function changeExportsAssignmentExpressionToExportDeclaration (node) {
+
+    var id = {
+        type: "Identifier",
+        name: node.expression.left.property.name
+    };
+
+    var declaration;
+    if (node.expression.right.type === "FunctionExpression") {
+        declaration = node.expression.right;
+        declaration.type = "FunctionDeclaration";
+        declaration.id = id
+    } else {
+        var declaration = {};
+        declaration.type = "VariableDeclaration";
+        declaration.kind = "var";
+        declaration.declarations = [
+            {
+                type: "VariableDeclarator",
+                id: id,
+                init: node.expression.right
+            }
+        ];
+    }
+
+    return {
+        type: "ExportNamedDeclaration",
+        declaration: declaration
+    };
+}
+
 function changeRequireCallExpressionToImportDeclaration (node) {
     return getImportDeclaration(node.expression.arguments[0].value);
 }
@@ -47,15 +79,14 @@ module.exports = function (source, code) {
     }).map(function (node) {
         if (canHaveRequireSugar && isVariableDeclaration(node)) {
             return changeVariableDeclaration(node);
-        }
-        if (isRequireCallExpression(node)) {
+        } else if (isRequireCallExpression(node)) {
             return changeRequireCallExpressionToImportDeclaration(node);
-        }
-        if (isReturnStatement(node)) {
+        } else if (isReturnStatement(node)) {
             return changeReturnToExportDefaultDeclaration(node);
-        }
-        if (isObjectExpression(node)) {
+        } else if (isObjectExpression(node)) {
             return changeObjectExpressionToExportDefaultDeclaration(node);
+        } else if (isExportsAssignmentExpression(node)) {
+            return changeExportsAssignmentExpressionToExportDeclaration(node);
         }
         return node;
     });
