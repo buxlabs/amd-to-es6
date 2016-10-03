@@ -13,6 +13,7 @@ program
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
     .option("--beautify", "Beautify the output")
+    .option("--side", "Import side effects with name")
     .parse(process.argv);
 
 function replaceSuffix (filename, suffix) {
@@ -58,14 +59,14 @@ function convertFiles (files, options) {
 if (!program.src) {
     var file = program.args[0];
     convertFile(file, program);
-    return process.exit(0);
+    process.exit(0);
 }
 
 if (program.src && (program.dest || program.replace)) {
     var files = glob.sync(getGlob(program), { cwd: program.src });
     convertFiles(files, program);
-    return process.exit(0);
+    process.exit(0);
 }
 
 process.stderr.write("Please provide --src and --dest");
-return process.exit(1);
+process.exit(1);

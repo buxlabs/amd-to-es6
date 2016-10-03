@@ -19,12 +19,12 @@ function changeReturnToExportDefaultDeclaration (node) {
     return node;
 }
 
-function changeVariableDeclaration (node) {
+function changeVariableDeclaration (node, options) {
     return node.declarations.map(function (declarator) {
         var param = declarator.id.name;
         if (isRequireSugarVariableDeclarator(declarator)) {
             var element = declarator.init && declarator.init.arguments && declarator.init.arguments[0].value;
-            return getImportDeclaration(element, param);
+            return getImportDeclaration(element, param, options);
         }
         return getVariableDeclaration(node, declarator, param);
     });
@@ -68,19 +68,19 @@ function changeExportsAssignmentExpressionToExportDeclaration (node) {
     };
 }
 
-function changeRequireCallExpressionToImportDeclaration (node) {
-    return getImportDeclaration(node.expression.arguments[0].value);
+function changeRequireCallExpressionToImportDeclaration (node, options) {
+    return getImportDeclaration(node.expression.arguments[0].value, null, options);
 }
 
-module.exports = function (source, code) {
+module.exports = function (source, code, options) {
     var canHaveRequireSugar = hasDefineWithCallback(source);
     var array = code.filter(function (node) {
         return !isUseStrict(node);
     }).map(function (node) {
         if (canHaveRequireSugar && isVariableDeclaration(node)) {
-            return changeVariableDeclaration(node);
+            return changeVariableDeclaration(node, options);
         } else if (isRequireCallExpression(node)) {
-            return changeRequireCallExpressionToImportDeclaration(node);
+            return changeRequireCallExpressionToImportDeclaration(node, options);
         } else if (isReturnStatement(node)) {
             return changeReturnToExportDefaultDeclaration(node);
         } else if (isObjectExpression(node)) {

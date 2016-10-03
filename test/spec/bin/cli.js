@@ -5,6 +5,10 @@ const fs = require("fs");
 const shell = require("shelljs");
 const path = require("path");
 
+function compare (result, output) {
+    return result.replace(/\s+/g, "") === output.replace(/\s+/g, "");
+}
+
 tap.test("it should be possible to convert a file through cli", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
@@ -171,6 +175,17 @@ tap.test("should be possible to beautify the output", function (t) {
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/beautify-file/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --beautify ${args}`, { silent: true });
     t.ok(replaceNewlines(output) === replaceNewlines(result.stdout));
+    t.end();
+
+});
+
+tap.test("should be possible to import side effects with name", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var args = "test/fixture/cli/named-side-effects/input.js";
+    var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/named-side-effects/output.js"), "utf8");
+    var result = shell.exec(`node ${bin} --side ${args}`, { silent: true });
+    t.ok(compare(output, result.stdout));
     t.end();
 
 });

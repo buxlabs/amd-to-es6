@@ -2,15 +2,14 @@
 
 const string = require("underscore.string");
 
-module.exports = function (element, param) {
+module.exports = function (element, param, options) {
     var specifiers = [];
-    if (param) {
+    if (param || options.side) {
         specifiers.push({
             type: "ImportDefaultSpecifier",
             local: {
                 type: "Identifier",
-                name: param
-                // name: param || string.camelize(element.replace(".", "-"))
+                name: param || string.camelize(element.replace(".", "-"))
             }
         });
     }
