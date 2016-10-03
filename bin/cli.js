@@ -6,13 +6,13 @@ const glob = require("glob");
 const amdtoes6 = require("../index");
 
 program
-    .option("--src <dirname>", "Directory of the source files")
-    .option("--dest <dirname>", "Directory of the destination files")
-    .option("--glob [glob]", "Glob pattern for the src")
-    .option("--recursive", "Set glob pattern to **/*.js with no hassle")
+    .option("-s, --src <dirname>", "Directory of the source files")
+    .option("-d, --dest <dirname>", "Directory of the destination files")
+    .option("-g, --glob [glob]", "Glob pattern for the src")
+    .option("-r, --recursive", "Set glob pattern to **/*.js with no hassle")
+    .option("-b, --beautify", "Beautify the output")
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
-    .option("--beautify", "Beautify the output")
     .option("--side", "Import side effects with camel cased named")
     .option("--assigned", "Automatically assign custom name to side effects")
     .parse(process.argv);

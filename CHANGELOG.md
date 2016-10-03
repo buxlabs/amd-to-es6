@@ -1,3 +1,7 @@
+## 0.6.2
+
+* add: support for short command line options
+
 ## 0.6.1
 
 * add: support for side effects with names and custom assigned name

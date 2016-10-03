@@ -1,4 +1,4 @@
-# AMD to ES6 converter, v0.6.1
+# AMD to ES6 converter, v0.6.2
 
 [ ![Codeship Status for buxlabs/buxlabs.amd-to-es6](https://app.codeship.com/projects/f6299130-6721-0134-f3f9-02d00f1d3243/status?branch=master)](https://app.codeship.com/projects/176125)
 
@@ -90,13 +90,15 @@ There are more examples in the test/fixture directory
 
   Options:
 
-    --src <dirname>     Directory of the source files
-    --dest <dirname>    Directory of the destination files
-    --glob [glob]       Glob pattern for the src to match for input files
-    --recursive         Set glob pattern to **/*.js with no hassle
+    -s, --src <dirname>     Directory of the source files
+    -d, --dest <dirname>    Directory of the destination files
+    -g, --glob [glob]       Glob pattern for the src to match for input files
+    -r, --recursive         Set glob pattern to **/*.js with no hassle
+    -b, --beautify          Beautify the output
     --replace           Replace the input files with results
     --suffix <string>   Replace suffix of the files
-    --beautify          Beautify the output
+    --side              Import side effects with camel cased named
+    --assigned          Automatically assign custom name to side effects
 
 ```
 
