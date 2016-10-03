@@ -13,7 +13,8 @@ program
     .option("--replace", "Replace the input files with results")
     .option("--suffix <string>", "Replace suffix of the files")
     .option("--beautify", "Beautify the output")
-    .option("--side", "Import side effects with name")
+    .option("--side", "Import side effects with camel cased named")
+    .option("--assigned", "Automatically assign custom name to side effects")
     .parse(process.argv);
 
 function replaceSuffix (filename, suffix) {

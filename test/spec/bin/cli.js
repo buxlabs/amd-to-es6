@@ -179,12 +179,23 @@ tap.test("should be possible to beautify the output", function (t) {
 
 });
 
-tap.test("should be possible to import side effects with name", function (t) {
+tap.test("should be possible to import side effects with names", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var args = "test/fixture/cli/named-side-effects/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/named-side-effects/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --side ${args}`, { silent: true });
+    t.ok(compare(output, result.stdout));
+    t.end();
+
+});
+
+tap.test("should be possible to import side effects with assigned names", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var args = "test/fixture/cli/named-assigned-side-effects/input.js";
+    var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/named-assigned-side-effects/output.js"), "utf8");
+    var result = shell.exec(`node ${bin} --side --assigned ${args}`, { silent: true });
     t.ok(compare(output, result.stdout));
     t.end();
 

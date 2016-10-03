@@ -1,3 +1,7 @@
+## 0.6.1
+
+* add: support for side effects with names and custom assigned name
+
 ## 0.6.0
 
 * add: basic support for simplified commonjs wrapping
