@@ -1,6 +1,6 @@
 {
   "name": "buxlabs.amd-to-es6",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "coverage": "tap \"test/spec/**/*.js\" --100"
   },
   "bin": {
-    "amdtoes6": "node bin/cli.js"
+    "amdtoes6": "./bin/cli.js"
   },
   "engines": {
     "node": ">=6.1.0"
