@@ -1,20 +1,10 @@
 "use strict";
 
-const string = require("underscore.string");
-var count = 0;
-
-function getIdentifierName (element, param, options) {
-    if (param) { return param; }
-    if (options.assigned) { 
-        count += 1;
-        return "$SIDE_EFFECT_" + count; 
-    }
-    return string.camelize(element.replace(".", "-"));
-}
+const getIdentifierName = require("./getIdentifierName");
 
 module.exports = function (element, param, options) {
     var specifiers = [];
-    if (param || options.side) {
+    if (param || (options && options.side)) {
         specifiers.push({
             type: "ImportDefaultSpecifier",
             local: {

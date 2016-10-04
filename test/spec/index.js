@@ -48,8 +48,13 @@ tap.test("it should work for named simplified commonjs wrapping", (t) => {
     t.end();
 });
 
-tap.test("it should work for named simplified commonjs wrapping with sugar", { todo: true }, (t) => {
+tap.test("it should work for named simplified commonjs wrapping with sugar", (t) => {
     t.assert(test("amdjs-api/named-simplified-commonjs-wrapping-with-sugar"));
+    t.end();
+});
+
+tap.test("it should work for named simplified commonjs wrapping with sugar", (t) => {
+    t.assert(test("amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second"));
     t.end();
 });
 

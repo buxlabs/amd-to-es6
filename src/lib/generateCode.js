@@ -10,6 +10,8 @@ const isExportsAssignmentExpression = require("./isExportsAssignmentExpression")
 const getImportDeclaration = require("./getImportDeclaration");
 const getVariableDeclaration = require("./getVariableDeclaration");
 const hasDefineWithCallback = require("./hasDefineWithCallback");
+const getRequireCallExpressions = require("./getRequireCallExpressions");
+const changeRequireCallExpressionToIdentifier = require("./changeRequireCallExpressionToIdentifier");
 const flatten = require("./util/flatten");
 
 function changeReturnToExportDefaultDeclaration (node) {
@@ -72,9 +74,14 @@ function changeRequireCallExpressionToImportDeclaration (node, options) {
     return getImportDeclaration(node.expression.arguments[0].value, null, options);
 }
 
+function changeNestedRequireCallExpressionToNamedImportDeclaration (node) {
+    return getImportDeclaration(node.arguments[0].value, null, { side: true });
+}
+
 module.exports = function (ast, code, options) {
     var canHaveRequireSugar = hasDefineWithCallback(ast);
-    var array = code.filter(function (node) {
+    var imports = [];
+    var nodes = code.filter(function (node) {
         return !isUseStrict(node);
     }).map(function (node) {
         if (canHaveRequireSugar && isVariableDeclaration(node)) {
@@ -86,10 +93,15 @@ module.exports = function (ast, code, options) {
         } else if (isObjectExpression(node)) {
             return changeObjectExpressionToExportDefaultDeclaration(node);
         } else if (isExportsAssignmentExpression(node)) {
+            var expressions = getRequireCallExpressions(node).map(changeNestedRequireCallExpressionToNamedImportDeclaration);
+            if (expressions.length > 0) {
+                imports = imports.concat(expressions);
+                node = changeRequireCallExpressionToIdentifier(node);
+            }
             return changeExportsAssignmentExpressionToExportDeclaration(node);
         }
         return node;
     });
 
-    return flatten(array);
+    return imports.concat(flatten(nodes));
 };
