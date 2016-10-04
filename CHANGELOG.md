@@ -1,3 +1,7 @@
+## 0.6.4
+
+* update: performance improvements
+
 ## 0.6.3
 
 * add: support for different types of quotes in output
