@@ -1,6 +1,7 @@
 "use strict";
 
 const escodegen = require("escodegen");
+const acorn = require("acorn");
 const beautify = require("js-beautify").js_beautify;
 const hasDefine = require("./lib/hasDefine");
 const getDependencies = require("./lib/getDependencies");
@@ -15,10 +16,11 @@ module.exports = function (source, options) {
     if (!hasDefine(source)) {
         return source;
     }
-    var dependencies = getDependencies(source);
-    var nodes = getModuleCode(source);
+    var ast = acorn.parse(source);
+    var dependencies = getDependencies(ast);
+    var nodes = getModuleCode(ast);
     var imports = generateImports(dependencies, options);
-    var code = generateCode(source, nodes, options);
+    var code = generateCode(ast, nodes, options);
     var program = { type: "Program", body: imports.concat(code) };
     var result = escodegen.generate(program, {
         format: {

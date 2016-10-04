@@ -72,8 +72,8 @@ function changeRequireCallExpressionToImportDeclaration (node, options) {
     return getImportDeclaration(node.expression.arguments[0].value, null, options);
 }
 
-module.exports = function (source, code, options) {
-    var canHaveRequireSugar = hasDefineWithCallback(source);
+module.exports = function (ast, code, options) {
+    var canHaveRequireSugar = hasDefineWithCallback(ast);
     var array = code.filter(function (node) {
         return !isUseStrict(node);
     }).map(function (node) {

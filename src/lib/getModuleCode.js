@@ -6,8 +6,7 @@ const isDefineWithDependencies = require("./isDefineWithDependencies");
 const isDefineWithObjectExpression = require("./isDefineWithObjectExpression");
 const getDefineCallbackArguments = require("./getDefineCallbackArguments");
 
-module.exports = function (source) {
-    var ast = acorn.parse(source);
+module.exports = function (ast) {
     var body = [];
     walk.simple(ast, {
         CallExpression: function (node) {

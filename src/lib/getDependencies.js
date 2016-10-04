@@ -26,8 +26,7 @@ function onCallExpression (dependencies, node) {
     }
 }
 
-module.exports = function (source) {
-    var ast = acorn.parse(source);
+module.exports = function (ast) {
     var dependencies = [];
     walk.simple(ast, {
         CallExpression: onCallExpression.bind(this, dependencies)
