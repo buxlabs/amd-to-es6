@@ -20,7 +20,11 @@ module.exports = function (source, options) {
     var imports = generateImports(dependencies, options);
     var code = generateCode(source, nodes, options);
     var program = { type: "Program", body: imports.concat(code) };
-    var result = escodegen.generate(program);
+    var result = escodegen.generate(program, {
+        format: {
+            quotes: options.quotes
+        }
+    });
     if (options.beautify) {
         return beautify(result, {
             end_with_newline: true

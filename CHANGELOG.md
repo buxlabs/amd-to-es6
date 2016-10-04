@@ -1,3 +1,7 @@
+## 0.6.3
+
+* add: support for different types of quotes in output
+
 ## 0.6.2
 
 * add: support for short command line options

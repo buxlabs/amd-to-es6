@@ -1,4 +1,4 @@
-# AMD to ES6 converter, v0.6.2
+# AMD to ES6 converter, v0.6.3
 
 [ ![Codeship Status for buxlabs/buxlabs.amd-to-es6](https://app.codeship.com/projects/f6299130-6721-0134-f3f9-02d00f1d3243/status?branch=master)](https://app.codeship.com/projects/176125)
 
@@ -99,6 +99,7 @@ There are more examples in the test/fixture directory
     --suffix <string>   Replace suffix of the files
     --side              Import side effects with camel cased named
     --assigned          Automatically assign custom name to side effects
+    --quotes            Single, double or auto quotes in the output
 
 ```
 

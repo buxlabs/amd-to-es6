@@ -201,6 +201,17 @@ tap.test("should be possible to import side effects with assigned names", functi
 
 });
 
+tap.test("should be possible to generate code with double quotes", function (t) {
+
+    var bin = path.join(__dirname, "../../../bin/cli.js");
+    var args = "test/fixture/cli/double-quotes/input.js";
+    var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/double-quotes/output.js"), "utf8");
+    var result = shell.exec(`node ${bin} --quotes=double ${args}`, { silent: true });
+    t.ok(compare(output, result.stdout));
+    t.end();
+
+});
+
 tap.test("it should throw an error if dest is not provided", function (t) {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
