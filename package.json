@@ -8,7 +8,7 @@
     "coverage": "tap \"test/spec/**/*.js\" --100"
   },
   "bin": {
-    "amdtoes6": "./bin/cli.js"
+    "amdtoes6": "node bin/cli.js"
   },
   "engines": {
     "node": ">=6.1.0"
