@@ -1,3 +1,7 @@
+## 0.7.1
+
+* fix: crlf issue
+
 ## 0.7.0
 
 * add: support simplified commonjs wrapping with suggar
