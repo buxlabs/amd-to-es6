@@ -1,3 +1,7 @@
+## 0.7.0
+
+* add: support simplified commonjs wrapping with suggar
+
 ## 0.6.4
 
 * update: performance improvements
