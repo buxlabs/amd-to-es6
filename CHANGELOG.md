@@ -1,3 +1,7 @@
+## 0.7.5
+
+* add: docs
+
 ## 0.7.4
 
 * fix: versioning
