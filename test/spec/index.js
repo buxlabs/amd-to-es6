@@ -108,6 +108,11 @@ tap.test("it should convert quotes correctly", (t) => {
     t.end();
 });
 
+tap.test("it should leave comments if required", (t) => {
+    t.ok(test("define/comments", { comments: true }));
+    t.end();
+});
+
 tap.test("it should convert define with an object in callback only correctly", (t) => {
     t.ok(test("define/object-only"));
     t.end();
