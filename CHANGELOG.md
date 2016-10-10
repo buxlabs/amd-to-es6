@@ -1,3 +1,11 @@
+## 0.7.4
+
+* fix: versioning
+
+## 0.7.3
+
+* add: basic comments support
+
 ## 0.7.2
 
 * fix: crlf issue
