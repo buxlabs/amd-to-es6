@@ -108,8 +108,13 @@ tap.test("it should convert quotes correctly", (t) => {
     t.end();
 });
 
-tap.test("it should leave comments if required", (t) => {
-    t.ok(test("define/comments", { comments: true }));
+tap.test("it should leave single line comments if required", (t) => {
+    t.ok(test("define/single-line-comments", { comments: true }));
+    t.end();
+});
+
+tap.test("it should leave multi line comments if required", (t) => {
+    t.ok(test("define/multi-line-comments", { comments: true }));
     t.end();
 });
 

@@ -12,8 +12,6 @@ const attachComments = require("./lib/attachComments");
 
 module.exports = function (source, options) {
     options = options || {};
-    // this could be optimized, the source is parsed in 3 places
-    // an ast tree could be passed instead to the methods
     if (!hasDefine(source)) {
         return source;
     }
