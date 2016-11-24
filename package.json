@@ -1,11 +1,11 @@
 {
   "name": "buxlabs.amd-to-es6",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
-    "test": "tap \"test/spec/**/*.js\"",
-    "coverage": "tap \"test/spec/**/*.js\" --100"
+    "test": "ava \"test/spec/**/*.js\"",
+    "coverage": "nyc --check-coverage --lines 100 --branches 100 --functions 100 --statements 100 npm test"
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
@@ -29,8 +29,9 @@
   },
   "homepage": "https://github.com/buxlabs/buxlabs.amd-to-es6#readme",
   "devDependencies": {
-    "shelljs": "0.7.4",
-    "tap": "7.1.2"
+    "ava": "0.17.0",
+    "nyc": "^10.0.0",
+    "shelljs": "0.7.4"
   },
   "dependencies": {
     "acorn": "4.0.3",

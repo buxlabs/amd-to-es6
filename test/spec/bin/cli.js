@@ -1,26 +1,25 @@
 "use strict";
 
-const tap = require("tap");
-const fs = require("fs");
-const shell = require("shelljs");
-const path = require("path");
+import test from 'ava';
+import fs from 'fs';
+import shell from 'shelljs';
+import path from 'path';
 
 function compare (result, output) {
-    return result.replace(/\s+/g, "") === output.replace(/\s+/g, "");
+    return result.replace(/\s+/g, '') === output.replace(/\s+/g, '');
 }
 
-tap.test("it should be possible to convert a file through cli", function (t) {
+test("it should be possible to convert a file through cli", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var args = "test/fixture/cli/single-file/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/single-file/output.js"), "utf8");
     var result = shell.exec(`node ${bin} ${args}`, { silent: true });
-    t.ok(output === result.stdout);
-    t.end();
+    t.truthy(output === result.stdout);
 
 });
 
-tap.test("it should be possible to convert multiple files within a directory", function (t) {
+test("it should be possible to convert multiple files within a directory", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var src = "test/fixture/cli/multiple-files/inputs";
@@ -36,15 +35,14 @@ tap.test("it should be possible to convert multiple files within a directory", f
     var content2 = fs.readFileSync(input2, "utf8");
     var result1 = fs.readFileSync(output1, "utf8");
     var result2 = fs.readFileSync(output2, "utf8");
-    t.ok(content1 === result1);
-    t.ok(content2 === result2);
+    t.truthy(content1 === result1);
+    t.truthy(content2 === result2);
     fs.unlinkSync(input1);
     fs.unlinkSync(input2);
-    t.end();
 
 });
 
-tap.test("it should be possible to convert multiple files recursively using the glob option", function (t) {
+test("it should be possible to convert multiple files recursively using the glob option", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var src = "test/fixture/cli/multiple-files-recursive/inputs";
@@ -60,15 +58,14 @@ tap.test("it should be possible to convert multiple files recursively using the 
     var content2 = fs.readFileSync(input2, "utf8");
     var result1 = fs.readFileSync(output1, "utf8");
     var result2 = fs.readFileSync(output2, "utf8");
-    t.ok(content1 === result1);
-    t.ok(content2 === result2);
+    t.truthy(content1 === result1);
+    t.truthy(content2 === result2);
     fs.unlinkSync(input1);
     fs.unlinkSync(input2);
-    t.end();
 
 });
 
-tap.test("it should be possible to convert multiple files recursively using the recursive option", function (t) {
+test("it should be possible to convert multiple files recursively using the recursive option", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var src = "test/fixture/cli/multiple-files-recursive/inputs";
@@ -83,15 +80,14 @@ tap.test("it should be possible to convert multiple files recursively using the 
     var content2 = fs.readFileSync(input2, "utf8");
     var result1 = fs.readFileSync(output1, "utf8");
     var result2 = fs.readFileSync(output2, "utf8");
-    t.ok(content1 === result1);
-    t.ok(content2 === result2);
+    t.truthy(content1 === result1);
+    t.truthy(content2 === result2);
     fs.unlinkSync(input1);
     fs.unlinkSync(input2);
-    t.end();
 
 });
 
-tap.test("should be possible to replace given file with a compiled one", function (t) {
+test("should be possible to replace given file with a compiled one", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var content = "define(function () { return 123; });";
@@ -100,13 +96,12 @@ tap.test("should be possible to replace given file with a compiled one", functio
     fs.writeFileSync(filepath, content);
     shell.exec(`node ${bin} ${src} --replace`, { silent: true });
     var output = fs.readFileSync(filepath, "utf8");
-    t.ok(output === "export default 123;");
+    t.truthy(output === "export default 123;");
     fs.unlinkSync(filepath);
-    t.end();
 
 });
 
-tap.test("should be possible to replace given files within a directory", function (t) {
+test("should be possible to replace given files within a directory", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var dir = "test/fixture/cli/replace-files";
@@ -118,15 +113,14 @@ tap.test("should be possible to replace given files within a directory", functio
     fs.writeFileSync(filepath, content);
     var result = shell.exec(`node ${bin} --src=${dirpath} --replace`, { silent: true });
     var output = fs.readFileSync(filepath, "utf8");
-    t.ok(result.code === 0);
-    t.ok(output === "export default 712;");
+    t.truthy(result.code === 0);
+    t.truthy(output === "export default 712;");
     fs.unlinkSync(filepath);
     fs.rmdirSync(dirpath);
-    t.end();
 
 });
 
-tap.test("should be possible to convert a single file and change it's suffix", function (t) {
+test("should be possible to convert a single file and change it's suffix", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var content = "define(function () { return 142; });";
@@ -137,13 +131,12 @@ tap.test("should be possible to convert a single file and change it's suffix", f
     var destpath = filepath.replace(/\.js$/, ".es6");
     var output = fs.readFileSync(destpath, "utf8");
     fs.unlinkSync(destpath);
-    t.ok(result.code === 0);
-    t.ok(output === "export default 142;");
-    t.end();
+    t.truthy(result.code === 0);
+    t.truthy(output === "export default 142;");
 
 });
 
-tap.test("should be possible to convert multiple files and change their suffix", function (t) {
+test("should be possible to convert multiple files and change their suffix", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var dir = "test/fixture/cli/replace-suffix-files";
@@ -156,15 +149,14 @@ tap.test("should be possible to convert multiple files and change their suffix",
     var result = shell.exec(`node ${bin} --src=${dirpath} --replace --suffix=es6`, { silent: true });
     var destpath = filepath.replace(/\.js$/, ".es6");
     var output = fs.readFileSync(destpath, "utf8");
-    t.ok(result.code === 0);
-    t.ok(output === "export default 617;");
+    t.truthy(result.code === 0);
+    t.truthy(output === "export default 617;");
     fs.unlinkSync(destpath);
     fs.rmdirSync(dirpath);
-    t.end();
 
 });
 
-tap.test("should be possible to beautify the output", function (t) {
+test("should be possible to beautify the output", t => {
 
     function replaceNewlines (str) {
         return str.replace(/(?:\r\n|\r|\n)/g, "\n");
@@ -174,49 +166,44 @@ tap.test("should be possible to beautify the output", function (t) {
     var args = "test/fixture/cli/beautify-file/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/beautify-file/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --beautify ${args}`, { silent: true });
-    t.ok(replaceNewlines(output) === replaceNewlines(result.stdout));
-    t.end();
+    t.truthy(replaceNewlines(output) === replaceNewlines(result.stdout));
 
 });
 
-tap.test("should be possible to import side effects with names", function (t) {
+test("should be possible to import side effects with names", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var args = "test/fixture/cli/named-side-effects/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/named-side-effects/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --side ${args}`, { silent: true });
-    t.ok(compare(output, result.stdout));
-    t.end();
+    t.truthy(compare(output, result.stdout));
 
 });
 
-tap.test("should be possible to import side effects with assigned names", function (t) {
+test("should be possible to import side effects with assigned names", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var args = "test/fixture/cli/named-assigned-side-effects/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/named-assigned-side-effects/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --side --assigned ${args}`, { silent: true });
-    t.ok(compare(output, result.stdout));
-    t.end();
+    t.truthy(compare(output, result.stdout));
 
 });
 
-tap.test("should be possible to generate code with double quotes", function (t) {
+test("should be possible to generate code with double quotes", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var args = "test/fixture/cli/double-quotes/input.js";
     var output = fs.readFileSync(path.join(__dirname, "../../fixture/cli/double-quotes/output.js"), "utf8");
     var result = shell.exec(`node ${bin} --quotes=double ${args}`, { silent: true });
-    t.ok(compare(output, result.stdout));
-    t.end();
+    t.truthy(compare(output, result.stdout));
 
 });
 
-tap.test("it should throw an error if dest is not provided", function (t) {
+test("it should throw an error if dest is not provided", t => {
 
     var bin = path.join(__dirname, "../../../bin/cli.js");
     var result = shell.exec(`node ${bin} --src=hello`, { silent: true });
-    t.ok(result.code === 1);
-    t.end();
+    t.truthy(result.code === 1);
 
 });
