@@ -1,3 +1,7 @@
+## 0.7.7
+
+* edit: introduce Module class
+
 ## 0.7.6
 
 * edit: refactor specs to ava
