@@ -1,5 +1,3 @@
-"use strict";
-
 import test from 'ava';
 import fs from 'fs';
 import path from 'path';
@@ -15,7 +13,12 @@ function convert (dir, options) {
     const input = fs.readFileSync(file1, "utf8");
     const output = fs.readFileSync(file2, "utf8");
     const result = converter(input, options);
-    return compare(result, output);
+    const isValid = compare(result, output);
+    if (!isValid) {
+        console.log(output);
+        console.log(result);
+    }
+    return isValid;
 }
 
 test("the converter should be available", t => {
@@ -200,6 +203,14 @@ test("it should convert troopjs components correctly", t => {
 
 test("it should convert troopjs components correctly", t => {
     t.truthy(convert("web-examples/troopjs_component_2"));
+});
+
+test("it should convert require sugar correctly", t => {
+    t.truthy(convert("define/require-sugar"));
+});
+
+test("it should convert require sugar with side effects correctly", t => {
+    t.truthy(convert("define/require-sugar-with-side-effect"));
 });
 
 test("it should convert todomvc backbone requirejs example correctly", t => {

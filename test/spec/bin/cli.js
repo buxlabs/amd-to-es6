@@ -1,5 +1,3 @@
-"use strict";
-
 import test from 'ava';
 import fs from 'fs';
 import shell from 'shelljs';
