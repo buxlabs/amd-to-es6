@@ -213,6 +213,10 @@ test("it should convert require sugar with side effects correctly", t => {
     t.truthy(convert("define/require-sugar-with-side-effect"));
 });
 
+test.skip("it should convert require with property assignment correctly", t => {
+    t.truthy(convert("define/require-sugar-with-property-assignment"));
+});
+
 test("it should convert todomvc backbone requirejs example correctly", t => {
     t.truthy(convert("web-examples/todomvc_backbone_requirejs_1"));
 });
