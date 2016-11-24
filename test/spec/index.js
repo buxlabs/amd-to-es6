@@ -94,6 +94,14 @@ test("it should convert define with an object in callback only correctly", t => 
     t.truthy(convert("define/object-only"));
 });
 
+test("it should leave single line comments if required", t => {
+    t.truthy(convert("define/single-line-comments", { comments: true }));
+});
+
+test("it should leave multi line comments if required", t => {
+    t.truthy(convert("define/multi-line-comments", { comments: true }));
+});
+
 test("it should convert define with unused deps correctly", t => {
     t.truthy(convert("define/callback-with-mismatch-deps"));
 });
