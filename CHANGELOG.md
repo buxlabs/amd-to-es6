@@ -1,3 +1,7 @@
+## 0.7.6
+
+* edit: refactor specs to ava
+
 ## 0.7.5
 
 * add: docs
