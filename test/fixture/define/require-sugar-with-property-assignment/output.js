@@ -1,10 +1,10 @@
+import $ASSIGNED_1 from 'model/first.model';
+import $ASSIGNED_2 from 'model/second.model';
 import codesEnum from 'enum/codes.enum';
-import $NAMED_1 from 'model/first.model';
-import $NAMED_2 from 'model/second.model';
 
 var models = {};
-models[codesEnum.FIRST] = $NAMED_1;
-models[codesEnum.SECOND] = $NAMED_2;
+models[codesEnum.FIRST] = $ASSIGNED_1;
+models[codesEnum.SECOND] = $ASSIGNED_2;
 
 export default {
     getClass: function (type) {

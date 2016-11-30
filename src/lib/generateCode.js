@@ -74,8 +74,23 @@ function changeRequireCallExpressionToImportDeclaration (node, options) {
     return getImportDeclaration(node.expression.arguments[0].value, null, options);
 }
 
-function changeNestedRequireCallExpressionToNamedImportDeclaration (node) {
-    return getImportDeclaration(node.arguments[0].value, null, { side: true });
+function changeNestedRequireCallExpressionToNamedImportDeclaration (node, options) {
+    return getImportDeclaration(node.arguments[0].value, null, options || { side: true });
+}
+
+function isAssignmentMemberExpression (node) {
+    return node.type === 'ExpressionStatement' &&
+        node.expression.type === 'AssignmentExpression' &&
+        node.expression.left.type === 'MemberExpression' &&
+        node.expression.right.type === 'CallExpression' &&
+        node.expression.right.callee.name === 'require' &&
+        node.expression.right.arguments.length === 1 &&
+        node.expression.right.arguments[0].type === 'Literal';
+}
+
+function changeAssignmentMemberExpressionRequire (node, name) {
+    node.expression.right = { type: "Identifier", name: name };
+    return node;
 }
 
 module.exports = function (ast, code, options) {
@@ -92,6 +107,13 @@ module.exports = function (ast, code, options) {
             return changeReturnToExportDefaultDeclaration(node);
         } else if (isObjectExpression(node)) {
             return changeObjectExpressionToExportDefaultDeclaration(node);
+        } else if (isAssignmentMemberExpression(node)) {
+            var expression = changeNestedRequireCallExpressionToNamedImportDeclaration(node.expression.right, {
+                side: true,
+                assigned: true
+            });
+            imports.push(expression);
+            return changeAssignmentMemberExpressionRequire(node, expression.specifiers[0].local.name);
         } else if (isExportsAssignmentExpression(node)) {
             var expressions = getRequireCallExpressions(node).map(changeNestedRequireCallExpressionToNamedImportDeclaration);
             if (expressions.length > 0) {

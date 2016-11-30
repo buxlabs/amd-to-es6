@@ -1,3 +1,11 @@
+## 0.7.9
+
+* add: support inline require in a member expression
+
+## 0.7.8
+
+* edit: switch to @buxlabs/amd-to-es6 name
+
 ## 0.7.7
 
 * edit: introduce Module class
