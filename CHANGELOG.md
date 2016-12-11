@@ -1,3 +1,7 @@
+## 0.7.10
+
+* edit: force lf in .gitattributes
+
 ## 0.7.9
 
 * add: support inline require in a member expression
