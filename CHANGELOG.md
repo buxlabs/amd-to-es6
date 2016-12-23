@@ -1,3 +1,7 @@
+## 0.8.0
+
+* edit: performance improvements, code cleanup
+
 ## 0.7.10
 
 * edit: force lf in .gitattributes
