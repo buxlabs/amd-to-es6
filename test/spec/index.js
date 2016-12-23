@@ -182,7 +182,7 @@ test("it should convert subapps correctly", t => {
 });
 
 test("it should covert subapp specs correctly", t => {
-    t.truthy(convert("app/subapp_spec_1"));
+    t.truthy(convert("app/subapp_spec_1", { quotes: "double" }));
 });
 
 test("it should convert modules with one require sugar call expression correctly", t => {
