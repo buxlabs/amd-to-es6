@@ -1,6 +1,5 @@
 "use strict";
 
-const isUseStrict = require("./isUseStrict");
 const isObjectExpression = require("./isObjectExpression");
 const isRequireSugarVariableDeclarator = require("./isRequireSugarVariableDeclarator");
 const isReturnStatement = require("./isReturnStatement");
@@ -50,9 +49,9 @@ function changeExportsAssignmentExpressionToExportDeclaration (node) {
     if (node.expression.right.type === "FunctionExpression") {
         declaration = node.expression.right;
         declaration.type = "FunctionDeclaration";
-        declaration.id = id
+        declaration.id = id;
     } else {
-        var declaration = {};
+        declaration = {};
         declaration.type = "VariableDeclaration";
         declaration.kind = "var";
         declaration.declarations = [
@@ -96,9 +95,7 @@ function changeAssignmentMemberExpressionRequire (node, name) {
 module.exports = function (ast, code, options) {
     var canHaveRequireSugar = hasDefineWithCallback(ast);
     var imports = [];
-    var nodes = code.filter(function (node) {
-        return !isUseStrict(node);
-    }).map(function (node) {
+    var nodes = code.map(function (node) {
         if (canHaveRequireSugar && isVariableDeclaration(node)) {
             return changeVariableDeclaration(node, options);
         } else if (isRequireCallExpression(node)) {
