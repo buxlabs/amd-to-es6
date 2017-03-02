@@ -10,7 +10,8 @@ module.exports = function (ast) {
     walk.simple(ast, {
         CallExpression: function (node) {
             if (isDefineWithDependencies(node)) {
-                body = getDefineCallbackArguments(node).body.body;
+                let define = getDefineCallbackArguments(node);
+                body = define.body.body || [{ type: 'ReturnStatement', argument: define.body }];
             } else if (isDefineWithObjectExpression(node)) {
                 body = [getDefineCallbackArguments(node)];
             }

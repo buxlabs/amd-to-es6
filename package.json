@@ -1,6 +1,6 @@
 {
   "name": "@buxlabs/amd-to-es6",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "amdtoes6": "./bin/cli.js"
   },
   "engines": {
-    "node": ">=6.1.0"
+    "node": ">=6.9.1"
   },
   "repository": {
     "type": "git",
@@ -30,11 +30,11 @@
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
     "ava": "0.18.2",
-    "nyc": "^10.0.0",
+    "nyc": "10.0.0",
     "shelljs": "0.7.5"
   },
   "dependencies": {
-    "@buxlabs/ast": "^0.1.9",
+    "@buxlabs/ast": "0.1.9",
     "acorn": "4.0.11",
     "commander": "2.9.0",
     "glob": "7.1.1",
