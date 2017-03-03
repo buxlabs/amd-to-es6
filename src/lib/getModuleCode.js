@@ -11,7 +11,11 @@ module.exports = function (ast) {
         CallExpression: function (node) {
             if (isDefineWithDependencies(node)) {
                 let define = getDefineCallbackArguments(node);
-                body = define.body.body || [{ type: 'ReturnStatement', argument: define.body }];
+                if (define.body.type === "BlockStatement") {
+                    body = define.body.body;
+                } else {
+                    body = [{ type: 'ReturnStatement', argument: define.body }];  
+                } 
             } else if (isDefineWithObjectExpression(node)) {
                 body = [getDefineCallbackArguments(node)];
             }

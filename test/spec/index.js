@@ -85,6 +85,10 @@ test("it should convert define with arrow function with immediate return", t => 
     t.truthy(convert("define/arrow-function-immediate-return"));
 });
 
+test("it should convert define with arrow function with immediate function return", t => {
+    t.truthy(convert("define/arrow-function-immediate-return-function"));
+});
+
 test("it should convert define with deps with arrow function correctly", t => {
     t.truthy(convert("define/callback-with-deps"));
 });
