@@ -31,7 +31,7 @@
   "devDependencies": {
     "ava": "0.18.2",
     "nyc": "10.0.0",
-    "shelljs": "0.7.5"
+    "shelljs": "0.7.7"
   },
   "dependencies": {
     "@buxlabs/ast": "0.1.9",
