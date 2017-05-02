@@ -1,3 +1,7 @@
+## 0.8.3
+
+* add: minor performance improvement for non amd files
+
 ## 0.8.0
 
 * edit: performance improvements, code cleanup

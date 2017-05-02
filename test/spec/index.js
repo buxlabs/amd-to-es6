@@ -105,6 +105,10 @@ test("it should convert define with an object in callback only correctly", t => 
     t.truthy(convert("define/object-only"));
 });
 
+test("it shouldn't convert files with no define", t => {
+    t.truthy(convert("define/no-define")); 
+});
+
 test("it should leave single line comments if required", t => {
     t.truthy(convert("define/single-line-comments", { comments: true }));
 });
