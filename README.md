@@ -8,6 +8,8 @@
 
 ## Usage
 
+### cli
+
 Convert a single file with:
 
 `amdtoes6 app.js > app-es6.js`
@@ -23,6 +25,16 @@ Convert multiple files in given dir recursively with:
 Convert multiple files and replace them with:
 
 `amdtoes6 --src=src --replace`
+
+### node
+
+Convert a single file with:
+
+```javascript
+const amdtoes6 = require('@buxlabs/amd-to-es6');
+const source = 'define({ hello: 'world' });';
+const result = amdtoes6(source); // export default { hello: 'world' };
+```
 
 ## Examples:
 
