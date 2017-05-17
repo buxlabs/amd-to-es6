@@ -11,11 +11,15 @@ function convert (dir, options) {
     const file1 = path.join(__dirname, "../fixture/", dir, "/input.js");
     const file2 = path.join(__dirname, "../fixture/", dir, "/output.js");
     const input = fs.readFileSync(file1, "utf8");
-    const output = fs.readFileSync(file2, "utf8");
+    const expected = fs.readFileSync(file2, "utf8");
     const result = converter(input, options);
-    const isValid = compare(result, output);
+    const isValid = compare(result, expected);
     if (!isValid) {
-        console.log(output);
+        console.log("-- INPUT --");
+        console.log(input);
+        console.log("-- EXPECTED --");
+        console.log(expected);
+        console.log("-- RESULT --");
         console.log(result);
     }
     return isValid;
@@ -51,6 +55,10 @@ test("it should work for named simplified commonjs wrapping with sugar", t => {
 
 test("it should work for named simplified commonjs wrapping with sugar", t => {
     t.truthy(convert("amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second"));
+});
+
+test("it should work for named module", t => {
+    t.truthy(convert("amdjs-api/named-module"));
 });
 
 test("it should work for an anonymous module", t => {

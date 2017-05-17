@@ -1,3 +1,7 @@
+## 0.8.4
+
+* fix: support named define with callback
+
 ## 0.8.3
 
 * add: minor performance improvement for non amd files
