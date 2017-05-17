@@ -61,6 +61,10 @@ test("it should work for named module", t => {
     t.truthy(convert("amdjs-api/named-module"));
 });
 
+test("it should work for named module with arrow function", t => {
+    t.truthy(convert("amdjs-api/named-module-arrow-fn"));
+});
+
 test("it should work for an anonymous module", t => {
     t.truthy(convert("rjs-examples/simple-define"));
 });
