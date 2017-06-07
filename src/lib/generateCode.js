@@ -1,6 +1,5 @@
 "use strict";
 
-const isObjectExpression = require("./isObjectExpression");
 const isRequireSugarVariableDeclarator = require("./isRequireSugarVariableDeclarator");
 const isReturnStatement = require("./isReturnStatement");
 const isVariableDeclaration = require("./isVariableDeclaration");
@@ -29,13 +28,6 @@ function changeVariableDeclaration (node, options) {
         }
         return getVariableDeclaration(node, declarator, param);
     });
-}
-
-function changeObjectExpressionToExportDefaultDeclaration (node) {
-    return {
-        type: "ExportDefaultDeclaration",
-        declaration: node
-    };
 }
 
 function changeExportsAssignmentExpressionToExportDeclaration (node) {
@@ -102,8 +94,6 @@ module.exports = function (ast, code, options) {
             return changeRequireCallExpressionToImportDeclaration(node, options);
         } else if (isReturnStatement(node)) {
             return changeReturnToExportDefaultDeclaration(node);
-        } else if (isObjectExpression(node)) {
-            return changeObjectExpressionToExportDefaultDeclaration(node);
         } else if (isAssignmentMemberExpression(node)) {
             var expression = changeNestedRequireCallExpressionToNamedImportDeclaration(node.expression.right, {
                 side: true,

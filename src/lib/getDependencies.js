@@ -1,34 +1,24 @@
 "use strict";
 
-const walk = require("acorn/dist/walk");
 const isDefineWithArrayAndCallback = require("./isDefineWithArrayAndCallback");
 
-function getDependencies (dependencies, node) {
+function getArrayExpressionValues (node) {
+    return node.elements.map(element => element.value);
+}
+
+function getFunctionParameters (node) {
+    return node.params.map(param => param.name);
+}
+
+module.exports = function (node) {
+    if (!isDefineWithArrayAndCallback(node)) { return []; }
     var length = node.arguments.length;
-    var elements = node.arguments[length - 2].elements.map(function (element) {
-        return element.value;
-    });
-    var params = node.arguments[length - 1].params.map(function (param) {
-        return param.name;
-    });
-    elements.forEach(function (element, index) {
-        dependencies.push({
+    var elements = getArrayExpressionValues(node.arguments[length - 2]);
+    var params = getFunctionParameters(node.arguments[length - 1]);
+    return elements.map((element, index) => {
+        return {
             element: element,
             param: params[index]
-        });
+        };
     });
-}
-
-function onCallExpression (dependencies, node) {
-    if (isDefineWithArrayAndCallback(node)) {
-        getDependencies(dependencies, node);
-    }
-}
-
-module.exports = function (ast) {
-    var dependencies = [];
-    walk.simple(ast, {
-        CallExpression: onCallExpression.bind(this, dependencies)
-    });
-    return dependencies;
 };

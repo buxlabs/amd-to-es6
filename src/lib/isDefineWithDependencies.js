@@ -1,9 +1,9 @@
 "use strict";
 
-const isDefineWithCallback = require("./isDefineWithCallback");
+const isDefineWithFunctionExpression = require("./isDefineWithFunctionExpression");
 const isDefineWithArrayAndCallback = require("./isDefineWithArrayAndCallback");
 
 module.exports = function (node) {
-    return isDefineWithCallback(node) ||
+    return isDefineWithFunctionExpression(node) ||
         isDefineWithArrayAndCallback(node);
 };

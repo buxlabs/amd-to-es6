@@ -1,13 +1,13 @@
 "use strict";
 
 const walk = require("acorn/dist/walk");
-const isDefineWithCallback = require("./isDefineWithCallback");
+const isDefineWithFunctionExpression = require("./isDefineWithFunctionExpression");
 
 module.exports = function (ast) {
     var has = false;
     walk.simple(ast, {
         CallExpression: function (node) {
-            if (isDefineWithCallback(node)) {
+            if (isDefineWithFunctionExpression(node)) {
                 has = true;
             }
         }

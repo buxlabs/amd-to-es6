@@ -2,7 +2,6 @@
 
 const walk = require("acorn/dist/walk");
 const isDefineWithDependencies = require("./isDefineWithDependencies");
-const isDefineWithObjectExpression = require("./isDefineWithObjectExpression");
 const getDefineCallbackArguments = require("./getDefineCallbackArguments");
 const isNamedDefine = require("./isNamedDefine");
 
@@ -17,8 +16,6 @@ module.exports = function (ast) {
                 } else {
                     body = [{ type: 'ReturnStatement', argument: define.body }];  
                 } 
-            } else if (isDefineWithObjectExpression(node)) {
-                body = [getDefineCallbackArguments(node)];
             }
         }
     });
