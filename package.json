@@ -34,7 +34,7 @@
     "shelljs": "0.7.8"
   },
   "dependencies": {
-    "@buxlabs/ast": "0.3.5",
+    "@buxlabs/ast": "0.4.0",
     "acorn": "5.0.3",
     "commander": "2.9.0",
     "glob": "7.1.1",
