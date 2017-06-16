@@ -3,7 +3,7 @@ define(["core/channel"], function (channel) {
 
     return {
         fetch: function () {
-            return channel.request("service:properties:request"); /* hello world */
+            return channel.request("service:properties:request"); // TODO fix
         }
     };
 

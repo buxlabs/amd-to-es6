@@ -1,3 +1,7 @@
+## 0.9.0
+
+* add: better support for comments (ast is using espree instead of acorn)
+
 ## 0.8.4
 
 * fix: support named define with callback

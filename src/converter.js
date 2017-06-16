@@ -7,7 +7,7 @@ module.exports = function (source, options) {
 
     if (source.indexOf('define') === -1) { return source; }
 
-    var module = new Module(source);
+    var module = new Module(source, options);
 
     if (module.has('CallExpression[callee.name="define"]')) {
         module.convert(options);

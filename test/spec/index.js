@@ -129,6 +129,10 @@ test("it should leave multi line comments if required", t => {
     t.truthy(convert("define/multi-line-comments", { comments: true }));
 });
 
+test("it should leave single line comments in code if required", t => {
+    t.truthy(convert("define/comments", { comments: true })); 
+});
+
 test("it should convert define with unused deps correctly", t => {
     t.truthy(convert("define/callback-with-mismatch-deps"));
 });
