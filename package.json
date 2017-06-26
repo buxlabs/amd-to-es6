@@ -30,7 +30,7 @@
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
     "ava": "0.19.1",
-    "nyc": "11.0.2",
+    "nyc": "11.0.3",
     "shelljs": "0.7.8"
   },
   "dependencies": {
