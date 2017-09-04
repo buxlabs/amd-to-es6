@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@buxlabs/ast": "0.7.0",
-    "acorn": "5.1.1",
+    "acorn": "5.1.2",
     "commander": "2.11.0",
     "glob": "7.1.1",
     "underscore.string": "3.3.4"
