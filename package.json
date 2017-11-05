@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "ava \"test/spec/**/*.js\"",
-    "coverage": "nyc --check-coverage --lines 100 --branches 100 --functions 100 --statements 100 npm test"
+    "coverage": "nyc --check-coverage --lines 100 --branches 100 --functions 100 --statements 100 npm test",
+    "lint": "eslint ."
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
@@ -30,6 +31,12 @@
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
     "ava": "0.23.0",
+    "eslint": "^4.10.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
     "nyc": "11.3.0",
     "shelljs": "0.7.8"
   },

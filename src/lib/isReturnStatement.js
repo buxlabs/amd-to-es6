@@ -1,5 +1,5 @@
-"use strict";
+'use strict'
 
 module.exports = function (node) {
-    return node.type === "ReturnStatement";
-};
+  return node.type === 'ReturnStatement'
+}

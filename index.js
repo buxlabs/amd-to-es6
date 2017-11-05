@@ -1,3 +1,3 @@
-const converter = require("./src/converter");
+const converter = require('./src/converter')
 
-module.exports = converter;
+module.exports = converter

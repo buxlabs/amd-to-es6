@@ -1,5 +1,5 @@
-"use strict";
+'use strict'
 
 module.exports = function (array) {
-    return [].concat.apply([], array);
-};
+  return [].concat.apply([], array)
+}
