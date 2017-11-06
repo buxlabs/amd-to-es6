@@ -4,6 +4,7 @@ const program = require('commander')
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
+const mkdirp = require('mkdirp')
 const amdtoes6 = require('../index')
 
 program
@@ -35,9 +36,9 @@ function convertFile (file, options) {
   var filepath = path.join(process.cwd(), file)
   var content = fs.readFileSync(filepath, 'utf8')
   var compiled = amdtoes6(content, options)
-  if (program.replace) {
-    var destpath = replaceSuffix(filepath, program.suffix)
-    if (program.suffix) {
+  if (options.replace) {
+    var destpath = replaceSuffix(filepath, options.suffix)
+    if (options.suffix) {
       fs.unlinkSync(filepath)
     }
     fs.writeFileSync(destpath, compiled)
@@ -48,14 +49,14 @@ function convertFile (file, options) {
 
 function convertFiles (files, options) {
   files.forEach(function (file) {
-    var filepath = path.join(program.src, file)
+    var filepath = path.join(options.src, file)
     var content = fs.readFileSync(filepath, 'utf8')
     var compiled = amdtoes6(content, options)
-    var destpath = program.replace ? filepath : path.join(program.dest, file)
-    if (program.suffix) {
+    var destpath = options.replace ? filepath : path.join(options.dest, file)
+    if (options.suffix) {
       fs.unlinkSync(filepath)
     }
-    destpath = replaceSuffix(destpath, program.suffix)
+    destpath = replaceSuffix(destpath, options.suffix)
     fs.writeFileSync(destpath, compiled)
   })
 }
@@ -64,6 +65,10 @@ if (!program.src) {
   var file = program.args[0]
   convertFile(file, program)
   process.exit(0)
+}
+
+if (program.dest) {
+  mkdirp.sync(program.dest)
 }
 
 if (program.src && (program.dest || program.replace)) {

@@ -2,21 +2,22 @@ import test from 'ava'
 import fs from 'fs'
 import shell from 'shelljs'
 import path from 'path'
+import os from 'os'
+
+const bin = path.join(__dirname, '../../../bin/cli.js')
 
 function compare (result, output) {
   return result.replace(/\s+/g, '') === output.replace(/\s+/g, '')
 }
 
-test('it should be possible to convert a file through cli', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to convert a file through cli', t => {
   var args = 'test/fixture/cli/single-file/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/single-file/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} ${args}`, { silent: true })
   t.truthy(output === result.stdout)
 })
 
-test('it should be possible to convert multiple files within a directory', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to convert multiple files within a directory', t => {
   var src = 'test/fixture/cli/multiple-files/inputs'
   var glob = '*.js'
   var dest = 'test/fixture/cli/multiple-files/outputs'
@@ -36,8 +37,20 @@ test('it should be possible to convert multiple files within a directory', t => 
   fs.unlinkSync(input2)
 })
 
-test('it should be possible to convert multiple files recursively using the glob option', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to convert multiple files recursively into an unexisting dir', t => {
+  const tmp = os.tmpdir()
+  const src = 'test/fixture/cli/multiple-files/inputs'
+  const glob = '*.js'
+  const dest = path.join(tmp, 'amd-to-es6-test1')
+  const args = `--src=${src} --glob=${glob} --dest=${dest}`
+  shell.exec(`node ${bin} ${args}`)
+  const output = path.join(dest, 'input1.js')
+  const result = fs.readFileSync(output, 'utf8')
+  t.truthy(result)
+  shell.exec(`rm -rf ${dest}`)
+})
+
+test('allows to convert multiple files recursively using the glob option', t => {
   var src = 'test/fixture/cli/multiple-files-recursive/inputs'
   var glob = '**/*.js'
   var dest = 'test/fixture/cli/multiple-files-recursive/outputs'
@@ -57,8 +70,7 @@ test('it should be possible to convert multiple files recursively using the glob
   fs.unlinkSync(input2)
 })
 
-test('it should be possible to convert multiple files recursively using the recursive option', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to convert multiple files recursively using the recursive option', t => {
   var src = 'test/fixture/cli/multiple-files-recursive/inputs'
   var dest = 'test/fixture/cli/multiple-files-recursive/outputs'
   var args = `--src=${src} --dest=${dest} --recursive`
@@ -77,8 +89,7 @@ test('it should be possible to convert multiple files recursively using the recu
   fs.unlinkSync(input2)
 })
 
-test('should be possible to replace given file with a compiled one', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to replace given file with a compiled one', t => {
   var content = 'define(function () { return 123; });'
   var src = 'test/fixture/cli/input.js'
   var filepath = path.join(__dirname, '../../../', src)
@@ -89,8 +100,7 @@ test('should be possible to replace given file with a compiled one', t => {
   fs.unlinkSync(filepath)
 })
 
-test('should be possible to replace given files within a directory', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to replace given files within a directory', t => {
   var dir = 'test/fixture/cli/replace-files'
   var dirpath = path.join(__dirname, '../../../', dir)
   fs.mkdirSync(dirpath)
@@ -106,8 +116,7 @@ test('should be possible to replace given files within a directory', t => {
   fs.rmdirSync(dirpath)
 })
 
-test("should be possible to convert a single file and change it's suffix", t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test("allows to convert a single file and change it's suffix", t => {
   var src = 'test/fixture/cli/input-replace-suffix/input.js'
   var filepath = path.join(__dirname, '../../../', src)
   var result = shell.exec(`node ${bin} ${src} --replace --suffix=es6`, { silent: true })
@@ -119,8 +128,7 @@ test("should be possible to convert a single file and change it's suffix", t => 
   t.truthy(output === 'export default 142;')
 })
 
-test('should be possible to convert multiple files and change their suffix', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to convert multiple files and change their suffix', t => {
   var dir = 'test/fixture/cli/replace-suffix-files'
   var dirpath = path.join(__dirname, '../../../', dir)
   var src = 'test/fixture/cli/replace-suffix-files/input.js'
@@ -134,43 +142,38 @@ test('should be possible to convert multiple files and change their suffix', t =
   fs.unlinkSync(destpath)
 })
 
-test('should be possible to beautify the output', t => {
+test('allows to beautify the output', t => {
   function replaceNewlines (str) {
     return str.replace(/(\W)/g, '')
   }
-  var bin = path.join(__dirname, '../../../bin/cli.js')
   var args = 'test/fixture/cli/beautify-file/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/beautify-file/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} --beautify ${args}`, { silent: true })
   t.truthy(replaceNewlines(output) === replaceNewlines(result.stdout))
 })
 
-test('should be possible to import side effects with names', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to import side effects with names', t => {
   var args = 'test/fixture/cli/named-side-effects/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/named-side-effects/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} --side ${args}`, { silent: true })
   t.truthy(compare(output, result.stdout))
 })
 
-test('should be possible to import side effects with assigned names', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to import side effects with assigned names', t => {
   var args = 'test/fixture/cli/named-assigned-side-effects/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/named-assigned-side-effects/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} --side --assigned ${args}`, { silent: true })
   t.truthy(compare(output, result.stdout))
 })
 
-test('should be possible to generate code with double quotes', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('allows to generate code with double quotes', t => {
   var args = 'test/fixture/cli/double-quotes/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/double-quotes/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} --quotes=double ${args}`, { silent: true })
   t.truthy(compare(output, result.stdout))
 })
 
-test('it should throw an error if dest is not provided', t => {
-  var bin = path.join(__dirname, '../../../bin/cli.js')
+test('throws an error if dest is not provided', t => {
   var result = shell.exec(`node ${bin} --src=hello`, { silent: true })
   t.truthy(result.code === 1)
 })

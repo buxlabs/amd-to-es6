@@ -1,3 +1,11 @@
+## 0.9.2
+
+* fix: create destination dir for convenience if it doesn't exist already
+
+## 0.9.1
+
+* edit: use standardjs as a styleguide
+
 ## 0.9.0
 
 * add: better support for comments (ast is using espree instead of acorn)
