@@ -1,6 +1,6 @@
 # AMD to ES6 converter
 
-[ ![Codeship Status for buxlabs/buxlabs.amd-to-es6](https://app.codeship.com/projects/f6299130-6721-0134-f3f9-02d00f1d3243/status?branch=master)](https://app.codeship.com/projects/176125)
+[![Codeship](https://img.shields.io/codeship/f6299130-6721-0134-f3f9-02d00f1d3243/master.svg)](https://app.codeship.com/projects/176125)
 
 ## Installation
 
