@@ -43,7 +43,7 @@
   "dependencies": {
     "@buxlabs/ast": "0.8.2",
     "acorn": "5.2.1",
-    "commander": "2.11.0",
+    "commander": "2.12.0",
     "glob": "7.1.1",
     "mkdirp": "^0.5.1",
     "underscore.string": "3.3.4"
