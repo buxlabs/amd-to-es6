@@ -9,7 +9,7 @@ const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpressio
 const escodegen = require('escodegen')
 
 class Module extends AbstractSyntaxTree {
-  constructor(source, options) {
+  constructor (source, options) {
     super(source, options)
     options = options || {}
     this.ast = super.constructor.parse(source, {
@@ -19,7 +19,7 @@ class Module extends AbstractSyntaxTree {
       attachComment: options.comments
     })
   }
-  convert(options) {
+  convert (options) {
     var define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
       this.ast.body = [{
@@ -36,7 +36,7 @@ class Module extends AbstractSyntaxTree {
     }
   }
 
-  removeUseStrict() {
+  removeUseStrict () {
     this.remove({
       type: 'ExpressionStatement',
       expression: {
@@ -45,11 +45,11 @@ class Module extends AbstractSyntaxTree {
       }
     })
   }
-  
-  toSource(options) {
+
+  toSource (options) {
     const originalSource = this.source
-    const code = super.toSource(options);
-    
+    const code = super.toSource(options)
+
     if (options.sourceMap) {
       const map = escodegen.generate(this.ast, {
         sourceMap: options.sourceFile || 'UNKNOWN', // Escodegen needs always a source filename
@@ -59,7 +59,7 @@ class Module extends AbstractSyntaxTree {
       })
       return { code, map }
     } else {
-      return code;
+      return code
     }
   }
 }
