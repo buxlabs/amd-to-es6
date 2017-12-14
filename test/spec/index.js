@@ -1,10 +1,11 @@
 import test from 'ava'
 import fs from 'fs'
 import path from 'path'
+import normalize from 'normalize-newline'
 import converter from '../../index'
 
 function compare (result, output) {
-  return result.replace(/\s+/g, '') === output.replace(/\s+/g, '')
+  return normalize(result).replace(/\s+/g, '') === normalize(output).replace(/\s+/g, '')
 }
 
 function convert (dir, options) {
@@ -31,7 +32,7 @@ function convertWithMap (dir, options, t) {
   const input = fs.readFileSync(file1, 'utf8')
   const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
   const result = converter(input, options)
-  const isValid = compare(JSON.stringify(result), JSON.stringify(expected))
+  const isValid = compare(result.code, expected.code) && compare(result.map, expected.map)
 
   if (!isValid) {
     console.log('-- INPUT --')
@@ -41,7 +42,7 @@ function convertWithMap (dir, options, t) {
     console.log('-- RESULT --')
     console.log(result)
   }
-  return isValid  
+  return isValid
 }
 
 test('the converter should be available', t => {
@@ -304,11 +305,10 @@ test('it should convert todomvc somajs requirejs example correctly', t => {
   t.truthy(convert('web-examples/todomvc_somajs_requirejs_2'))
 })
 
-
 test('it should return sourcemaps', t => {
-  t.truthy(convertWithMap('source-maps', { sourceMap: true }, t))
+  t.truthy(convertWithMap('source-maps/unnamed', { sourceMap: true }, t))
 })
 
 test('it should return sourcemaps with file reference', t => {
-  t.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file'  }, t))
+  t.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file' }, t))
 })
