@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava \"test/spec/**/*.js\"",
-    "coverage": "nyc --check-coverage --lines 100 --branches 100 --functions 100 --statements 100 npm test",
+    "coverage": "nyc npm test",
     "lint": "eslint ."
   },
   "bin": {
