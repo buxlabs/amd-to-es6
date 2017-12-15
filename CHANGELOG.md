@@ -1,3 +1,6 @@
+## 0.10.0
+
+* add: sourcemaps support
 ## 0.9.2
 
 * fix: create destination dir for convenience if it doesn't exist already

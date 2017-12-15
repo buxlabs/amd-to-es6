@@ -25,6 +25,25 @@ function convert (dir, options) {
   return isValid
 }
 
+function convertWithMap (dir, options, t) {
+  const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+  const file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
+  const input = fs.readFileSync(file1, 'utf8')
+  const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
+  const result = converter(input, options)
+  const isValid = compare(JSON.stringify(result), JSON.stringify(expected))
+
+  if (!isValid) {
+    console.log('-- INPUT --')
+    console.log(input)
+    console.log('-- EXPECTED --')
+    console.log(expected)
+    console.log('-- RESULT --')
+    console.log(result)
+  }
+  return isValid  
+}
+
 test('the converter should be available', t => {
   t.truthy(typeof converter === 'function')
 })
@@ -283,4 +302,13 @@ test('it should convert todomvc somajs requirejs example correctly', t => {
 
 test('it should convert todomvc somajs requirejs example correctly', t => {
   t.truthy(convert('web-examples/todomvc_somajs_requirejs_2'))
+})
+
+
+test('it should return sourcemaps', t => {
+  t.truthy(convertWithMap('source-maps', { sourceMap: true }, t))
+})
+
+test('it should return sourcemaps with file reference', t => {
+  t.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file'  }, t))
 })

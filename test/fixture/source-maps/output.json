@@ -1,0 +1,4 @@
+{
+    "code": "import alpha from 'alpha';\nexport default {\n    verb: function () {\n        return alpha.verb() + 2;\n    }\n};",
+    "map": "{\"version\":3,\"sources\":[\"UNKNOWN\"],\"names\":[],\"mappings\":\"0BAAA;AACI;AAAA;AAAA;AAAA;AAAA\",\"sourceRoot\":\"\",\"sourcesContent\":[\"define([\\\"alpha\\\"], function (alpha) {\\r\\n    return {\\r\\n        verb: function(){\\r\\n            return alpha.verb() + 2;\\r\\n        }\\r\\n    };\\r\\n});\\r\\n\"]}"
+}
