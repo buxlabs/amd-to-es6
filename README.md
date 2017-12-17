@@ -4,6 +4,10 @@
 
 ## Installation
 
+`npm install @buxlabs/amd-to-es6`
+
+If you'd like to use it in the cli consider installing globally or use `npx`
+
 `npm install -g @buxlabs/amd-to-es6`
 
 ## Usage

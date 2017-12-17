@@ -31,11 +31,17 @@ function changeVariableDeclaration (node, options) {
 }
 
 function changeExportsAssignmentExpressionToExportDeclaration (node) {
+  var name = node.expression.left.property.name
+  if (name === 'default') {
+    return {
+      type: 'ExportDefaultDeclaration',
+      declaration: node.expression.right
+    }
+  }
   var id = {
     type: 'Identifier',
-    name: node.expression.left.property.name
+    name: name
   }
-
   var declaration
   if (node.expression.right.type === 'FunctionExpression') {
     declaration = node.expression.right

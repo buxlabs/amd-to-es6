@@ -6,19 +6,8 @@ const getModuleCode = require('../lib/getModuleCode')
 const generateImports = require('../lib/generateImports')
 const generateCode = require('../lib/generateCode')
 const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpression')
-const escodegen = require('escodegen')
 
 class Module extends AbstractSyntaxTree {
-  constructor (source, options) {
-    super(source, options)
-    options = options || {}
-    this.ast = super.constructor.parse(source, {
-      sourceType: 'module',
-      loc: true,
-      comment: options.comments,
-      attachComment: options.comments
-    })
-  }
   convert (options) {
     var define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
@@ -32,8 +21,25 @@ class Module extends AbstractSyntaxTree {
       var imports = generateImports(dependencies, options)
       var code = generateCode(this.ast, nodes, options)
       this.ast.body = imports.concat(code)
+      this.removeEsModuleConvention()
       this.removeUseStrict()
     }
+  }
+
+  removeEsModuleConvention () {
+    var object = '[expression.callee.object.name=Object]'
+    var property = '[expression.callee.property.name=defineProperty]'
+    var selector = `ExpressionStatement${object}${property}`
+    var nodes = this.find(selector)
+    nodes.forEach(node => {
+      var args = node.expression.arguments
+      if (args.length > 2 &&
+        args[0].type === 'Identifier' && args[0].name === 'exports' &&
+        args[1].type === 'Literal' && args[1].value === '__esModule'
+      ) {
+        this.remove(node)
+      }
+    })
   }
 
   removeUseStrict () {
@@ -44,23 +50,6 @@ class Module extends AbstractSyntaxTree {
         value: 'use strict'
       }
     })
-  }
-
-  toSource (options) {
-    const originalSource = this.source
-    const code = super.toSource(options)
-
-    if (options.sourceMap) {
-      const map = escodegen.generate(this.ast, {
-        sourceMap: options.sourceFile || 'UNKNOWN', // Escodegen needs always a source filename
-        sourceMapRoot: options.sourceRoot || '',
-        sourceContent: originalSource,
-        comment: options.comments
-      })
-      return { code, map }
-    } else {
-      return code
-    }
   }
 }
 

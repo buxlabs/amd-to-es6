@@ -1,6 +1,12 @@
+## 0.11.0
+
+* edit: return { source, map } instead of { code, map } in the toSource method
+* fix: handle exports.default as export default
+
 ## 0.10.0
 
 * add: sourcemaps support
+
 ## 0.9.2
 
 * fix: create destination dir for convenience if it doesn't exist already
