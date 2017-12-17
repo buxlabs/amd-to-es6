@@ -42,7 +42,7 @@
     "shelljs": "0.7.8"
   },
   "dependencies": {
-    "@buxlabs/ast": "0.8.2",
+    "@buxlabs/ast": "0.9.0",
     "acorn": "5.2.1",
     "commander": "2.12.2",
     "escodegen": "^1.9.0",
