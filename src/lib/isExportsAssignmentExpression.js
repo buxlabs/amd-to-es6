@@ -1,9 +1,8 @@
 'use strict'
 
 module.exports = function (node) {
-  return node.type === 'ExpressionStatement' &&
-        node.expression.type === 'AssignmentExpression' &&
-        node.expression.left.type === 'MemberExpression' &&
-        node.expression.left.object.type === 'Identifier' &&
-        node.expression.left.object.name === 'exports'
+  return node.type === 'AssignmentExpression' &&
+    node.left.type === 'MemberExpression' &&
+    node.left.object.type === 'Identifier' &&
+    node.left.object.name === 'exports'
 }

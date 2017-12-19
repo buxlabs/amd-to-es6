@@ -5,6 +5,7 @@ const isReturnStatement = require('./isReturnStatement')
 const isVariableDeclaration = require('./isVariableDeclaration')
 const isRequireCallExpression = require('./isRequireCallExpression')
 const isExportsAssignmentExpression = require('./isExportsAssignmentExpression')
+const isExportsAssignmentExpressionStatement = require('./isExportsAssignmentExpressionStatement')
 const getImportDeclaration = require('./getImportDeclaration')
 const getVariableDeclaration = require('./getVariableDeclaration')
 const hasDefineWithCallback = require('./hasDefineWithCallback')
@@ -31,6 +32,9 @@ function changeVariableDeclaration (node, options) {
 }
 
 function changeExportsAssignmentExpressionToExportDeclaration (node) {
+  if (isExportsAssignmentExpression(node.expression.right)) {
+    return null
+  }
   var name = node.expression.left.property.name
   if (name === 'default') {
     return {
@@ -106,7 +110,7 @@ module.exports = function (ast, code, options) {
       })
       imports.push(expression)
       return changeAssignmentMemberExpressionRequire(node, expression.specifiers[0].local.name)
-    } else if (isExportsAssignmentExpression(node)) {
+    } else if (isExportsAssignmentExpressionStatement(node)) {
       var expressions = getRequireCallExpressions(node).map(changeNestedRequireCallExpressionToNamedImportDeclaration)
       if (expressions.length > 0) {
         imports = imports.concat(expressions)
@@ -117,5 +121,5 @@ module.exports = function (ast, code, options) {
     return node
   })
 
-  return imports.concat(flatten(nodes))
+  return imports.concat(flatten(nodes)).filter(Boolean)
 }

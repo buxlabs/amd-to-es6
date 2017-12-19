@@ -319,3 +319,11 @@ test('it should convert exports.default correctly', assert => {
 test('it should remove code that defines the __esModule property', assert => {
   assert.truthy(convert('define/object-define-property'))
 })
+
+test('it should handle multiple exports assignments to undefined', assert => {
+  assert.truthy(convert('define/exports-overrides'))
+})
+
+test.skip('it should handle multiple exports assignments', assert => {
+  assert.truthy(convert('define/exports-multiple'))
+})
