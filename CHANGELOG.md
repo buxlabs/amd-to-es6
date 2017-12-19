@@ -1,7 +1,7 @@
 ## 0.11.1
 
 - fix: handle multiple exports.foo assignments
-- add: new skipped test case for an edge cases that were not considered before
+- add: new skipped test cases that were not considered before
 
 ## 0.11.0
 

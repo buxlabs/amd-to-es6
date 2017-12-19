@@ -324,6 +324,14 @@ test('it should handle multiple exports assignments to undefined', assert => {
   assert.truthy(convert('define/exports-overrides'))
 })
 
+test('it should handle anonymous imports', assert => {
+  assert.truthy(convert('define/imports-anonymous'))
+})
+
 test.skip('it should handle multiple exports assignments', assert => {
   assert.truthy(convert('define/exports-multiple'))
+})
+
+test.skip('it should handle exports with same names', assert => {
+  assert.truthy(convert('define/exports-same'))
 })
