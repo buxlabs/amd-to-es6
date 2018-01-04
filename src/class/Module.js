@@ -29,7 +29,7 @@ function changeReturnToExportDefaultDeclaration (node) {
 
 function changeVariableDeclaration (node, options) {
   return node.declarations.map(function (declarator) {
-    var param = declarator.id.name
+    var param = declarator.id.type === 'ObjectPattern' ? declarator.id : declarator.id.name
     if (isRequireSugarVariableDeclarator(declarator)) {
       var element = declarator.init && declarator.init.arguments && declarator.init.arguments[0].value
       return getImportDeclaration(element, param, options)

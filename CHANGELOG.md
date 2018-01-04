@@ -1,3 +1,7 @@
+## 0.11.3
+
+- add: better support for destructuring with require sugar
+
 ## 0.11.2
 
 - add: basics for destructuring support in define

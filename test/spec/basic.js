@@ -340,6 +340,14 @@ test('it handles destructuring for named keys', assert => {
   assert.truthy(convert('define/destructuring-named-keys'))
 })
 
+test('it handles destructuring for require sugar', assert => {
+  assert.truthy(convert('define/require-sugar-destructuring'))
+})
+
+test('it handles destructuring for require sugar with many variables', assert => {
+  assert.truthy(convert('define/require-sugar-destructuring-many-variables'))
+})
+
 test.skip('it handles multiple exports assignments', assert => {
   assert.truthy(convert('define/exports-multiple'))
 })
