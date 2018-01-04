@@ -1,16 +1,16 @@
 'use strict'
 
-const walk = require('acorn/dist/walk')
+const { walk } = require('@buxlabs/ast')
 
 module.exports = function (ast) {
   var nodes = []
-  walk.simple(ast, {
-    CallExpression: function (node) {
-      if (node.callee &&
-                node.callee.type === 'Identifier' &&
-                node.callee.name === 'require') {
-        nodes.push(node)
-      }
+  walk(ast, function (node) {
+    if (node.type === 'CallExpression' &&
+      node.callee &&
+      node.callee.type === 'Identifier' &&
+      node.callee.name === 'require'
+    ) {
+      nodes.push(node)
     }
   })
   return nodes
