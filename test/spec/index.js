@@ -48,91 +48,91 @@ test('the converter should be available', assert => {
   assert.truthy(typeof converter === 'function')
 })
 
-test('it should work for an anonymous module', assert => {
+test('it works for an anonymous module', assert => {
   assert.truthy(convert('amdjs-api/anonymous-module'))
 })
 
-test('it should work for a dependency free module', assert => {
+test('it works for a dependency free module', assert => {
   assert.truthy(convert('amdjs-api/dependency-free-module'))
 })
 
-test('it should work for simplified commonjs wrapping', assert => {
+test('it works for simplified commonjs wrapping', assert => {
   assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping'))
 })
 
-test('it should work for simplified commonjs wrapping that returns a literal', assert => {
+test('it works for simplified commonjs wrapping that returns a literal', assert => {
   assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping-returns-literal'))
 })
 
-test('it should work for named simplified commonjs wrapping', assert => {
+test('it works for named simplified commonjs wrapping', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping'))
 })
 
-test('it should work for named simplified commonjs wrapping with sugar', assert => {
+test('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar'))
 })
 
-test('it should work for named simplified commonjs wrapping with sugar', assert => {
+test('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second'))
 })
 
-test('it should work for named module', assert => {
+test('it works for named module', assert => {
   assert.truthy(convert('amdjs-api/named-module'))
 })
 
-test('it should work for named module with arrow function', assert => {
+test('it works for named module with arrow function', assert => {
   assert.truthy(convert('amdjs-api/named-module-arrow-fn'))
 })
 
-test('it should work for an anonymous module', assert => {
+test('it works for an anonymous module', assert => {
   assert.truthy(convert('rjs-examples/simple-define'))
 })
 
-test('it should work for named dependencies', assert => {
+test('it works for named dependencies', assert => {
   assert.truthy(convert('rjs-examples/function-wrapping'))
 })
 
-test('it should convert empty array in define correctly', assert => {
+test('it converts empty array in define correctly', assert => {
   assert.truthy(convert('define/callback-empty-array'))
 })
 
-test('it should convert empty array in define with array function correctly', assert => {
+test('it converts empty array in define with array function correctly', assert => {
   assert.truthy(convert('define/arrow-function-callback-empty-array'))
 })
 
-test('it should convert define with callback only correctly using the built in parser', assert => {
+test('it converts define with callback only correctly using the built in parser', assert => {
   assert.truthy(convert('define/callback-only'))
 })
 
-test('it should convert empty define with arrow function correctly', assert => {
+test('it converts empty define with arrow function correctly', assert => {
   assert.truthy(convert('define/arrow-function-callback-only'))
 })
 
-test('it should convert define with deps correctly', assert => {
+test('it converts define with deps correctly', assert => {
   assert.truthy(convert('define/arrow-function-callback-with-deps'))
 })
 
-test('it should convert define with arrow function with immediate return', assert => {
+test('it converts define with arrow function with immediate return', assert => {
   assert.truthy(convert('define/arrow-function-immediate-return'))
 })
 
-test('it should convert define with arrow function with immediate function return', assert => {
+test('it converts define with arrow function with immediate function return', assert => {
   assert.truthy(convert('define/arrow-function-immediate-return-function'))
 })
 
-test('it should convert define with deps with arrow function correctly', assert => {
+test('it converts define with deps with arrow function correctly', assert => {
   assert.truthy(convert('define/callback-with-deps'))
 })
 
-test('it should convert modules wrapped with iife correctly', assert => {
+test('it converts modules wrapped with iife correctly', assert => {
   assert.truthy(convert('define/iife'))
 })
 
-test('it should convert quotes correctly', assert => {
+test('it converts quotes correctly', assert => {
   assert.truthy(convert('define/quotes'))
 })
 
-test('it should convert define with an object in callback only correctly', assert => {
+test('it converts define with an object in callback only correctly', assert => {
   assert.truthy(convert('define/object-only'))
 })
 
@@ -140,198 +140,210 @@ test("it shouldn't convert files with no define", assert => {
   assert.truthy(convert('define/no-define'))
 })
 
-test('it should leave single line comments if required', assert => {
+test('it leaves single line comments if required', assert => {
   assert.truthy(convert('define/single-line-comments', { comments: true }))
 })
 
-test('it should leave multi line comments if required', assert => {
+test('it leaves multi line comments if required', assert => {
   assert.truthy(convert('define/multi-line-comments', { comments: true }))
 })
 
-test('it should leave single line comments in code if required', assert => {
+test('it leaves single line comments in code if required', assert => {
   assert.truthy(convert('define/comments', { comments: true }))
 })
 
-test('it should convert define with unused deps correctly', assert => {
+test('it converts define with unused deps correctly', assert => {
   assert.truthy(convert('define/callback-with-mismatch-deps'))
 })
 
-test('it should keep dependencies with side effects', assert => {
+test('it keeps dependencies with side effects', assert => {
   assert.truthy(convert('app/behavior_1'))
 })
 
-test('it should keep dependencies with side effects', assert => {
+test('it keeps dependencies with side effects', assert => {
   assert.truthy(convert('app/behavior_2'))
 })
 
-test('it should convert controllers correctly', assert => {
+test('it converts controllers correctly', assert => {
   assert.truthy(convert('app/controller_1'))
 })
 
-test('it should keep dependencies with side effects', assert => {
+test('it keeps dependencies with side effects', assert => {
   assert.truthy(convert('app/controller_2'))
 })
 
-test('it should work with const', assert => {
+test('it works with const', assert => {
   assert.truthy(convert('app/controller_3'))
 })
 
-test('it should work with let', assert => {
+test('it works with let', assert => {
   assert.truthy(convert('app/controller_4'))
 })
 
-test('it should keep custom object assignments', assert => {
+test('it keeps custom object assignments', assert => {
   assert.truthy(convert('app/enum_1'))
 })
 
-test('it should leave empty var statements', assert => {
+test('it leaves empty var statements', assert => {
   assert.truthy(convert('app/helper_1'))
 })
 
-test('it should leave empty var statements', assert => {
+test('it leaves empty var statements', assert => {
   assert.truthy(convert('app/helper_2'))
 })
 
-test('it should work for named dependencies', assert => {
+test('it works for named dependencies', assert => {
   assert.truthy(convert('app/helper_3'))
 })
 
-test('it should leave empty var statements', assert => {
+test('it leaves empty var statements', assert => {
   assert.truthy(convert('app/model_1'))
 })
 
-test('it should handle returns of objects', assert => {
+test('it handles returns of objects', assert => {
   assert.truthy(convert('app/model_2'))
 })
 
-test('it should convert views correctly', assert => {
+test('it converts views correctly', assert => {
   assert.truthy(convert('app/view_1'))
 })
 
-test('it should convert modules with functions after the return correctly', assert => {
+test('it converts modules with functions after the return correctly', assert => {
   assert.truthy(convert('app/view_2'))
 })
 
-test('it should convert modules with constructors assigned to variables correctly', assert => {
+test('it converts modules with constructors assigned to variables correctly', assert => {
   assert.truthy(convert('app/view_3'))
 })
 
-test('it should handle a var declaration which is moved to a separate line', assert => {
+test('it handles a var declaration which is moved to a separate line', assert => {
   assert.truthy(convert('app/view_4'))
 })
 
-test('it should drop an empty define', assert => {
+test('it drops an empty define', assert => {
   assert.truthy(convert('app/view_spec_1'))
 })
 
-test('it should convert subapps correctly', assert => {
+test('it converts subapps correctly', assert => {
   assert.truthy(convert('app/subapp_1'))
 })
 
-test('it should covert subapp specs correctly', assert => {
+test('it converts subapp specs correctly', assert => {
   assert.truthy(convert('app/subapp_spec_1', { quotes: 'double' }))
 })
 
-test('it should convert modules with one require sugar call expression correctly', assert => {
+test('it converts modules with one require sugar call expression correctly', assert => {
   assert.truthy(convert('app/module_1'))
 })
 
-test('it should convert modules with multiple require sugar call expressions correctly', assert => {
+test('it converts modules with multiple require sugar call expressions correctly', assert => {
   assert.truthy(convert('app/module_2'))
 })
 
-test('it should convert module specs correctly', assert => {
+test('it converts module specs correctly', assert => {
   assert.truthy(convert('app/module_spec_1'))
 })
 
-test('it should convert troopjs components correctly', assert => {
+test('it converts troopjs components correctly', assert => {
   assert.truthy(convert('web-examples/troopjs_component_1'))
 })
 
-test('it should convert troopjs components correctly', assert => {
+test('it converts troopjs components correctly', assert => {
   assert.truthy(convert('web-examples/troopjs_component_2'))
 })
 
-test('it should convert require sugar correctly', assert => {
+test('it converts require sugar correctly', assert => {
   assert.truthy(convert('define/require-sugar'))
 })
 
-test('it should convert require sugar with side effects correctly', assert => {
+test('it converts require sugar with side effects correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-side-effect'))
 })
 
-test('it should convert require with property assignment correctly', assert => {
+test('it converts require with property assignment correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-property-assignment'))
 })
 
-test('it should convert todomvc backbone requirejs example correctly', assert => {
+test('it converts todomvc backbone requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_backbone_requirejs_1'))
 })
 
-test('it should convert todomvc backbone requirejs example correctly', assert => {
+test('it converts todomvc backbone requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_backbone_requirejs_2'))
 })
 
-test('it should convert todomvc backbone requirejs example correctly', assert => {
+test('it converts todomvc backbone requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_backbone_requirejs_3'))
 })
 
-test('it should convert todomvc angular requirejs example correctly', assert => {
+test('it converts todomvc angular requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_angularjs_requirejs_1'))
 })
 
-test('it should convert todomvc angular requirejs example correctly', assert => {
+test('it converts todomvc angular requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_angularjs_requirejs_2'))
 })
 
-test('it should convert todomvc angular requirejs example correctly', assert => {
+test('it converts todomvc angular requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_angularjs_requirejs_3'))
 })
 
-test('it should convert todomvc knockout requirejs example correctly', assert => {
+test('it converts todomvc knockout requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_knockout_requirejs_1'))
 })
 
-test('it should convert todomvc lavaca requirejs example correctly', assert => {
+test('it converts todomvc lavaca requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_lavaca_requirejs_1'))
 })
 
-test('it should convert todomvc somajs requirejs example correctly', assert => {
+test('it converts todomvc somajs requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_somajs_requirejs_1'))
 })
 
-test('it should convert todomvc somajs requirejs example correctly', assert => {
+test('it converts todomvc somajs requirejs example correctly', assert => {
   assert.truthy(convert('web-examples/todomvc_somajs_requirejs_2'))
 })
 
-test('it should return sourcemaps', assert => {
+test('it returns sourcemaps', assert => {
   assert.truthy(convertWithMap('source-maps/unnamed', { sourceMap: true }))
 })
 
-test('it should return sourcemaps with file reference', assert => {
+test('it returns sourcemaps with file reference', assert => {
   assert.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file' }))
 })
 
-test('it should convert exports.default correctly', assert => {
+test('it converts exports.default correctly', assert => {
   assert.truthy(convert('define/exports-default'))
 })
 
-test('it should remove code that defines the __esModule property', assert => {
+test('it removes code that defines the __esModule property', assert => {
   assert.truthy(convert('define/object-define-property'))
 })
 
-test('it should handle multiple exports assignments to undefined', assert => {
+test('it handles multiple exports assignments to undefined', assert => {
   assert.truthy(convert('define/exports-overrides'))
 })
 
-test('it should handle anonymous imports', assert => {
+test('it handles anonymous imports', assert => {
   assert.truthy(convert('define/imports-anonymous'))
 })
 
-test.skip('it should handle multiple exports assignments', assert => {
+test('it handles destructuring', assert => {
+  assert.truthy(convert('define/destructuring'))
+})
+
+test('it handles destructuring for multiple keys', assert => {
+  assert.truthy(convert('define/destructuring-multiple-keys'))
+})
+
+test('it handles destructuring for named keys', assert => {
+  assert.truthy(convert('define/destructuring-named-keys'))
+})
+
+test.skip('it handles multiple exports assignments', assert => {
   assert.truthy(convert('define/exports-multiple'))
 })
 
-test.skip('it should handle exports with same names', assert => {
+test.skip('it handles exports with same names', assert => {
   assert.truthy(convert('define/exports-same'))
 })

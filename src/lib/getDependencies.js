@@ -7,7 +7,12 @@ function getArrayExpressionValues (node) {
 }
 
 function getFunctionParameters (node) {
-  return node.params.map(param => param.name)
+  return node.params.map(param => {
+    if (param.type === 'ObjectPattern') {
+      return param
+    }
+    return param.name
+  })
 }
 
 module.exports = function (node) {

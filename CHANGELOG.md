@@ -1,3 +1,7 @@
+## 0.11.2
+
+- add: basics for destructuring support in define
+
 ## 0.11.1
 
 - fix: handle multiple exports.foo assignments
