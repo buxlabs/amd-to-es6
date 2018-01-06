@@ -1,0 +1,34 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "_bar"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "bar"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "_baz"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "baz"
+    }
+  }
+]

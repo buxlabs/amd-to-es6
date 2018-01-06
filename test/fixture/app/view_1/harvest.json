@@ -1,0 +1,34 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "View"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "core/view"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "template"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "subapp/hello/template/layout"
+    }
+  }
+]

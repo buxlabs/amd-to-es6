@@ -1,0 +1,22 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportSpecifier",
+        "imported": {
+          "type": "Identifier",
+          "name": "foo"
+        },
+        "local": {
+          "type": "Identifier",
+          "name": "foo"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "bar"
+    }
+  }
+]

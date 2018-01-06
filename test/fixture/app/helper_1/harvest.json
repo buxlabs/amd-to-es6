@@ -1,0 +1,18 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "moment"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "moment"
+    }
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "_"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "underscore"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "Backbone"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "backbone"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "Store"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "backboneLocalstorage"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "Todo"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "models/todo"
+    }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "MY_ENUM"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "common/enums/my.enum"
+    }
+  }
+]

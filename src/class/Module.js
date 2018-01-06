@@ -18,6 +18,8 @@ const getVariableDeclaration = require('../lib/getVariableDeclaration')
 const getRequireCallExpressions = require('../lib/getRequireCallExpressions')
 const changeRequireCallExpressionToIdentifier = require('../lib/changeRequireCallExpressionToIdentifier')
 const isDefineWithFunctionExpression = require('../lib/isDefineWithFunctionExpression')
+const changeRequireCallExpressionToImportDeclaration = require('../lib/changeRequireCallExpressionToImportDeclaration')
+const changeNestedRequireCallExpressionToNamedImportDeclaration = require('../lib/changeNestedRequireCallExpressionToNamedImportDeclaration')
 const { array } = require('@buxlabs/utils')
 
 function changeReturnToExportDefaultDeclaration (node) {
@@ -75,14 +77,6 @@ function changeExportsAssignmentExpressionToExportDeclaration (node) {
     type: 'ExportNamedDeclaration',
     declaration: declaration
   }
-}
-
-function changeRequireCallExpressionToImportDeclaration (node, options) {
-  return getImportDeclaration(node.expression.arguments[0].value, null, options)
-}
-
-function changeNestedRequireCallExpressionToNamedImportDeclaration (node, options) {
-  return getImportDeclaration(node.arguments[0].value, null, options || { side: true })
 }
 
 function isAssignmentMemberExpression (node) {
