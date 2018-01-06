@@ -1,0 +1,26 @@
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "Behavior"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "core/behavior"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [],
+    "source": {
+      "type": "Literal",
+      "value": "typeahead"
+    }
+  }
+]

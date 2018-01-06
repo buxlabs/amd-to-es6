@@ -1,52 +1,5 @@
 import test from 'ava'
-import fs from 'fs'
-import path from 'path'
-import normalize from 'normalize-newline'
-import converter from '../../index'
-
-function compare (result, output) {
-  return normalize(result).replace(/\s+/g, '') === normalize(output).replace(/\s+/g, '')
-}
-
-function convert (dir, options) {
-  const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
-  const file2 = path.join(__dirname, '../fixture/', dir, '/output.js')
-  const input = fs.readFileSync(file1, 'utf8')
-  const expected = fs.readFileSync(file2, 'utf8')
-  const result = converter(input, options)
-  const isValid = compare(result, expected)
-  if (!isValid) {
-    console.log('-- INPUT --')
-    console.log(input)
-    console.log('-- EXPECTED --')
-    console.log(expected)
-    console.log('-- RESULT --')
-    console.log(result)
-  }
-  return isValid
-}
-
-function convertWithMap (dir, options) {
-  const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
-  const file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
-  const input = fs.readFileSync(file1, 'utf8')
-  const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
-  const result = converter(input, options)
-  const isValid = compare(result.source, expected.source) && compare(result.map, expected.map)
-  if (!isValid) {
-    console.log('-- INPUT --')
-    console.log(input)
-    console.log('-- EXPECTED --')
-    console.log(expected)
-    console.log('-- RESULT --')
-    console.log(result)
-  }
-  return isValid
-}
-
-test('the converter should be available', assert => {
-  assert.truthy(typeof converter === 'function')
-})
+import { convert, convertWithMap } from '../helper/spec'
 
 test('it works for an anonymous module', assert => {
   assert.truthy(convert('amdjs-api/anonymous-module'))

@@ -1,7 +1,7 @@
 'use strict'
 
 const AbstractSyntaxTree = require('@buxlabs/ast')
-const getDependencies = require('../lib/getDependencies')
+const getDefineDependencies = require('../lib/getDefineDependencies')
 const generateImports = require('../lib/generateImports')
 const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpression')
 const isDefineWithDependencies = require('../lib/isDefineWithDependencies')
@@ -109,7 +109,7 @@ class Module extends AbstractSyntaxTree {
         declaration: define.arguments[0]
       }]
     } else {
-      var dependencies = getDependencies(define)
+      var dependencies = getDefineDependencies(define)
       var nodes = this.getModuleCode()
       var imports = generateImports(dependencies, options)
       var code = this.generateCode(nodes, options)

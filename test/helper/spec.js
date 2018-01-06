@@ -1,0 +1,64 @@
+const fs = require('fs')
+const path = require('path')
+const normalize = require('normalize-newline')
+const { parse } = require('@buxlabs/ast')
+const converter = require('../../index')
+const Harvester = require('../../src/class/Harvester')
+
+function compare (result, output) {
+  return normalize(result).replace(/\s+/g, '') === normalize(output).replace(/\s+/g, '')
+}
+
+module.exports = {
+  convert: function convert (dir, options) {
+    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+    const file2 = path.join(__dirname, '../fixture/', dir, '/output.js')
+    const input = fs.readFileSync(file1, 'utf8')
+    const expected = fs.readFileSync(file2, 'utf8')
+    const result = converter(input, options)
+    const isValid = compare(result, expected)
+    if (!isValid) {
+      console.log('-- INPUT --')
+      console.log(input)
+      console.log('-- EXPECTED --')
+      console.log(expected)
+      console.log('-- RESULT --')
+      console.log(result)
+    }
+    return isValid
+  },
+  convertWithMap: function convertWithMap (dir, options) {
+    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+    const file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
+    const input = fs.readFileSync(file1, 'utf8')
+    const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
+    const result = converter(input, options)
+    const isValid = compare(result.source, expected.source) && compare(result.map, expected.map)
+    if (!isValid) {
+      console.log('-- INPUT --')
+      console.log(input)
+      console.log('-- EXPECTED --')
+      console.log(expected)
+      console.log('-- RESULT --')
+      console.log(result)
+    }
+    return isValid
+  },
+  harvest: function harvest (dir) {
+    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+    const file2 = path.join(__dirname, '../fixture/', dir, '/harvest.json')
+    const input = fs.readFileSync(file1, 'utf8')
+    const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
+    const ast = parse(input, { sourceType: 'module' })
+    const harvester = new Harvester(ast)
+    const result = harvester.harvest()
+    const isValid = JSON.stringify(expected) === JSON.stringify(result)
+    if (!isValid) {
+      console.log('-- EXPECTED --')
+      console.log(JSON.stringify(expected, null, 2))
+      console.log('-- RESULT --')
+      console.log(JSON.stringify(result, null, 2))
+    }
+    return isValid
+  }
+}
