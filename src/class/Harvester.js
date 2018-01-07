@@ -1,7 +1,5 @@
 const AbstractSyntaxTree = require('@buxlabs/ast')
-const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpression')
-const isDefineWithArrayAndCallback = require('../lib/isDefineWithArrayAndCallback')
-const isDefineWithFunctionExpression = require('../lib/isDefineWithFunctionExpression')
+const isDefineWithDependencies = require('../lib/isDefineWithDependencies')
 const getDefineDependencies = require('../lib/getDefineDependencies')
 const generateImports = require('../lib/generateImports')
 const getImportDeclaration = require('../lib/getImportDeclaration')
@@ -13,15 +11,10 @@ const isAssignmentMemberExpression = require('../lib/isAssignmentMemberExpressio
 class Harvester extends AbstractSyntaxTree {
   harvest () {
     const node = this.first('CallExpression[callee.name="define"]')
-    if (!node || isDefineWithObjectExpression(node)) { return [] }
-    if (isDefineWithArrayAndCallback(node)) {
-      return this.getDefineDependencies(node).concat(
-        this.getRequireSugarDependencies()
-      )
-    } else if (isDefineWithFunctionExpression(node)) {
-      return this.getRequireSugarDependencies()
-    }
-    return []
+    if (!isDefineWithDependencies(node)) { return [] }
+    return this.getDefineDependencies(node).concat(
+      this.getRequireSugarDependencies()
+    )
   }
   getDefineDependencies (node) {
     return generateImports(getDefineDependencies(node))

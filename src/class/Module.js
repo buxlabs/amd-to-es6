@@ -8,60 +8,14 @@ const isNamedDefine = require('../lib/isNamedDefine')
 const isReturnStatement = require('../lib/isReturnStatement')
 const isVariableDeclaration = require('../lib/isVariableDeclaration')
 const isRequireCallExpression = require('../lib/isRequireCallExpression')
-const isExportsAssignmentExpression = require('../lib/isExportsAssignmentExpression')
 const isExportsAssignmentExpressionStatement = require('../lib/isExportsAssignmentExpressionStatement')
-const { array } = require('@buxlabs/utils')
+const changeReturnToExportDefaultDeclaration = require('../lib/changeReturnToExportDefaultDeclaration')
+const changeExportsAssignmentExpressionToExportDeclaration = require('../lib/changeExportsAssignmentExpressionToExportDeclaration')
 const Harvester = require('./Harvester')
-
-function changeReturnToExportDefaultDeclaration (node) {
-  node.type = 'ExportDefaultDeclaration'
-  node.declaration = node.argument
-  delete node.argument
-  return node
-}
-
-function changeExportsAssignmentExpressionToExportDeclaration (node) {
-  if (isExportsAssignmentExpression(node.expression.right)) {
-    return null
-  }
-  var name = node.expression.left.property.name
-  if (name === 'default') {
-    return {
-      type: 'ExportDefaultDeclaration',
-      declaration: node.expression.right
-    }
-  }
-  var id = {
-    type: 'Identifier',
-    name: name
-  }
-  var declaration
-  if (node.expression.right.type === 'FunctionExpression') {
-    declaration = node.expression.right
-    declaration.type = 'FunctionDeclaration'
-    declaration.id = id
-  } else {
-    declaration = {}
-    declaration.type = 'VariableDeclaration'
-    declaration.kind = 'var'
-    declaration.declarations = [
-      {
-        type: 'VariableDeclarator',
-        id: id,
-        init: node.expression.right
-      }
-    ]
-  }
-
-  return {
-    type: 'ExportNamedDeclaration',
-    declaration: declaration
-  }
-}
 
 class Module extends AbstractSyntaxTree {
   convert (options) {
-    var define = this.first('CallExpression[callee.name=define]')
+    const define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
       this.ast.body = [{
         type: 'ExportDefaultDeclaration',
@@ -69,32 +23,29 @@ class Module extends AbstractSyntaxTree {
       }]
     } else {
       const harvester = new Harvester(this.ast)
-      var imports = harvester.harvest()
-      var nodes = this.getModuleCode()
-      var code = this.generateCode(nodes, options)
+      const imports = harvester.harvest()
+      const body = this.getBody(define)
+      const code = this.transform(body, options)
       this.ast.body = imports.concat(code)
-      this.removeEsModuleConvention()
-      this.removeUseStrict()
+      this.clean()
     }
   }
 
-  getModuleCode () {
+  getBody (node) {
     var body = []
-    this.walk(node => {
-      if (node.type === 'CallExpression' && (isDefineWithDependencies(node) || isNamedDefine(node))) {
-        let define = getDefineCallbackArguments(node)
-        if (define.body.type === 'BlockStatement') {
-          body = define.body.body
-        } else {
-          body = [{ type: 'ReturnStatement', argument: define.body }]
-        }
+    if (node.type === 'CallExpression' && (isDefineWithDependencies(node) || isNamedDefine(node))) {
+      let args = getDefineCallbackArguments(node)
+      if (args.body.type === 'BlockStatement') {
+        body = args.body.body
+      } else {
+        body = [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
       }
-    })
+    }
     return body
   }
 
-  generateCode (code, options) {
-    var nodes = code.map(node => {
+  transform (body, options) {
+    return body.map(node => {
       if (isReturnStatement(node)) {
         return changeReturnToExportDefaultDeclaration(node)
       } else if (isRequireCallExpression(node)) {
@@ -113,9 +64,12 @@ class Module extends AbstractSyntaxTree {
         return changeExportsAssignmentExpressionToExportDeclaration(node)
       }
       return node
-    })
+    }).filter(Boolean)
+  }
 
-    return array.flatten(nodes).filter(Boolean)
+  clean () {
+    this.removeEsModuleConvention()
+    this.removeUseStrict()
   }
 
   removeEsModuleConvention () {
