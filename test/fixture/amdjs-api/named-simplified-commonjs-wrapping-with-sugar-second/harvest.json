@@ -1,15 +1,7 @@
 [
   {
     "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "beta"
-        }
-      }
-    ],
+    "specifiers": [],
     "source": {
       "type": "Literal",
       "value": "beta"

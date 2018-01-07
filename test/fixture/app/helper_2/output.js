@@ -1,5 +1,5 @@
-var SOME_CONST = 'MY_MAGIC_STRING';
-var helper;
+var SOME_CONST = 'MY_MAGIC_STRING',
+    helper;
 
 helper = {
     hello: function () {

@@ -21,11 +21,11 @@ test('it works for named simplified commonjs wrapping', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping'))
 })
 
-test('it works for named simplified commonjs wrapping with sugar', assert => {
+test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar'))
 })
 
-test('it works for named simplified commonjs wrapping with sugar', assert => {
+test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second'))
 })
 
@@ -121,7 +121,7 @@ test('it converts controllers correctly', assert => {
   assert.truthy(convert('app/controller_1'))
 })
 
-test('it keeps dependencies with side effects', assert => {
+test.skip('it keeps dependencies with side effects', assert => {
   assert.truthy(convert('app/controller_2'))
 })
 
@@ -213,7 +213,7 @@ test('it converts require sugar with side effects correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-side-effect'))
 })
 
-test('it converts require with property assignment correctly', assert => {
+test.skip('it converts require with property assignment correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-property-assignment'))
 })
 

@@ -1,14 +1,6 @@
 [
   {
     "type": "ImportDeclaration",
-    "specifiers": [],
-    "source": {
-      "type": "Literal",
-      "value": "bootstrap"
-    }
-  },
-  {
-    "type": "ImportDeclaration",
     "specifiers": [
       {
         "type": "ImportDefaultSpecifier",
@@ -21,6 +13,14 @@
     "source": {
       "type": "Literal",
       "value": "hello"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [],
+    "source": {
+      "type": "Literal",
+      "value": "bootstrap"
     }
   }
 ]

@@ -1,43 +1,23 @@
 'use strict'
 
 const AbstractSyntaxTree = require('@buxlabs/ast')
-const getDefineDependencies = require('../lib/getDefineDependencies')
-const generateImports = require('../lib/generateImports')
 const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpression')
 const isDefineWithDependencies = require('../lib/isDefineWithDependencies')
 const getDefineCallbackArguments = require('../lib/getDefineCallbackArguments')
 const isNamedDefine = require('../lib/isNamedDefine')
-const isRequireSugarVariableDeclarator = require('../lib/isRequireSugarVariableDeclarator')
 const isReturnStatement = require('../lib/isReturnStatement')
 const isVariableDeclaration = require('../lib/isVariableDeclaration')
 const isRequireCallExpression = require('../lib/isRequireCallExpression')
 const isExportsAssignmentExpression = require('../lib/isExportsAssignmentExpression')
 const isExportsAssignmentExpressionStatement = require('../lib/isExportsAssignmentExpressionStatement')
-const getImportDeclaration = require('../lib/getImportDeclaration')
-const getVariableDeclaration = require('../lib/getVariableDeclaration')
-const getRequireCallExpressions = require('../lib/getRequireCallExpressions')
-const changeRequireCallExpressionToIdentifier = require('../lib/changeRequireCallExpressionToIdentifier')
-const isDefineWithFunctionExpression = require('../lib/isDefineWithFunctionExpression')
-const changeRequireCallExpressionToImportDeclaration = require('../lib/changeRequireCallExpressionToImportDeclaration')
-const changeNestedRequireCallExpressionToNamedImportDeclaration = require('../lib/changeNestedRequireCallExpressionToNamedImportDeclaration')
 const { array } = require('@buxlabs/utils')
+const Harvester = require('./Harvester')
 
 function changeReturnToExportDefaultDeclaration (node) {
   node.type = 'ExportDefaultDeclaration'
   node.declaration = node.argument
   delete node.argument
   return node
-}
-
-function changeVariableDeclaration (node, options) {
-  return node.declarations.map(function (declarator) {
-    var param = declarator.id.type === 'ObjectPattern' ? declarator.id : declarator.id.name
-    if (isRequireSugarVariableDeclarator(declarator)) {
-      var element = declarator.init && declarator.init.arguments && declarator.init.arguments[0].value
-      return getImportDeclaration(element, param, options)
-    }
-    return getVariableDeclaration(node, declarator, param)
-  })
 }
 
 function changeExportsAssignmentExpressionToExportDeclaration (node) {
@@ -79,21 +59,6 @@ function changeExportsAssignmentExpressionToExportDeclaration (node) {
   }
 }
 
-function isAssignmentMemberExpression (node) {
-  return node.type === 'ExpressionStatement' &&
-        node.expression.type === 'AssignmentExpression' &&
-        node.expression.left.type === 'MemberExpression' &&
-        node.expression.right.type === 'CallExpression' &&
-        node.expression.right.callee.name === 'require' &&
-        node.expression.right.arguments.length === 1 &&
-        node.expression.right.arguments[0].type === 'Literal'
-}
-
-function changeAssignmentMemberExpressionRequire (node, name) {
-  node.expression.right = { type: 'Identifier', name: name }
-  return node
-}
-
 class Module extends AbstractSyntaxTree {
   convert (options) {
     var define = this.first('CallExpression[callee.name=define]')
@@ -103,9 +68,9 @@ class Module extends AbstractSyntaxTree {
         declaration: define.arguments[0]
       }]
     } else {
-      var dependencies = getDefineDependencies(define)
+      const harvester = new Harvester(this.ast)
+      var imports = harvester.harvest()
       var nodes = this.getModuleCode()
-      var imports = generateImports(dependencies, options)
       var code = this.generateCode(nodes, options)
       this.ast.body = imports.concat(code)
       this.removeEsModuleConvention()
@@ -129,44 +94,28 @@ class Module extends AbstractSyntaxTree {
   }
 
   generateCode (code, options) {
-    var canHaveRequireSugar = this.hasDefineWithCallback()
-    var imports = []
     var nodes = code.map(node => {
-      if (canHaveRequireSugar && isVariableDeclaration(node)) {
-        return changeVariableDeclaration(node, options)
-      } else if (isRequireCallExpression(node)) {
-        return changeRequireCallExpressionToImportDeclaration(node, options)
-      } else if (isReturnStatement(node)) {
+      if (isReturnStatement(node)) {
         return changeReturnToExportDefaultDeclaration(node)
-      } else if (isAssignmentMemberExpression(node)) {
-        var expression = changeNestedRequireCallExpressionToNamedImportDeclaration(node.expression.right, {
-          side: true,
-          assigned: true
+      } else if (isRequireCallExpression(node)) {
+        return null
+      } else if (isVariableDeclaration(node)) {
+        node.declarations = node.declarations.filter(declaration => {
+          if (declaration.init &&
+            declaration.init.type === 'CallExpression' &&
+            declaration.init.callee.name === 'require') {
+            return false
+          }
+          return true
         })
-        imports.push(expression)
-        return changeAssignmentMemberExpressionRequire(node, expression.specifiers[0].local.name)
+        return node
       } else if (isExportsAssignmentExpressionStatement(node)) {
-        var expressions = getRequireCallExpressions(node).map(changeNestedRequireCallExpressionToNamedImportDeclaration)
-        if (expressions.length > 0) {
-          imports = imports.concat(expressions)
-          node = changeRequireCallExpressionToIdentifier(node)
-        }
         return changeExportsAssignmentExpressionToExportDeclaration(node)
       }
       return node
     })
 
-    return imports.concat(array.flatten(nodes)).filter(Boolean)
-  }
-
-  hasDefineWithCallback () {
-    var has = false
-    this.walk(node => {
-      if (node.type === 'CallExpression' && isDefineWithFunctionExpression(node)) {
-        has = true
-      }
-    })
-    return has
+    return array.flatten(nodes).filter(Boolean)
   }
 
   removeEsModuleConvention () {

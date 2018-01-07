@@ -9,10 +9,6 @@ test('it works for a dependency free module', assert => {
   assert.truthy(harvest('amdjs-api/dependency-free-module'))
 })
 
-test('it works for side effect dependencies', assert => {
-  assert.truthy(harvest('define/require-sugar-with-side-effect'))
-})
-
 test('it works for simplified commonjs wrapping', assert => {
   assert.truthy(harvest('amdjs-api/simplified-commonjs-wrapping'))
 })
@@ -25,11 +21,11 @@ test('it works for named simplified commonjs wrapping', assert => {
   assert.truthy(harvest('amdjs-api/named-simplified-commonjs-wrapping'))
 })
 
-test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
+test('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(harvest('amdjs-api/named-simplified-commonjs-wrapping-with-sugar'))
 })
 
-test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
+test('it works for named simplified commonjs wrapping with sugar', assert => {
   assert.truthy(harvest('amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second'))
 })
 
@@ -125,7 +121,7 @@ test('it converts controllers correctly', assert => {
   assert.truthy(harvest('app/controller_1'))
 })
 
-test.skip('it keeps dependencies with side effects', assert => {
+test('it keeps dependencies with side effects', assert => {
   assert.truthy(harvest('app/controller_2'))
 })
 
@@ -185,7 +181,7 @@ test('it converts subapps correctly', assert => {
   assert.truthy(harvest('app/subapp_1'))
 })
 
-test.skip('it converts subapp specs correctly', assert => {
+test('it converts subapp specs correctly', assert => {
   assert.truthy(harvest('app/subapp_spec_1', { quotes: 'double' }))
 })
 
@@ -217,7 +213,7 @@ test('it converts require sugar with side effects correctly', assert => {
   assert.truthy(harvest('define/require-sugar-with-side-effect'))
 })
 
-test.skip('it converts require with property assignment correctly', assert => {
+test('it converts require with property assignment correctly', assert => {
   assert.truthy(harvest('define/require-sugar-with-property-assignment'))
 })
 
@@ -249,7 +245,7 @@ test('it converts todomvc knockout requirejs example correctly', assert => {
   assert.truthy(harvest('web-examples/todomvc_knockout_requirejs_1'))
 })
 
-test.skip('it converts todomvc lavaca requirejs example correctly', assert => {
+test('it converts todomvc lavaca requirejs example correctly', assert => {
   assert.truthy(harvest('web-examples/todomvc_lavaca_requirejs_1'))
 })
 

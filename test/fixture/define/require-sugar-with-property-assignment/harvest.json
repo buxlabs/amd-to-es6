@@ -1,1 +1,34 @@
-// TODO
+[
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "codesEnum"
+        }
+      }
+    ],
+    "source": {
+      "type": "Literal",
+      "value": "enum/codes.enum"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [],
+    "source": {
+      "type": "Literal",
+      "value": "model/first.model"
+    }
+  },
+  {
+    "type": "ImportDeclaration",
+    "specifiers": [],
+    "source": {
+      "type": "Literal",
+      "value": "model/second.model"
+    }
+  }
+]
