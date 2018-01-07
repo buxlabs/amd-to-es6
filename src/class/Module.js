@@ -2,9 +2,7 @@
 
 const AbstractSyntaxTree = require('@buxlabs/ast')
 const isDefineWithObjectExpression = require('../lib/isDefineWithObjectExpression')
-const isDefineWithDependencies = require('../lib/isDefineWithDependencies')
 const getDefineCallbackArguments = require('../lib/getDefineCallbackArguments')
-const isNamedDefine = require('../lib/isNamedDefine')
 const isReturnStatement = require('../lib/isReturnStatement')
 const isVariableDeclaration = require('../lib/isVariableDeclaration')
 const isRequireCallExpression = require('../lib/isRequireCallExpression')
@@ -40,21 +38,16 @@ class Module extends AbstractSyntaxTree {
   }
 
   getBody (node) {
-    if (node.type === 'CallExpression' && (isDefineWithDependencies(node) || isNamedDefine(node))) {
-      let args = getDefineCallbackArguments(node)
-      if (args.body.type === 'BlockStatement') {
-        return args.body.body
-      }
-      return [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
+    let args = getDefineCallbackArguments(node)
+    if (args.body.type === 'BlockStatement') {
+      return args.body.body
     }
-    return []
+    return [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
   }
 
   transform (body, options) {
     return body.map(node => {
-      if (node.conversion) {
-        console.log(node)
-      } else if (isReturnStatement(node)) {
+      if (isReturnStatement(node)) {
         return changeReturnToExportDefaultDeclaration(node)
       } else if (isRequireCallExpression(node)) {
         return null
