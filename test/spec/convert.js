@@ -297,14 +297,14 @@ test('it removes code that defines the __esModule property', assert => {
   assert.truthy(convert('define/exports-object-define-property'))
 })
 
-test.skip('it handles exports with same names', assert => {
-  assert.truthy(convert('define/exports-same'))
-})
-
-test.skip('it handles multiple exports assignments to undefined', assert => {
+test('it handles multiple exports assignments to undefined', assert => {
   assert.truthy(convert('define/exports-overrides'))
 })
 
-test.skip('it handles multiple exports assignments', assert => {
+test('it handles exports with same names', assert => {
+  assert.truthy(convert('define/exports-same'))
+})
+
+test('it handles multiple exports assignments', assert => {
   assert.truthy(convert('define/exports-multiple'))
 })

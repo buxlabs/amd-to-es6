@@ -1,4 +1,8 @@
 import hello from 'hello';
 import world from 'world';
-export var bar = hello;
-export var baz = world;
+var a = hello;
+var b = world;
+export {
+    a as bar,
+    b as baz
+};

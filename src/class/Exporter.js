@@ -1,5 +1,6 @@
 const AbstractSyntaxTree = require('@buxlabs/ast')
 const isDefineWithExports = require('../lib/isDefineWithExports')
+const isExportsMemberExpression = require('../lib/isExportsMemberExpression')
 
 module.exports = class Exporter extends AbstractSyntaxTree {
   constructor (source, options) {
@@ -16,36 +17,33 @@ module.exports = class Exporter extends AbstractSyntaxTree {
     const exports = []
     const specifiers = []
     nodes.forEach(node => {
-      if (node.left.type === 'MemberExpression' &&
-        node.left.object &&
-        node.left.object.name === 'exports' &&
-        node.left.property &&
-        node.left.property.type === 'Identifier'
-      ) {
-        const identifier = this.analyzer.createIdentifier()
-        exports.push({
-          type: 'VariableDeclaration',
-          declarations: [
-            {
-              type: 'VariableDeclarator',
-              id: { type: 'Identifier', name: identifier },
-              init: node.right
-            }
-          ],
-          kind: 'var'
-        })
+      if (!isExportsMemberExpression(node.left) || node.right.visited) return
+      node.remove = true
+      let names = [node.left.property.name]
+      while (node.right.type === 'AssignmentExpression') {
+        names.push(node.right.left.property.name)
+        node.right = node.right.right
+        node.right.visited = true
+      }
+      if (node.right.type === 'Identifier' && node.right.name === 'undefined') return
+      const identifier = this.analyzer.createIdentifier()
+      exports.push({
+        type: 'VariableDeclaration',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: identifier },
+            init: node.right
+          }
+        ],
+        kind: 'var'
+      })
+      for (let i = 0, length = names.length; i < length; i += 1) {
         specifiers.push({
           type: 'ExportSpecifier',
-          local: {
-            type: 'Identifier',
-            name: identifier
-          },
-          exported: {
-            type: 'Identifier',
-            name: node.left.property.name
-          }
+          local: { type: 'Identifier', name: identifier },
+          exported: { type: 'Identifier', name: names[i] }
         })
-        node.remove = true
       }
     })
     return exports.concat([{ type: 'ExportNamedDeclaration', specifiers }])

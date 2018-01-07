@@ -1,5 +1,7 @@
 ## 0.12.0
 
+- add: support multi exports
+- fix: handle collisions of names
 - remove: drop support for side and assigned flags
 
 ## 0.11.3
