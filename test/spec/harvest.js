@@ -262,7 +262,7 @@ test('it converts exports.default correctly', assert => {
 })
 
 test('it removes code that defines the __esModule property', assert => {
-  assert.truthy(harvest('define/object-define-property'))
+  assert.truthy(harvest('define/exports-object-define-property'))
 })
 
 test('it handles multiple exports assignments to undefined', assert => {
@@ -293,10 +293,10 @@ test('it handles destructuring for require sugar with many variables', assert =>
   assert.truthy(harvest('define/require-sugar-destructuring-many-variables'))
 })
 
-test.skip('it handles multiple exports assignments', assert => {
+test('it handles multiple exports assignments', assert => {
   assert.truthy(harvest('define/exports-multiple'))
 })
 
-test.skip('it handles exports with same names', assert => {
+test('it handles exports with same names', assert => {
   assert.truthy(harvest('define/exports-same'))
 })

@@ -113,8 +113,6 @@ There are more examples in the test/fixture directory
     -b, --beautify          Beautify the output
     --replace           Replace the input files with results
     --suffix <string>   Replace suffix of the files
-    --side              Import side effects with camel cased named
-    --assigned          Automatically assign custom name to side effects
     --quotes            Single, double or auto quotes in the output
     --comments          Basic comments, copy them to the top of the output file
 

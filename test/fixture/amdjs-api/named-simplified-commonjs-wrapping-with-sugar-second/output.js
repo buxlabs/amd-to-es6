@@ -1,11 +1,12 @@
-import beta from 'beta';
+import a from 'beta';
 
-export function verb () {
+var b = function () {
     var hello = function () {
         return {
             world: function () {}
         };
     };
     hello().world();
-    return beta.verb();
-}
+    return a.verb();
+};
+export { b as verb };

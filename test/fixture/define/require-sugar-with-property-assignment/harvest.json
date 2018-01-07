@@ -17,7 +17,15 @@
   },
   {
     "type": "ImportDeclaration",
-    "specifiers": [],
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "a"
+        }
+      }
+    ],
     "source": {
       "type": "Literal",
       "value": "model/first.model"
@@ -25,7 +33,15 @@
   },
   {
     "type": "ImportDeclaration",
-    "specifiers": [],
+    "specifiers": [
+      {
+        "type": "ImportDefaultSpecifier",
+        "local": {
+          "type": "Identifier",
+          "name": "b"
+        }
+      }
+    ],
     "source": {
       "type": "Literal",
       "value": "model/second.model"

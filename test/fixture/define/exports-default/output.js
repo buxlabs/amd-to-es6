@@ -1,3 +1,4 @@
 import bar from 'bar';
 import baz from 'baz';
-export default bar(baz);
+var a = bar(baz);
+export { a as default };

@@ -1,11 +1,7 @@
-'use strict'
-
-const getIdentifierName = require('./getIdentifierName')
-
-module.exports = function (element, param, options) {
-  var specifiers = []
-  if (param || (options && options.side)) {
-    if (param && param.type === 'ObjectPattern') {
+module.exports = function (element, param) {
+  const specifiers = []
+  if (param) {
+    if (param.type === 'ObjectPattern') {
       param.properties.forEach(property => {
         specifiers.push({
           type: 'ImportSpecifier',
@@ -18,12 +14,11 @@ module.exports = function (element, param, options) {
         type: 'ImportDefaultSpecifier',
         local: {
           type: 'Identifier',
-          name: getIdentifierName(element, param, options)
+          name: param
         }
       })
     }
   }
-
   return {
     type: 'ImportDeclaration',
     specifiers: specifiers,

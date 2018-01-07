@@ -1,3 +1,7 @@
+## 0.12.0
+
+- remove: drop support for side and assigned flags
+
 ## 0.11.3
 
 - add: better support for destructuring with require sugar

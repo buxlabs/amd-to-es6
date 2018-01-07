@@ -152,20 +152,6 @@ test('allows to beautify the output', t => {
   t.truthy(replaceNewlines(output) === replaceNewlines(result.stdout))
 })
 
-test.skip('allows to import side effects with names', t => {
-  var args = 'test/fixture/cli/named-side-effects/input.js'
-  var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/named-side-effects/output.js'), 'utf8')
-  var result = shell.exec(`node ${bin} --side ${args}`, { silent: true })
-  t.truthy(compare(output, result.stdout))
-})
-
-test.skip('allows to import side effects with assigned names', t => {
-  var args = 'test/fixture/cli/named-assigned-side-effects/input.js'
-  var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/named-assigned-side-effects/output.js'), 'utf8')
-  var result = shell.exec(`node ${bin} --side --assigned ${args}`, { silent: true })
-  t.truthy(compare(output, result.stdout))
-})
-
 test('allows to generate code with double quotes', t => {
   var args = 'test/fixture/cli/double-quotes/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/double-quotes/output.js'), 'utf8')

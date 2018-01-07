@@ -9,26 +9,6 @@ test('it works for a dependency free module', assert => {
   assert.truthy(convert('amdjs-api/dependency-free-module'))
 })
 
-test('it works for simplified commonjs wrapping', assert => {
-  assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping'))
-})
-
-test('it works for simplified commonjs wrapping that returns a literal', assert => {
-  assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping-returns-literal'))
-})
-
-test('it works for named simplified commonjs wrapping', assert => {
-  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping'))
-})
-
-test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
-  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar'))
-})
-
-test.skip('it works for named simplified commonjs wrapping with sugar', assert => {
-  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second'))
-})
-
 test('it works for named module', assert => {
   assert.truthy(convert('amdjs-api/named-module'))
 })
@@ -121,7 +101,7 @@ test('it converts controllers correctly', assert => {
   assert.truthy(convert('app/controller_1'))
 })
 
-test.skip('it keeps dependencies with side effects', assert => {
+test('it keeps dependencies with side effects', assert => {
   assert.truthy(convert('app/controller_2'))
 })
 
@@ -213,7 +193,7 @@ test('it converts require sugar with side effects correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-side-effect'))
 })
 
-test.skip('it converts require with property assignment correctly', assert => {
+test('it converts require with property assignment correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-property-assignment'))
 })
 
@@ -265,22 +245,6 @@ test('it returns sourcemaps with file reference', assert => {
   assert.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file' }))
 })
 
-test('it converts exports.default correctly', assert => {
-  assert.truthy(convert('define/exports-default'))
-})
-
-test('it removes code that defines the __esModule property', assert => {
-  assert.truthy(convert('define/object-define-property'))
-})
-
-test('it handles multiple exports assignments to undefined', assert => {
-  assert.truthy(convert('define/exports-overrides'))
-})
-
-test('it handles anonymous imports', assert => {
-  assert.truthy(convert('define/imports-anonymous'))
-})
-
 test('it handles destructuring', assert => {
   assert.truthy(convert('define/destructuring'))
 })
@@ -301,10 +265,46 @@ test('it handles destructuring for require sugar with many variables', assert =>
   assert.truthy(convert('define/require-sugar-destructuring-many-variables'))
 })
 
-test.skip('it handles multiple exports assignments', assert => {
-  assert.truthy(convert('define/exports-multiple'))
+test('it works for simplified commonjs wrapping', assert => {
+  assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping'))
+})
+
+test('it works for simplified commonjs wrapping that returns a literal', assert => {
+  assert.truthy(convert('amdjs-api/simplified-commonjs-wrapping-returns-literal'))
+})
+
+test('it works for named simplified commonjs wrapping', assert => {
+  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping'))
+})
+
+test('it works for named simplified commonjs wrapping with sugar', assert => {
+  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar'))
+})
+
+test('it works for named simplified commonjs wrapping with sugar', assert => {
+  assert.truthy(convert('amdjs-api/named-simplified-commonjs-wrapping-with-sugar-second'))
+})
+
+test('it handles anonymous imports', assert => {
+  assert.truthy(convert('define/imports-anonymous'))
+})
+
+test('it converts exports.default correctly', assert => {
+  assert.truthy(convert('define/exports-default'))
+})
+
+test('it removes code that defines the __esModule property', assert => {
+  assert.truthy(convert('define/exports-object-define-property'))
 })
 
 test.skip('it handles exports with same names', assert => {
   assert.truthy(convert('define/exports-same'))
+})
+
+test.skip('it handles multiple exports assignments to undefined', assert => {
+  assert.truthy(convert('define/exports-overrides'))
+})
+
+test.skip('it handles multiple exports assignments', assert => {
+  assert.truthy(convert('define/exports-multiple'))
 })

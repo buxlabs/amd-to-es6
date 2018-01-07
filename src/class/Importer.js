@@ -8,7 +8,11 @@ const isRequireSugarVariableDeclarator = require('../lib/isRequireSugarVariableD
 const isMemberRequireCallExpression = require('../lib/isMemberRequireCallExpression')
 const isAssignmentMemberExpression = require('../lib/isAssignmentMemberExpression')
 
-class Harvester extends AbstractSyntaxTree {
+module.exports = class Importer extends AbstractSyntaxTree {
+  constructor (source, options) {
+    super(...arguments)
+    this.analyzer = options.analyzer
+  }
   harvest () {
     const node = this.first('CallExpression[callee.name="define"]')
     if (!isDefineWithDependencies(node)) { return [] }
@@ -43,11 +47,19 @@ class Harvester extends AbstractSyntaxTree {
     return getImportDeclaration(element, param)
   }
   getMemberExpressionRequire (node) {
-    return getImportDeclaration(node.callee.object.arguments[0].value)
+    const identifier = this.analyzer.createIdentifier()
+    node.callee.object.replacement = {
+      parent: 'object',
+      child: { type: 'Identifier', name: identifier }
+    }
+    return getImportDeclaration(node.callee.object.arguments[0].value, identifier)
   }
   getAssignmentExpressionRequire (node) {
-    return getImportDeclaration(node.right.arguments[0].value)
+    const identifier = this.analyzer.createIdentifier()
+    node.right.replacement = {
+      parent: 'right',
+      child: { type: 'Identifier', name: identifier }
+    }
+    return getImportDeclaration(node.right.arguments[0].value, identifier)
   }
 }
-
-module.exports = Harvester

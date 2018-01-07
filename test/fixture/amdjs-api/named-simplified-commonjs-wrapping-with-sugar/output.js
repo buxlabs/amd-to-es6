@@ -1,5 +1,7 @@
-import beta from 'beta';
-
-export function verb () {
-    return beta.verb();
-}
+import a from 'beta';
+var b = function () {
+    return a.verb();
+};
+export {
+    b as verb
+};

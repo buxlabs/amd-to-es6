@@ -15,8 +15,6 @@ program
   .option('-b, --beautify', 'Beautify the output')
   .option('--replace', 'Replace the input files with results')
   .option('--suffix <string>', 'Replace suffix of the files')
-  .option('--side', 'Import side effects with camel cased named')
-  .option('--assigned', 'Automatically assign custom name to side effects')
   .option('--quotes <type>', 'Single, double or auto quotes in the output', /^(single|double|auto)$/i, 'single')
   .option('--comments', 'Basic comments, copy them to the top of the output file')
   .parse(process.argv)

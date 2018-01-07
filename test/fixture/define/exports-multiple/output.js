@@ -1,3 +1,2 @@
-var $REF1 = 'baz';
-export var foo = $REF1;
-export var bar = $REF1;
+var a = 'baz';
+export { a as foo, a as bar }

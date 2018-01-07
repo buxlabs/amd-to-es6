@@ -1,4 +1,7 @@
 import a from 'a';
 import b from 'b';
 
-export function action () {}
+var c = function () {};
+export {
+    c as action
+};

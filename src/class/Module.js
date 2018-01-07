@@ -10,10 +10,17 @@ const isVariableDeclaration = require('../lib/isVariableDeclaration')
 const isRequireCallExpression = require('../lib/isRequireCallExpression')
 const isExportsAssignmentExpressionStatement = require('../lib/isExportsAssignmentExpressionStatement')
 const changeReturnToExportDefaultDeclaration = require('../lib/changeReturnToExportDefaultDeclaration')
-const changeExportsAssignmentExpressionToExportDeclaration = require('../lib/changeExportsAssignmentExpressionToExportDeclaration')
-const Harvester = require('./Harvester')
+const Analyzer = require('./Analyzer')
+const Importer = require('./Importer')
+const Exporter = require('./Exporter')
 
 class Module extends AbstractSyntaxTree {
+  constructor () {
+    super(...arguments)
+    this.analyzer = new Analyzer(this.ast)
+    this.importer = new Importer(this.ast, { analyzer: this.analyzer })
+    this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
+  }
   convert (options) {
     const define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
@@ -22,31 +29,32 @@ class Module extends AbstractSyntaxTree {
         declaration: define.arguments[0]
       }]
     } else {
-      const harvester = new Harvester(this.ast)
-      const imports = harvester.harvest()
+      const imports = this.importer.harvest()
+      const exports = this.exporter.harvest()
       const body = this.getBody(define)
       const code = this.transform(body, options)
-      this.ast.body = imports.concat(code)
+      this.ast.body = imports.concat(code, exports)
+      this.replace()
       this.clean()
     }
   }
 
   getBody (node) {
-    var body = []
     if (node.type === 'CallExpression' && (isDefineWithDependencies(node) || isNamedDefine(node))) {
       let args = getDefineCallbackArguments(node)
       if (args.body.type === 'BlockStatement') {
-        body = args.body.body
-      } else {
-        body = [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
+        return args.body.body
       }
+      return [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
     }
-    return body
+    return []
   }
 
   transform (body, options) {
     return body.map(node => {
-      if (isReturnStatement(node)) {
+      if (node.conversion) {
+        console.log(node)
+      } else if (isReturnStatement(node)) {
         return changeReturnToExportDefaultDeclaration(node)
       } else if (isRequireCallExpression(node)) {
         return null
@@ -61,10 +69,20 @@ class Module extends AbstractSyntaxTree {
         })
         return node
       } else if (isExportsAssignmentExpressionStatement(node)) {
-        return changeExportsAssignmentExpressionToExportDeclaration(node)
+        return node
       }
       return node
     }).filter(Boolean)
+  }
+
+  replace () {
+    this.walk((node, parent) => {
+      if (node.replacement) {
+        parent[node.replacement.parent] = node.replacement.child
+      } else if (node.remove) {
+        this.remove(node)
+      }
+    })
   }
 
   clean () {

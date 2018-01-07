@@ -3,7 +3,8 @@ const path = require('path')
 const normalize = require('normalize-newline')
 const { parse } = require('@buxlabs/ast')
 const converter = require('../../index')
-const Harvester = require('../../src/class/Harvester')
+const Analyzer = require('../../src/class/Analyzer')
+const Importer = require('../../src/class/Importer')
 
 function compare (result, output) {
   return normalize(result).replace(/\s+/g, '') === normalize(output).replace(/\s+/g, '')
@@ -50,7 +51,8 @@ module.exports = {
     const input = fs.readFileSync(file1, 'utf8')
     const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
     const ast = parse(input, { sourceType: 'module' })
-    const harvester = new Harvester(ast)
+    const analyzer = new Analyzer(ast)
+    const harvester = new Importer(ast, { analyzer })
     const result = harvester.harvest()
     const isValid = JSON.stringify(expected) === JSON.stringify(result)
     if (!isValid) {

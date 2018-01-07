@@ -1,3 +1,4 @@
 import a from 'a';
 
-export var hello = 'world';
+var b = 'world';
+export { b as hello };

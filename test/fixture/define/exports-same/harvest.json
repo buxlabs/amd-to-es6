@@ -6,7 +6,7 @@
         "type": "ImportDefaultSpecifier",
         "local": {
           "type": "Identifier",
-          "name": "_bar"
+          "name": "bar"
         }
       }
     ],
@@ -22,7 +22,7 @@
         "type": "ImportDefaultSpecifier",
         "local": {
           "type": "Identifier",
-          "name": "_baz"
+          "name": "baz"
         }
       }
     ],
