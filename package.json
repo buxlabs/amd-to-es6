@@ -42,7 +42,7 @@
     "shelljs": "0.8.0"
   },
   "dependencies": {
-    "@buxlabs/ast": "^0.9.2",
+    "@buxlabs/ast": "^0.9.3",
     "@buxlabs/utils": "^2.2.1",
     "array-uniq": "^1.0.3",
     "commander": "2.12.2",

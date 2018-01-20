@@ -30,9 +30,8 @@ class Module extends AbstractSyntaxTree {
       const imports = this.importer.harvest()
       const exports = this.exporter.harvest()
       const body = this.getBody(define)
-      const code = this.transform(body, options)
+      const code = this.getCode(body, options)
       this.ast.body = imports.concat(code, exports)
-      this.replace()
       this.clean()
     }
   }
@@ -45,7 +44,7 @@ class Module extends AbstractSyntaxTree {
     return [{ type: 'ExportDefaultDeclaration', declaration: args.body }]
   }
 
-  transform (body, options) {
+  getCode (body, options) {
     return body.map(node => {
       if (isReturnStatement(node)) {
         return changeReturnToExportDefaultDeclaration(node)
@@ -61,24 +60,29 @@ class Module extends AbstractSyntaxTree {
           return true
         })
         return node
-      } else if (isExportsAssignmentExpressionStatement(node)) {
-        return node
       }
       return node
     }).filter(Boolean)
   }
 
-  replace () {
+  transformTree () {
+    let cid = 1
     this.walk((node, parent) => {
+      node.cid = cid++
       if (node.replacement) {
         parent[node.replacement.parent] = node.replacement.child
       } else if (node.remove) {
         this.remove(node)
+      } else if (node.type === 'IfStatement' && node.test.value === true) {
+        parent.body = parent.body.reduce((result, item) => {
+          return result.concat(node.cid === item.cid ? node.consequent.body : item)
+        }, [])
       }
     })
   }
 
   clean () {
+    this.transformTree()
     this.removeEsModuleConvention()
     this.removeUseStrict()
   }

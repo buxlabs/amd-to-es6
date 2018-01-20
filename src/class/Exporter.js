@@ -21,7 +21,9 @@ module.exports = class Exporter extends AbstractSyntaxTree {
       node.remove = true
       let names = [node.left.property.name]
       while (node.right.type === 'AssignmentExpression') {
-        names.push(node.right.left.property.name)
+        if (node.right.left.property) {
+          names.push(node.right.left.property.name)
+        }
         node.right = node.right.right
         node.right.visited = true
       }

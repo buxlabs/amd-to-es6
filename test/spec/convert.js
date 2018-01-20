@@ -312,3 +312,11 @@ test('it handles exports with same names', assert => {
 test('it handles multiple exports assignments', assert => {
   assert.truthy(convert('define/exports-multiple'))
 })
+
+test('it handles exports with condition', assert => {
+  assert.truthy(convert('define/exports-with-condition'))
+})
+
+test.skip('it handles exports with condition and multiple overrides', assert => {
+  assert.truthy(convert('define/exports-with-condition-and-overrides'))
+})
