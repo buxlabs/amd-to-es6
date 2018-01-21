@@ -39,7 +39,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "normalize-newline": "^3.0.0",
     "nyc": "11.4.1",
-    "shelljs": "0.8.0"
+    "shelljs": "0.8.1"
   },
   "dependencies": {
     "@buxlabs/ast": "^0.9.3",
