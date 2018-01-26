@@ -18,17 +18,10 @@ module.exports = class Exporter extends AbstractSyntaxTree {
     const nodes = this.find('AssignmentExpression')
     const exports = []
     const specifiers = []
+    const used = []
     nodes.forEach(node => {
-      if (!isExportsMemberExpression(node.left) || node.right.visited) return
+      if (!isExportsMemberExpression(node.left)) return
       node.remove = true
-      let names = [node.left.property.name]
-      while (node.right.type === 'AssignmentExpression') {
-        if (node.right.left.property) {
-          names.push(node.right.left.property.name)
-        }
-        node.right = node.right.right
-        node.right.visited = true
-      }
       if (node.right.type === 'Identifier' && node.right.name === 'undefined') return
       const identifier = this.analyzer.createIdentifier()
       exports.push({
@@ -42,12 +35,17 @@ module.exports = class Exporter extends AbstractSyntaxTree {
         ],
         kind: 'var'
       })
-      for (let i = 0, length = names.length; i < length; i += 1) {
-        specifiers.push({
-          type: 'ExportSpecifier',
-          local: { type: 'Identifier', name: identifier },
-          exported: { type: 'Identifier', name: names[i] }
-        })
+      used.push(node.left.property.name)
+      let index = used.indexOf(node.left.property.name)
+      let specifier = {
+        type: 'ExportSpecifier',
+        local: { type: 'Identifier', name: identifier },
+        exported: { type: 'Identifier', name: node.left.property.name }
+      }
+      if (index >= 0) {
+        specifiers[index] = specifier
+      } else {
+        specifiers.push(specifier)
       }
     })
     return exports.concat([{ type: 'ExportNamedDeclaration', specifiers }])

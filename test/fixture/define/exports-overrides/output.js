@@ -1,8 +1,11 @@
 import hello from 'hello';
 import world from 'world';
-var a = hello;
-var b = world;
+var a = undefined;
+var b = a;
+var c = a;
+var d = hello;
+var e = world;
 export {
-    a as bar,
-    b as baz
+    e as baz,
+    d as bar
 };

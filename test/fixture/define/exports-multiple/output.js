@@ -1,2 +1,7 @@
 var a = 'baz';
-export { a as foo, a as bar };
+var b = a;
+var c = a;
+export {
+    b as bar,
+    c as foo
+};

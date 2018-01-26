@@ -26,6 +26,7 @@ class Module extends AbstractSyntaxTree {
         declaration: define.arguments[0]
       }]
     } else {
+      this.prepare()
       const imports = this.importer.harvest()
       const exports = this.exporter.harvest()
       const body = this.getBody(define)
@@ -33,6 +34,55 @@ class Module extends AbstractSyntaxTree {
       this.ast.body = imports.concat(code, exports)
       this.clean()
     }
+  }
+
+  prepare () {
+    let cid = 1
+    this.walk((node, parent) => {
+      node.cid = cid++
+      if (node.type === 'IfStatement' && node.test.value === true) {
+        parent.body = parent.body.reduce((result, item) => {
+          return result.concat(node.cid === item.cid ? node.consequent.body : item)
+        }, [])
+      } else if (node.type === 'ExpressionStatement' && node.expression.type === 'AssignmentExpression') {
+        if (node.expression.left.type === 'MemberExpression' &&
+            node.expression.left.object.name === 'exports' &&
+            node.expression.right.type === 'AssignmentExpression') {
+          let cache = [node.expression.left]
+          while (node.expression.right.type === 'AssignmentExpression') {
+            cache.push(node.expression.right.left)
+            node.expression.right = node.expression.right.right
+          }
+          const identifier = this.analyzer.createIdentifier()
+          const container = {
+            type: 'VariableDeclaration',
+            declarations: [
+              {
+                type: 'VariableDeclarator',
+                id: { type: 'Identifier', name: identifier },
+                init: node.expression.right
+              }
+            ],
+            kind: 'var'
+          }
+          cache = cache.reverse().map(current => {
+            return {
+              type: 'ExpressionStatement',
+              expression: {
+                type: 'AssignmentExpression',
+                left: current,
+                right: { type: 'Identifier', name: identifier },
+                operator: '='
+              }
+            }
+          })
+          cache.unshift(container)
+          parent.body = parent.body.reduce((result, item) => {
+            return result.concat(node.cid === item.cid ? cache : item)
+          }, [])
+        }
+      }
+    })
   }
 
   getBody (node) {
@@ -65,17 +115,11 @@ class Module extends AbstractSyntaxTree {
   }
 
   transformTree () {
-    let cid = 1
     this.walk((node, parent) => {
-      node.cid = cid++
       if (node.replacement) {
         parent[node.replacement.parent] = node.replacement.child
       } else if (node.remove) {
         this.remove(node)
-      } else if (node.type === 'IfStatement' && node.test.value === true) {
-        parent.body = parent.body.reduce((result, item) => {
-          return result.concat(node.cid === item.cid ? node.consequent.body : item)
-        }, [])
       }
     })
   }
