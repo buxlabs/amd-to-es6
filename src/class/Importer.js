@@ -1,3 +1,5 @@
+'use strict'
+
 const AbstractSyntaxTree = require('@buxlabs/ast')
 const isDefineWithDependencies = require('../lib/isDefineWithDependencies')
 const getDefineDependencies = require('../lib/getDefineDependencies')
@@ -10,7 +12,7 @@ const isAssignmentMemberExpression = require('../lib/isAssignmentMemberExpressio
 
 module.exports = class Importer extends AbstractSyntaxTree {
   constructor (source, options) {
-    super(...arguments)
+    super(source, options)
     this.analyzer = options.analyzer
   }
   harvest () {

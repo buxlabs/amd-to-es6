@@ -1,3 +1,7 @@
+## 0.12.1
+
+- fix: support node >= 4.0.0
+
 ## 0.12.0
 
 - add: support multi exports

@@ -1,17 +1,19 @@
+'use strict'
+
 const AbstractSyntaxTree = require('@buxlabs/ast')
-const { array } = require('@buxlabs/utils')
+const utils = require('@buxlabs/utils')
 const unique = require('array-uniq')
 
 module.exports = class Analyzer extends AbstractSyntaxTree {
-  constructor () {
-    super(...arguments)
+  constructor (source, options) {
+    super(source, options)
     this.identifiers = this.getIdentifiers()
   }
   getIdentifiers () {
     return unique(this.find('Identifier').map(identifier => identifier.name))
   }
   createIdentifier () {
-    const identifier = array.identifier(this.identifiers)
+    const identifier = utils.array.identifier(this.identifiers)
     this.identifiers.push(identifier)
     return identifier
   }

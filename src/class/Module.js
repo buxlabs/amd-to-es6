@@ -12,8 +12,8 @@ const Importer = require('./Importer')
 const Exporter = require('./Exporter')
 
 class Module extends AbstractSyntaxTree {
-  constructor () {
-    super(...arguments)
+  constructor (source, options) {
+    super(source, options)
     this.analyzer = new Analyzer(this.ast)
     this.importer = new Importer(this.ast, { analyzer: this.analyzer })
     this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
