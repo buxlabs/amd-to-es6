@@ -1,6 +1,7 @@
 # AMD to ES6 converter
 
 [![Codeship](https://img.shields.io/codeship/f6299130-6721-0134-f3f9-02d00f1d3243/master.svg)](https://app.codeship.com/projects/176125)
+[![Build Status](https://travis-ci.org/buxlabs/amd-to-es6.svg?branch=master)](https://travis-ci.org/buxlabs/amd-to-es6)
 
 ## Installation
 
