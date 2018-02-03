@@ -48,10 +48,11 @@ class Module extends AbstractSyntaxTree {
         if (node.expression.left.type === 'MemberExpression' &&
             node.expression.left.object.name === 'exports' &&
             node.expression.right.type === 'AssignmentExpression') {
-          let cache = [node.expression.left]
-          while (node.expression.right.type === 'AssignmentExpression') {
-            cache.push(node.expression.right.left)
-            node.expression.right = node.expression.right.right
+          let cache = [node.expression]
+          let right = node.expression.right
+          while (right.type === 'AssignmentExpression') {
+            cache.push(right)
+            right = right.right
           }
           const identifier = this.analyzer.createIdentifier()
           const container = {
@@ -60,7 +61,7 @@ class Module extends AbstractSyntaxTree {
               {
                 type: 'VariableDeclarator',
                 id: { type: 'Identifier', name: identifier },
-                init: node.expression.right
+                init: right
               }
             ],
             kind: 'var'
@@ -70,7 +71,7 @@ class Module extends AbstractSyntaxTree {
               type: 'ExpressionStatement',
               expression: {
                 type: 'AssignmentExpression',
-                left: current,
+                left: current.left,
                 right: { type: 'Identifier', name: identifier },
                 operator: '='
               }
