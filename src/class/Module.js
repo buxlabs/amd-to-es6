@@ -37,14 +37,29 @@ class Module extends AbstractSyntaxTree {
   }
 
   prepare () {
+    this.removeTrueIfStatements()
+    this.flattenAssignments()
+  }
+
+  removeTrueIfStatements () {
     let cid = 1
-    this.walk((node, parent) => {
-      node.cid = cid++
+    this.walk(function (node, parent) {
+      node.cid = cid
+      cid += 1
       if (node.type === 'IfStatement' && node.test.value === true) {
         parent.body = parent.body.reduce((result, item) => {
           return result.concat(node.cid === item.cid ? node.consequent.body : item)
         }, [])
-      } else if (node.type === 'ExpressionStatement' && node.expression.type === 'AssignmentExpression') {
+      }
+    })
+  }
+
+  flattenAssignments () {
+    let cid = 1
+    this.walk((node, parent) => {
+      node.cid = cid
+      cid += 1
+      if (node.type === 'ExpressionStatement' && node.expression.type === 'AssignmentExpression') {
         if (node.expression.left.type === 'MemberExpression' &&
             node.expression.left.object.name === 'exports' &&
             node.expression.right.type === 'AssignmentExpression') {

@@ -1,5 +1,8 @@
 # @buxlabs/amd-to-es6 changelog
 
+## 0.12.3
+* fix: handle code with complex exports assignments
+
 ## 0.12.2
 * update: dependencies
 

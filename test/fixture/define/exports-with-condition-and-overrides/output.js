@@ -1,5 +1,8 @@
 var foo;
 var a = 1;
+foo = a;
+var b = a;
+var c = foo;
 export {
-    a as foo
+    c as foo
 };

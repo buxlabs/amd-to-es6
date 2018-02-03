@@ -317,6 +317,6 @@ test('it handles exports with condition', assert => {
   assert.truthy(convert('define/exports-with-condition'))
 })
 
-test.skip('it handles exports with condition and multiple overrides', assert => {
+test('it handles exports with condition and multiple overrides', assert => {
   assert.truthy(convert('define/exports-with-condition-and-overrides'))
 })
