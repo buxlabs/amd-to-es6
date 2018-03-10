@@ -12,8 +12,10 @@ function compare (result, output) {
 
 module.exports = {
   convert: function convert (dir, options) {
-    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
-    const file2 = path.join(__dirname, '../fixture/', dir, '/output.js')
+    options = options || {}
+    const extension = options.jsx ? 'jsx' : 'js'
+    const file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
+    const file2 = path.join(__dirname, '../fixture/', dir, '/output.' + extension)
     const input = fs.readFileSync(file1, 'utf8')
     const expected = fs.readFileSync(file2, 'utf8')
     const result = converter(input, options)
@@ -29,7 +31,9 @@ module.exports = {
     return isValid
   },
   convertWithMap: function convertWithMap (dir, options) {
-    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+    options = options || {}
+    const extension = options.jsx ? 'jsx' : 'js'
+    const file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
     const file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
     const input = fs.readFileSync(file1, 'utf8')
     const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))

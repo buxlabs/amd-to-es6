@@ -14,6 +14,10 @@ const Exporter = require('./Exporter')
 class Module extends AbstractSyntaxTree {
   constructor (source, options) {
     super(source, options)
+    this.transformations = []
+    if (options.jsx) {
+      this.transformJsxNodes()
+    }
     this.analyzer = new Analyzer(this.ast)
     this.importer = new Importer(this.ast, { analyzer: this.analyzer })
     this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
@@ -170,6 +174,34 @@ class Module extends AbstractSyntaxTree {
         value: 'use strict'
       }
     })
+  }
+
+  transformJsxNodes () {
+    let count = 0
+    this.replace({
+      enter: node => {
+        if (node.type === 'JSXElement') {
+          count += 1
+          const name = '$$JSXElement_' + count + '$$'
+          this.transformations.push({
+            node: node,
+            name: name
+          })
+          return { type: 'Identifier', name: name }
+        }
+        return node
+      }
+    })
+  }
+
+  toSource (options) {
+    let source = super.toSource(options)
+    this.transformations.forEach(transformation => {
+      // jsxcodegen will be used in the line below
+      const code = transformation.node
+      source = source.replace(transformation.name, code)
+    })
+    return source
   }
 }
 

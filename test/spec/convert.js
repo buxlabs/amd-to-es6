@@ -320,3 +320,7 @@ test('it handles exports with condition', assert => {
 test('it handles exports with condition and multiple overrides', assert => {
   assert.truthy(convert('define/exports-with-condition-and-overrides'))
 })
+
+test.skip('it handles jsx', assert => {
+  assert.truthy(convert('jsx/react', { jsx: true }))
+})

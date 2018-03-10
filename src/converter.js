@@ -4,7 +4,6 @@ const Module = require('./class/Module')
 
 module.exports = function (source, options) {
   options = options || {}
-
   if (source.indexOf('define') === -1) { return source }
 
   const module = new Module(source, options)
