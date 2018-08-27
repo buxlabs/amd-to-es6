@@ -11,6 +11,24 @@ const Analyzer = require('./Analyzer')
 const Importer = require('./Importer')
 const Exporter = require('./Exporter')
 
+function getImmediatelyInvokedFunctionExpression (body) {
+  return {
+    type: 'ExpressionStatement',
+    expression: {
+      type: 'CallExpression',
+      callee: {
+        type: 'FunctionExpression',
+        params: [],
+        body: {
+          type: 'BlockStatement',
+          body
+        }
+      },
+      arguments: []
+    }
+  }
+}
+
 class Module extends AbstractSyntaxTree {
   constructor (source, options) {
     super(source, options)
@@ -30,7 +48,7 @@ class Module extends AbstractSyntaxTree {
         declaration: define.arguments[0]
       }]
     } else {
-      this.prepare()
+      this.prepare(define)
       const imports = this.importer.harvest()
       const exports = this.exporter.harvest()
       const body = this.getBody(define)
@@ -40,9 +58,10 @@ class Module extends AbstractSyntaxTree {
     }
   }
 
-  prepare () {
+  prepare (define) {
     this.removeTrueIfStatements()
     this.flattenAssignments()
+    this.wrapMultipleReturns(define)
   }
 
   removeTrueIfStatements () {
@@ -103,6 +122,16 @@ class Module extends AbstractSyntaxTree {
         }
       }
     })
+  }
+
+  wrapMultipleReturns (node) {
+    let args = getDefineCallbackArguments(node)
+    if (args.body.type === 'BlockStatement') {
+      const types = args.body.body.map(leaf => leaf.type)
+      if (!types.includes('ReturnStatement') && types.includes('IfStatement')) {
+        args.body.body = [{ type: 'ReturnStatement', argument: getImmediatelyInvokedFunctionExpression(args.body.body) }]
+      }
+    }
   }
 
   getBody (node) {

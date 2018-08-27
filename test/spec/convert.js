@@ -324,3 +324,7 @@ test('it handles exports with condition and multiple overrides', assert => {
 test.skip('it handles jsx', assert => {
   assert.truthy(convert('jsx/react', { jsx: true }))
 })
+
+test('it works for multiple returns', assert => {
+  assert.truthy(convert('define/multiple-returns'))
+})
