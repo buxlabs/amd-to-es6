@@ -321,6 +321,10 @@ test('(convert) it does not break on files with dynamic import', assert => {
   assert.truthy(convert('define/dynamic-import'))
 })
 
+test('(convert) it does not break on files with async await', assert => {
+  assert.truthy(convert('define/async-await'))
+})
+
 test.skip('it leaves single line comments if required', assert => {
   assert.truthy(convert('define/single-line-comments', { comments: true }))
 })

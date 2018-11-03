@@ -1,5 +1,8 @@
 # @buxlabs/amd-to-es6 changelog
 
+## 0.13.2
+* add: support async/await
+
 ## 0.13.1
 * remove: .nyc_output from the package source files
 
