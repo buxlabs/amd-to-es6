@@ -42,7 +42,7 @@
     "shelljs": "0.8.0"
   },
   "dependencies": {
-    "abstract-syntax-tree": "^1.0.2",
+    "abstract-syntax-tree": "^1.0.3",
     "array-uniq": "^1.0.3",
     "commander": "^2.13.0",
     "glob": "^7.1.2",

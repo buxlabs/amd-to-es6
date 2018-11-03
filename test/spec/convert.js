@@ -317,7 +317,7 @@ test('(convert) it is a noop for files with dynamic imports', assert => {
   assert.truthy(convert('noop/dynamic-import'))
 })
 
-test.skip('(convert) it does not break on files with dynamic import', assert => {
+test('(convert) it does not break on files with dynamic import', assert => {
   assert.truthy(convert('define/dynamic-import'))
 })
 

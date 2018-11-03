@@ -32,10 +32,7 @@ function getImmediatelyInvokedFunctionExpression (body) {
 class Module extends AbstractSyntaxTree {
   constructor (source, options) {
     super(source, options)
-    this.transformations = []
-    if (options.jsx) {
-      this.transformJsxNodes()
-    }
+    this.transform(options)
     this.analyzer = new Analyzer(this.ast)
     this.importer = new Importer(this.ast, { analyzer: this.analyzer })
     this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
@@ -207,6 +204,13 @@ class Module extends AbstractSyntaxTree {
         value: 'use strict'
       }
     })
+  }
+
+  transform (options) {
+    this.transformations = []
+    if (options.jsx) {
+      this.transformJsxNodes()
+    }
   }
 
   transformJsxNodes () {

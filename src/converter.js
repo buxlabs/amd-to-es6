@@ -1,10 +1,12 @@
 'use strict'
 
 const Module = require('./class/Module')
+const { convertDynamicImport, revertDynamicImportConversion } = require('./utilities/dynamic-import')
 
 module.exports = function (source, options) {
   options = options || {}
   if (source.indexOf('define') === -1) { return source }
+  source = convertDynamicImport(source)
 
   const module = new Module(source, options)
 
@@ -12,5 +14,14 @@ module.exports = function (source, options) {
     module.convert(options)
   }
 
-  return module.toSource(options)
+  let code = module.toSource(options)
+
+  if (typeof code === 'string') {
+    code = revertDynamicImportConversion(code)
+  } else if (typeof code === 'object') {
+    code.source = revertDynamicImportConversion(code.source)
+    code.map = revertDynamicImportConversion(code.map)
+  }
+
+  return code
 }
