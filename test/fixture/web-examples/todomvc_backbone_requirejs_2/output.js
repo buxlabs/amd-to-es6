@@ -1,26 +1,26 @@
-import _ from 'underscore';
-import Backbone from 'backbone';
-import Store from 'backboneLocalstorage';
-import Todo from 'models/todo';
+import _ from "underscore";
+import Backbone from "backbone";
+import Store from "backboneLocalstorage";
+import Todo from "models/todo";
 
 var TodosCollection = Backbone.Collection.extend({
-    model: Todo,
+  model: Todo,
 
-    localStorage: new Store('todos-backbone'),
+  localStorage: new Store("todos-backbone"),
 
-    completed: function () {
-        return this.where({completed: true});
-    },
+  completed: function () {
+    return this.where({completed: true});
+  },
 
-    remaining: function () {
-        return this.where({completed: false});
-    },
+  remaining: function () {
+    return this.where({completed: false});
+  },
 
-    nextOrder: function () {
-        return this.length ? this.last().get('order') + 1 : 1;
-    },
+  nextOrder: function () {
+    return this.length ? this.last().get("order") + 1 : 1;
+  },
 
-    comparator: 'order'
+  comparator: "order"
 });
 
 export default new TodosCollection();

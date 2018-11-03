@@ -1,2 +1,2 @@
-import { foo } from 'bar';
+import { foo } from "bar";
 export default foo();

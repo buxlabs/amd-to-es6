@@ -1,3 +1,3 @@
-define('foo', ['exports', 'hello', 'world'], function (exports, hello) {
-  exports.bar = hello('world')
+define("foo", ["exports", "hello", "world"], function (exports, hello) {
+  exports.bar = hello("world")
 })

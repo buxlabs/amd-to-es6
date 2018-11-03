@@ -1,23 +1,23 @@
 define([
-    "module/hello/hello.module"
+  "module/hello/hello.module"
 ], function (HelloModule) {
-    "use strict";
+  "use strict";
 
-    var module;
+  var module;
 
-    describe("HelloModule", function () {
+  describe("HelloModule", function () {
 
-        beforeEach(function () {
-            module = new HelloModule();
-        });
-
-        afterEach(function () {
-            module.destroy();
-        });
-
-        it("should be defined", function () {
-            expect(module).toBeDefined();
-        });
-
+    beforeEach(function () {
+      module = new HelloModule();
     });
+
+    afterEach(function () {
+      module.destroy();
+    });
+
+    it("should be defined", function () {
+      expect(module).toBeDefined();
+    });
+
+  });
 });

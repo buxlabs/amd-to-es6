@@ -1,18 +1,18 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "HelloModule"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "module/hello/hello.module"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "HelloModule"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "module/hello/hello.module"
+  }
   }
 ]

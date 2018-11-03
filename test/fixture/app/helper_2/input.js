@@ -1,14 +1,14 @@
 define(function () {
-    "use strict";
+  "use strict";
 
-    var SOME_CONST = "MY_MAGIC_STRING",
-        helper;
+  var SOME_CONST = "MY_MAGIC_STRING",
+    helper;
 
-    helper = {
-        hello: function () {
-            console.log(SOME_CONST);
-        }
-    };
+  helper = {
+    hello: function () {
+      console.log(SOME_CONST);
+    }
+  };
 
-    return helper;
+  return helper;
 });

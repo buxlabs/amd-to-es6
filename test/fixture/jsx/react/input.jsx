@@ -1,6 +1,6 @@
 define([
-  'react',
-  'enzyme'
+  "react",
+  "enzyme"
 ], (React, { mount }) => {
   mount(<Component foo={true} />)
 })

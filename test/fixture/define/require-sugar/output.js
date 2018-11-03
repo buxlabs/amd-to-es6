@@ -1,2 +1,2 @@
-import hello from 'hello';
+import hello from "hello";
 export default hello.world();

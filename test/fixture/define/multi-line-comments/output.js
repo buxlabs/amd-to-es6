@@ -1,7 +1,7 @@
-import channel from 'core/channel';
+import channel from "core/channel";
 export default {
-    fetch: function () {
-        return channel.request('service:properties:request'); /* hello world */
+  fetch: function () {
+    return channel.request("service:properties:request"); /* hello world */
 
-    }
+  }
 };

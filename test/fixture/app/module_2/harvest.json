@@ -1,34 +1,34 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "Marionette"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "marionette"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "Marionette"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "marionette"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "Radio"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "backbone.radio"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "Radio"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "backbone.radio"
+  }
   }
 ]

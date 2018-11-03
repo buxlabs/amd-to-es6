@@ -1,11 +1,11 @@
 define([
-    'core/view',
-    'subapp/hello/template/layout'
+  "core/view",
+  "subapp/hello/template/layout"
 ], function (View, template) {
-    'use strict';
+  "use strict";
 
-    return View.extend({
-        template: template
-    });
+  return View.extend({
+    template: template
+  });
 
 });

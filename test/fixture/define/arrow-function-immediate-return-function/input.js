@@ -1,9 +1,9 @@
 define(["marionette"], (Marionette) =>
-    () => {
-        return new Marionette.View({
-            template: function () {
-                return "hello world";
-            }
-        });
-    }
+  () => {
+    return new Marionette.View({
+      template: function () {
+        return "hello world";
+      }
+    });
+  }
 );

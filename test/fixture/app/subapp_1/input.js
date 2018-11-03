@@ -1,36 +1,36 @@
 define([
-    "core/subapp",
-    "subapps/hello/controller"
+  "core/subapp",
+  "subapps/hello/controller"
 ], function (
-    Subapp,
-    Controller
+  Subapp,
+  Controller
 ) {
-    "use strict";
+  "use strict";
 
-    var actions = ["hello", "world"];
+  var actions = ["hello", "world"];
 
-    return Subapp.extend({
+  return Subapp.extend({
 
-        Controller: Controller,
-        ControllerOptions: {
-            actions: {
-                show: actions
-            }
-        },
+    Controller: Controller,
+    ControllerOptions: {
+      actions: {
+        show: actions
+      }
+    },
 
-        routes: {
-            "hello": "show"
-        },
+    routes: {
+      "hello": "show"
+    },
 
-        initialize: function () {
-            this.listenTo(channel, "hello:show", this.onHelloShow);
-        },
+    initialize: function () {
+      this.listenTo(channel, "hello:show", this.onHelloShow);
+    },
 
-        onHelloShow: function (options) {
-            channel.trigger("navigate", "hello");
-            this.controller.show(options);
-        }
+    onHelloShow: function (options) {
+      channel.trigger("navigate", "hello");
+      this.controller.show(options);
+    }
 
-    });
+  });
 
 });

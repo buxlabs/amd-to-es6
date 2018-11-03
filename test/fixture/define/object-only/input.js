@@ -1,3 +1,3 @@
 define({
-    value: 12
+  value: 12
 });

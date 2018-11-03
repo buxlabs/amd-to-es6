@@ -1,16 +1,16 @@
 define(function (require) {
-    "use strict";
+  "use strict";
 
-    var Marionette = require("backbone.marionette");
+  var Marionette = require("backbone.marionette");
 
-    require("side-effect");
+  require("side-effect");
 
-    return Marionette.Object.extend({
+  return Marionette.Object.extend({
 
-        initialize: function (options) {
-            this.window.hello();
-        }
+    initialize: function (options) {
+      this.window.hello();
+    }
 
-    });
+  });
 
 });

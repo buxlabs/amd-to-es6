@@ -1,22 +1,22 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportSpecifier",
-        "imported": {
-          "type": "Identifier",
-          "name": "bar"
-        },
-        "local": {
-          "type": "Identifier",
-          "name": "baz"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "foo"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportSpecifier",
+    "imported": {
+      "type": "Identifier",
+      "name": "bar"
+    },
+    "local": {
+      "type": "Identifier",
+      "name": "baz"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "foo"
+  }
   }
 ]

@@ -1,2 +1,2 @@
-import 'bootstrap';
-export default 'foo';
+import "bootstrap";
+export default "foo";

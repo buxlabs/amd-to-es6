@@ -1,5 +1,4 @@
-import hello from 'hello';
-
+import hello from "hello";
 export default function () {
-    return hello.world();
-};
+  return hello.world();
+}

@@ -1,15 +1,15 @@
 define(function (require) {
-    "use strict";
+  "use strict";
 
-    const Marionette = require("backbone.marionette"),
-        text = "Hello world!";
+  const Marionette = require("backbone.marionette"),
+    text = "Hello world!";
 
-    return Marionette.Object.extend({
+  return Marionette.Object.extend({
 
-        initialize: function () {
-            console.log(text);
-        }
+    initialize: function () {
+      console.log(text);
+    }
 
-    });
+  });
 
 });

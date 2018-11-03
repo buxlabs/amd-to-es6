@@ -1,13 +1,13 @@
 define(["common/core/view"], function (View) {
-    "use strict";
+  "use strict";
 
-    return View.extend({
-        method1: method,
-        method2: method
-    });
+  return View.extend({
+    method1: method,
+    method2: method
+  });
 
-    function method () {
-        console.log("hello world");
-    }
+  function method () {
+    console.log("hello world");
+  }
 
 });

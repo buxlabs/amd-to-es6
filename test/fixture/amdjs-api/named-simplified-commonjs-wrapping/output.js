@@ -1,8 +1,8 @@
-import beta from 'beta';
+import beta from "beta";
 
 var a = function () {
-    return beta.verb();
+  return beta.verb();
 };
 export {
-    a as verb
+  a as verb
 };

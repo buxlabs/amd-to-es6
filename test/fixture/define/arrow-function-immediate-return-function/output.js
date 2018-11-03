@@ -1,9 +1,9 @@
-import Marionette from 'marionette';
+import Marionette from "marionette";
 
 export default () => {
-    return new Marionette.View({
-        template: function () {
-            return 'hello world';
-        }
-    });
+  return new Marionette.View({
+    template: function () {
+      return "hello world";
+    }
+  });
 };

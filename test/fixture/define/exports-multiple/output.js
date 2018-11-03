@@ -1,7 +1,4 @@
-var a = 'baz';
+var a = "baz";
 var b = a;
 var c = a;
-export {
-    b as bar,
-    c as foo
-};
+export {b as bar, c as foo};

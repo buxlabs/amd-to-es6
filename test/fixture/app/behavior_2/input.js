@@ -1,16 +1,16 @@
 define([
-    "core/behavior",
-    "jquery.swing"
+  "core/behavior",
+  "jquery.swing"
 ], function (Behavior) {
-    "use strict";
+  "use strict";
 
-    return Behavior.extend({
-        ui: {
-            hello: ".world"
-        },
-        onRender: function () {
-            this.ui.hello.swing();
-        }
-    });
+  return Behavior.extend({
+    ui: {
+      hello: ".world"
+    },
+    onRender: function () {
+      this.ui.hello.swing();
+    }
+  });
 
 });

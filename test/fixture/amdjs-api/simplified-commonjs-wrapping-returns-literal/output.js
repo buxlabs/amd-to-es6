@@ -1,4 +1,4 @@
-import a from 'a';
+import a from "a";
 
-var b = 'world';
+var b = "world";
 export { b as hello };

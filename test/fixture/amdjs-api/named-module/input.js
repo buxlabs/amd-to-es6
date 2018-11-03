@@ -1,5 +1,5 @@
-define('alpha', function () {
-    return function () {
-        return 'alpha';
-    };
+define("alpha", function () {
+  return function () {
+    return "alpha";
+  };
 });

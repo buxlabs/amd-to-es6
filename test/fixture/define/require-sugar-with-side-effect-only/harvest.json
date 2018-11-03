@@ -1,10 +1,10 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [],
-    "source": {
-      "type": "Literal",
-      "value": "bootstrap"
-    }
+  "type": "ImportDeclaration",
+  "specifiers": [],
+  "source": {
+    "type": "Literal",
+    "value": "bootstrap"
+  }
   }
 ]

@@ -1,4 +1,4 @@
 define(function (require) {
-    require('bootstrap');
-    return 'foo';
+  require("bootstrap");
+  return "foo";
 });

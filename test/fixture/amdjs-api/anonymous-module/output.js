@@ -1,7 +1,7 @@
-import alpha from 'alpha';
+import alpha from "alpha";
 
 export default {
-    verb: function(){
-        return alpha.verb() + 2;
-    }
+  verb: function(){
+    return alpha.verb() + 2;
+  }
 };

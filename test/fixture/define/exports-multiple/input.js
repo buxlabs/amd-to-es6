@@ -1,3 +1,3 @@
-define(['exports'], function (exports) {
-  exports.foo = exports.bar = 'baz'
+define(["exports"], function (exports) {
+  exports.foo = exports.bar = "baz"
 })

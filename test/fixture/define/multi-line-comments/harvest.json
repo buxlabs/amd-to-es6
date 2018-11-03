@@ -1,18 +1,18 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "channel"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "core/channel"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "channel"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "core/channel"
+  }
   }
 ]

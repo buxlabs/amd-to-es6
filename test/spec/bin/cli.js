@@ -14,7 +14,7 @@ test('allows to convert a file through cli', t => {
   var args = 'test/fixture/cli/single-file/input.js'
   var output = fs.readFileSync(path.join(__dirname, '../../fixture/cli/single-file/output.js'), 'utf8')
   var result = shell.exec(`node ${bin} ${args}`, { silent: true })
-  t.truthy(output === result.stdout)
+  t.truthy(compare(output, result.stdout))
 })
 
 test('allows to convert multiple files within a directory', t => {
@@ -31,8 +31,8 @@ test('allows to convert multiple files within a directory', t => {
   var content2 = fs.readFileSync(input2, 'utf8')
   var result1 = fs.readFileSync(output1, 'utf8')
   var result2 = fs.readFileSync(output2, 'utf8')
-  t.truthy(content1 === result1)
-  t.truthy(content2 === result2)
+  t.truthy(compare(content1, result1))
+  t.truthy(compare(content2, result2))
   fs.unlinkSync(input1)
   fs.unlinkSync(input2)
 })
@@ -64,8 +64,8 @@ test('allows to convert multiple files recursively using the glob option', t => 
   var content2 = fs.readFileSync(input2, 'utf8')
   var result1 = fs.readFileSync(output1, 'utf8')
   var result2 = fs.readFileSync(output2, 'utf8')
-  t.truthy(content1 === result1)
-  t.truthy(content2 === result2)
+  t.truthy(compare(content1, result1))
+  t.truthy(compare(content2, result2))
   fs.unlinkSync(input1)
   fs.unlinkSync(input2)
 })
@@ -83,8 +83,8 @@ test('allows to convert multiple files recursively using the recursive option', 
   var content2 = fs.readFileSync(input2, 'utf8')
   var result1 = fs.readFileSync(output1, 'utf8')
   var result2 = fs.readFileSync(output2, 'utf8')
-  t.truthy(content1 === result1)
-  t.truthy(content2 === result2)
+  t.truthy(compare(content1, result1))
+  t.truthy(compare(content2, result2))
   fs.unlinkSync(input1)
   fs.unlinkSync(input2)
 })
@@ -96,7 +96,7 @@ test('allows to replace given file with a compiled one', t => {
   fs.writeFileSync(filepath, content)
   shell.exec(`node ${bin} ${src} --replace`, { silent: true })
   var output = fs.readFileSync(filepath, 'utf8')
-  t.truthy(output === 'export default 123;')
+  t.truthy(compare(output, 'export default 123;'))
   fs.unlinkSync(filepath)
 })
 
@@ -111,7 +111,7 @@ test('allows to replace given files within a directory', t => {
   var result = shell.exec(`node ${bin} --src=${dirpath} --replace`, { silent: true })
   var output = fs.readFileSync(filepath, 'utf8')
   t.truthy(result.code === 0)
-  t.truthy(output === 'export default 712;')
+  t.truthy(compare(output, 'export default 712;'))
   fs.unlinkSync(filepath)
   fs.rmdirSync(dirpath)
 })
@@ -125,7 +125,7 @@ test("allows to convert a single file and change it's suffix", t => {
   fs.unlinkSync(destpath)
   fs.writeFileSync(filepath, 'define(function () { return 142; });')
   t.truthy(result.code === 0)
-  t.truthy(output === 'export default 142;')
+  t.truthy(compare(output, 'export default 142;'))
 })
 
 test('allows to convert multiple files and change their suffix', t => {
@@ -138,7 +138,7 @@ test('allows to convert multiple files and change their suffix', t => {
   var output = fs.readFileSync(destpath, 'utf8')
   fs.writeFileSync(filepath, 'define(function () { return 617; });')
   t.truthy(result.code === 0)
-  t.truthy(output === 'export default 617;')
+  t.truthy(compare(output, 'export default 617;'))
   fs.unlinkSync(destpath)
 })
 

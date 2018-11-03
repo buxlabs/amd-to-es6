@@ -1,2 +1,2 @@
-import { bar, baz } from 'foo';
+import { bar, baz } from "foo";
 export default bar(baz);

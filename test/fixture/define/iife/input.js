@@ -1,7 +1,7 @@
 (function () {
 
-    define({
-        hello: "world"
-    });
+  define({
+    hello: "world"
+  });
 
 })();

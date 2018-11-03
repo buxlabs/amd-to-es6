@@ -1,11 +1,11 @@
 define(function (require) {
-    'use strict';
+  "use strict";
 
-    var Marionette = require('marionette');
+  var Marionette = require("marionette");
 
-    return Marionette.Object.extend({
-        initialize: function () {
-            console.log('hello world');
-        }
-    });
+  return Marionette.Object.extend({
+    initialize: function () {
+      console.log("hello world");
+    }
+  });
 });

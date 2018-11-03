@@ -1,33 +1,33 @@
 /*global define:false */
 (function () {
 
-    'use strict';
+  "use strict";
 
-    define(['director'], function (Router) {
+  define(["director"], function (Router) {
 
-        var RouterModel = function (dispatcher) {
+    var RouterModel = function (dispatcher) {
 
-            // create the router (director.js)
-            var router = new Router().init().configure({
-                notfound: render
-            });
+      // create the router (director.js)
+      var router = new Router().init().configure({
+        notfound: render
+      });
 
-            // dispatch a custom event to render the template on a route change
-            router.on(/.*/, render);
+      // dispatch a custom event to render the template on a route change
+      router.on(/.*/, render);
 
-            function render() {
-                dispatcher.dispatch('render');
-            }
+      function render() {
+        dispatcher.dispatch("render");
+      }
 
-            return {
-                getRoute: function () {
-                    return router.getRoute()[0];
-                }
-            };
-        };
+      return {
+        getRoute: function () {
+          return router.getRoute()[0];
+        }
+      };
+    };
 
-        return RouterModel;
+    return RouterModel;
 
-    });
+  });
 
 })();

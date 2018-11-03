@@ -1,5 +1,5 @@
-Object.defineProperty(window, 'custom', {
+Object.defineProperty(window, "custom", {
   value: true
 });
-var a = 'foo';
-export { a as default };
+var a = "foo";
+export {a as default};

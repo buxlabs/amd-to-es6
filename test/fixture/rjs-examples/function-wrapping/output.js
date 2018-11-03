@@ -1,7 +1,7 @@
-import Employee from 'types/Employee';
+import Employee from "types/Employee";
 
 function Manager () {
-    this.reports = [];
+  this.reports = [];
 }
 
 Manager.prototype = new Employee();

@@ -1,14 +1,14 @@
 define(function (require) {
-    "use strict";
+  "use strict";
 
-    var moment = require("moment"),
-        helper;
+  var moment = require("moment"),
+    helper;
 
-    helper = {
-        hello: function () {
-            console.log(moment());
-        }
-    };
+  helper = {
+    hello: function () {
+      console.log(moment());
+    }
+  };
 
-    return helper;
+  return helper;
 });

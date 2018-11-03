@@ -1,18 +1,18 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "ko"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "knockout"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "ko"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "knockout"
+  }
   }
 ]

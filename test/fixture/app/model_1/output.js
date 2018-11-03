@@ -1,13 +1,13 @@
-import Backbone from 'backbone';
+import Backbone from "backbone";
 
 var State, Model;
 
 State = {
-    NEW: 0,
-    ERROR: 1,
-    RETRY: 2,
-    SUCCESS: 3,
-    CANCELLED: 4
+  NEW: 0,
+  ERROR: 1,
+  RETRY: 2,
+  SUCCESS: 3,
+  CANCELLED: 4
 };
 
 Model = Backbone.Model.extend({});

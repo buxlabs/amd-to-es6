@@ -73,18 +73,6 @@ test("it shouldn't convert files with no define", assert => {
   assert.truthy(convert('define/no-define'))
 })
 
-test('it leaves single line comments if required', assert => {
-  assert.truthy(convert('define/single-line-comments', { comments: true }))
-})
-
-test('it leaves multi line comments if required', assert => {
-  assert.truthy(convert('define/multi-line-comments', { comments: true }))
-})
-
-test('it leaves single line comments in code if required', assert => {
-  assert.truthy(convert('define/comments', { comments: true }))
-})
-
 test('it converts define with unused deps correctly', assert => {
   assert.truthy(convert('define/callback-with-mismatch-deps'))
 })
@@ -321,10 +309,22 @@ test('it handles exports with condition and multiple overrides', assert => {
   assert.truthy(convert('define/exports-with-condition-and-overrides'))
 })
 
-test.skip('it handles jsx', assert => {
-  assert.truthy(convert('jsx/react', { jsx: true }))
-})
-
 test('it works for multiple returns', assert => {
   assert.truthy(convert('define/multiple-returns'))
+})
+
+test.skip('it leaves single line comments if required', assert => {
+  assert.truthy(convert('define/single-line-comments', { comments: true }))
+})
+
+test.skip('it leaves multi line comments if required', assert => {
+  assert.truthy(convert('define/multi-line-comments', { comments: true }))
+})
+
+test.skip('it leaves single line comments in code if required', assert => {
+  assert.truthy(convert('define/comments', { comments: true }))
+})
+
+test.skip('it handles jsx', assert => {
+  assert.truthy(convert('jsx/react', { jsx: true }))
 })

@@ -4,5 +4,5 @@ foo = a;
 var b = a;
 var c = foo;
 export {
-    c as foo
+  c as foo
 };

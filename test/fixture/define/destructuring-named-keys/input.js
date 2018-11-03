@@ -1,3 +1,3 @@
-define(['foo'], function ({ bar: baz }) {
-    return baz;
+define(["foo"], function ({ bar: baz }) {
+  return baz;
 });

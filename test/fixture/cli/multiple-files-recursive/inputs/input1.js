@@ -1,5 +1,5 @@
 define(function () {
-    'use strict';
+  "use strict";
 
-    return 789;
+  return 789;
 });

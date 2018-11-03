@@ -1,7 +1,7 @@
 'use strict'
 
-const AbstractSyntaxTree = require('@buxlabs/ast')
-const utils = require('@buxlabs/utils')
+const AbstractSyntaxTree = require('abstract-syntax-tree')
+const utils = require('pure-utilities')
 const unique = require('array-uniq')
 
 module.exports = class Analyzer extends AbstractSyntaxTree {

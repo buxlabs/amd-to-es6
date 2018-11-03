@@ -1,20 +1,20 @@
 define(["backbone"], function (Backbone) {
-    "use strict";
+  "use strict";
 
-    var State, Model;
+  var State, Model;
 
-    State = {
-        NEW: 0,
-        ERROR: 1,
-        RETRY: 2,
-        SUCCESS: 3,
-        CANCELLED: 4
-    };
+  State = {
+    NEW: 0,
+    ERROR: 1,
+    RETRY: 2,
+    SUCCESS: 3,
+    CANCELLED: 4
+  };
 
-    Model = Backbone.Model.extend({});
+  Model = Backbone.Model.extend({});
 
-    Model.State = State;
+  Model.State = State;
 
-    return Model;
+  return Model;
 
 });

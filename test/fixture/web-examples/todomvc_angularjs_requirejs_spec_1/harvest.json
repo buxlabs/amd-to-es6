@@ -1,42 +1,42 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "todoEscapeDir"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "directives/todoEscape"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "todoEscapeDir"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "directives/todoEscape"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "jQuery"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "jquery"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "jQuery"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "jquery"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [],
-    "source": {
-      "type": "Literal",
-      "value": "angular-mocks"
-    }
+  "type": "ImportDeclaration",
+  "specifiers": [],
+  "source": {
+    "type": "Literal",
+    "value": "angular-mocks"
+  }
   }
 ]

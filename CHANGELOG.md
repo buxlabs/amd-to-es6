@@ -1,5 +1,8 @@
 # @buxlabs/amd-to-es6 changelog
 
+## 0.13.0
+* remove: comments support
+
 ## 0.12.5
 * fix: added .npmignore
 

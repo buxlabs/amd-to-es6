@@ -1,10 +1,10 @@
-import View from 'common/core/view';
+import View from "common/core/view";
 
 export default View.extend({
-    method1: method,
-    method2: method
+  method1: method,
+  method2: method
 });
 
 function method () {
-    console.log('hello world');
+  console.log("hello world");
 }

@@ -1,5 +1,3 @@
-import foo from 'foo';
+import foo from "foo";
 var a = foo;
-export {
-    a as baz
-};
+export {a as baz};

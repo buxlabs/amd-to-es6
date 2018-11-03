@@ -1,5 +1,5 @@
-define('alpha', () => {
-    return function () {
-        return 'alpha';
-    };
+define("alpha", () => {
+  return function () {
+    return "alpha";
+  };
 });

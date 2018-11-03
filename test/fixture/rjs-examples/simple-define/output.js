@@ -1,3 +1,2 @@
-import $ from 'jquery';
-
-export default function () {};
+import $ from "jquery";
+export default function () {}

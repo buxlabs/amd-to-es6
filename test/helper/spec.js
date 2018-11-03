@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const normalize = require('normalize-newline')
-const AbstractSyntaxTree = require('@buxlabs/ast')
+const AbstractSyntaxTree = require('abstract-syntax-tree')
 const converter = require('../../index')
 const Analyzer = require('../../src/class/Analyzer')
 const Importer = require('../../src/class/Importer')
@@ -13,13 +13,13 @@ function compare (result, output) {
 module.exports = {
   convert: function convert (dir, options) {
     options = options || {}
-    const extension = options.jsx ? 'jsx' : 'js'
-    const file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
-    const file2 = path.join(__dirname, '../fixture/', dir, '/output.' + extension)
-    const input = fs.readFileSync(file1, 'utf8')
-    const expected = fs.readFileSync(file2, 'utf8')
-    const result = converter(input, options)
-    const isValid = compare(result, expected)
+    let extension = options.jsx ? 'jsx' : 'js'
+    let file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
+    let file2 = path.join(__dirname, '../fixture/', dir, '/output.' + extension)
+    let input = fs.readFileSync(file1, 'utf8')
+    let expected = fs.readFileSync(file2, 'utf8')
+    let result = converter(input, options)
+    let isValid = compare(result, expected)
     if (!isValid) {
       console.log('-- INPUT --')
       console.log(input)
@@ -32,13 +32,14 @@ module.exports = {
   },
   convertWithMap: function convertWithMap (dir, options) {
     options = options || {}
-    const extension = options.jsx ? 'jsx' : 'js'
-    const file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
-    const file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
-    const input = fs.readFileSync(file1, 'utf8')
-    const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
-    const result = converter(input, options)
-    const isValid = compare(result.source, expected.source) && compare(result.map, expected.map)
+    let extension = options.jsx ? 'jsx' : 'js'
+    let file1 = path.join(__dirname, '../fixture/', dir, '/input.' + extension)
+    let file2 = path.join(__dirname, '../fixture/', dir, '/output.json')
+    let input = fs.readFileSync(file1, 'utf8')
+    let content = fs.readFileSync(file2, 'utf8')
+    let result = converter(input, options)
+    let expected = JSON.parse(content)
+    let isValid = compare(result.source, expected.source) && compare(result.map, expected.map)
     if (!isValid) {
       console.log('-- INPUT --')
       console.log(input)
@@ -50,15 +51,15 @@ module.exports = {
     return isValid
   },
   harvest: function harvest (dir) {
-    const file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
-    const file2 = path.join(__dirname, '../fixture/', dir, '/harvest.json')
-    const input = fs.readFileSync(file1, 'utf8')
-    const expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
-    const ast = AbstractSyntaxTree.parse(input, { sourceType: 'module' })
-    const analyzer = new Analyzer(ast)
-    const harvester = new Importer(ast, { analyzer })
-    const result = harvester.harvest()
-    const isValid = JSON.stringify(expected) === JSON.stringify(result)
+    let file1 = path.join(__dirname, '../fixture/', dir, '/input.js')
+    let file2 = path.join(__dirname, '../fixture/', dir, '/harvest.json')
+    let input = fs.readFileSync(file1, 'utf8')
+    let expected = JSON.parse(fs.readFileSync(file2, 'utf8'))
+    let ast = AbstractSyntaxTree.parse(input, { sourceType: 'module' })
+    let analyzer = new Analyzer(ast)
+    let harvester = new Importer(ast, { analyzer })
+    let result = harvester.harvest()
+    let isValid = JSON.stringify(expected) === JSON.stringify(result)
     if (!isValid) {
       console.log('-- EXPECTED --')
       console.log(JSON.stringify(expected, null, 2))

@@ -16,7 +16,6 @@ program
   .option('--replace', 'Replace the input files with results')
   .option('--suffix <string>', 'Replace suffix of the files')
   .option('--quotes <type>', 'Single, double or auto quotes in the output', /^(single|double|auto)$/i, 'single')
-  .option('--comments', 'Basic comments, copy them to the top of the output file')
   .parse(process.argv)
 
 function replaceSuffix (filename, suffix) {

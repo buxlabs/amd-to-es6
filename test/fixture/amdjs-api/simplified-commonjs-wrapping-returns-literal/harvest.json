@@ -1,18 +1,18 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "a"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "a"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "a"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "a"
+  }
   }
 ]

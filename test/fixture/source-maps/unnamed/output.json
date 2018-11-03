@@ -1,4 +1,4 @@
 {
-    "source": "import alpha from 'alpha';\nexport default {\n    verb: function () {\n        return alpha.verb() + 2;\n    }\n};",
-    "map": "{\"version\":3,\"sources\":[\"UNKNOWN\"],\"names\":[],\"mappings\":\"0BAAA;AACI;AAAA;AAAA;AAAA;AAAA\",\"sourceRoot\":\"\",\"sourcesContent\":[\"define([\\\"alpha\\\"], function (alpha) {\\n    return {\\n        verb: function(){\\n            return alpha.verb() + 2;\\n        }\\n    };\\n});\\n\"]}"
+  "map": "{\"version\":3,\"sources\":[\"UNKNOWN\"],\"names\":[\"verb\",\"alpha\"],\"mappings\":\";;EAEIA,MAAM;WACGC,MAAMD,SAAS\",\"file\":\"UNKNOWN\"}",
+  "source": "import alpha from \"alpha\";\nexport default {\n  verb: function () {\n    return alpha.verb() + 2;\n  }\n};\n"
 }

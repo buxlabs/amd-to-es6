@@ -1,6 +1,6 @@
 'use strict'
 
-const AbstractSyntaxTree = require('@buxlabs/ast')
+const AbstractSyntaxTree = require('abstract-syntax-tree')
 const isDefineWithExports = require('../lib/isDefineWithExports')
 const isExportsMemberExpression = require('../lib/isExportsMemberExpression')
 

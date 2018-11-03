@@ -1,5 +1,5 @@
 define(["hello"], (hello) => {
-    return function () {
-        return hello.world();
-    };
+  return function () {
+    return hello.world();
+  };
 });

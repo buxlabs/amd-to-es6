@@ -1,3 +1,3 @@
 define([], () => {
-    return 3;
+  return 3;
 });

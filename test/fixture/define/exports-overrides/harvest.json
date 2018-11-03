@@ -1,34 +1,34 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "hello"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "hello"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "hello"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "hello"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "world"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "world"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "world"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "world"
+  }
   }
 ]

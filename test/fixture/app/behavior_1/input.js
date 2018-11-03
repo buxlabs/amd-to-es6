@@ -1,16 +1,16 @@
 define([
-    "core/behavior",
-    "typeahead"
+  "core/behavior",
+  "typeahead"
 ], function (Behavior) {
-    "use strict";
+  "use strict";
 
-    return Behavior.extend({
-        ui: {
-            hello: ".world"
-        },
-        onRender: function () {
-            this.ui.hello.typeahead();
-        }
-    });
+  return Behavior.extend({
+    ui: {
+      hello: ".world"
+    },
+    onRender: function () {
+      this.ui.hello.typeahead();
+    }
+  });
 
 });

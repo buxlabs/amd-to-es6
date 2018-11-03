@@ -1,10 +1,10 @@
 define("crypto", ["md5"], function (md5) {
-    "use strict";
+  "use strict";
 
-    return {
-        createCipher: function (value, key) {
-            return md5(value, key);
-        }
-    };
+  return {
+    createCipher: function (value, key) {
+      return md5(value, key);
+    }
+  };
 
 });

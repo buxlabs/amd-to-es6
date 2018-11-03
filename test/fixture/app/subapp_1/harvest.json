@@ -1,34 +1,34 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "Subapp"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "core/subapp"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "Subapp"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "core/subapp"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "Controller"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "subapps/hello/controller"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "Controller"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "subapps/hello/controller"
+  }
   }
 ]

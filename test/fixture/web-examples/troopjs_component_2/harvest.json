@@ -1,34 +1,34 @@
 [
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "Component"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "troopjs-core/component/base"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "Component"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "troopjs-core/component/base"
+  }
   },
   {
-    "type": "ImportDeclaration",
-    "specifiers": [
-      {
-        "type": "ImportDefaultSpecifier",
-        "local": {
-          "type": "Identifier",
-          "name": "$"
-        }
-      }
-    ],
-    "source": {
-      "type": "Literal",
-      "value": "jquery"
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+    "type": "ImportDefaultSpecifier",
+    "local": {
+      "type": "Identifier",
+      "name": "$"
     }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "jquery"
+  }
   }
 ]

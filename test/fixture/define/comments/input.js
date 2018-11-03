@@ -1,10 +1,10 @@
 define(["core/channel"], function (channel) {
-    "use strict";
+  "use strict";
 
-    return {
-        fetch: function () {
-            return channel.request("service:properties:request"); // TODO fix
-        }
-    };
+  return {
+    fetch: function () {
+      return channel.request("service:properties:request"); // TODO fix
+    }
+  };
 
 });
