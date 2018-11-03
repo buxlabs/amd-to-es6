@@ -40,6 +40,10 @@ class Module extends AbstractSyntaxTree {
     this.importer = new Importer(this.ast, { analyzer: this.analyzer })
     this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
   }
+  static parse (source, options) {
+    options.next = true
+    return AbstractSyntaxTree.parse(source, options)
+  }
   convert (options) {
     const define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {

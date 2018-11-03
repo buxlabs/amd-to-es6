@@ -1,6 +1,7 @@
 # @buxlabs/amd-to-es6 changelog
 
 ## 0.13.0
+* edit: update dependencies
 * remove: comments support
 
 ## 0.12.5
