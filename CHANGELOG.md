@@ -1,5 +1,8 @@
 # @buxlabs/amd-to-es6 changelog
 
+## 0.13.1
+* remove: .nyc_output from the package source files
+
 ## 0.13.0
 * add: support dynamic imports inside of the source code
 * edit: update dependencies
