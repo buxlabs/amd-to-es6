@@ -1,12 +1,12 @@
 {
   "name": "@buxlabs/amd-to-es6",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
     "test": "ava \"test/spec/**/*.js\"",
     "coverage": "nyc npm test",
-    "lint": "eslint ."
+    "lint": "standard"
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
@@ -30,23 +30,23 @@
   },
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
-    "ava": "^1.0.0-rc.1",
-    "eslint": "^4.10.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "ava": "^1.0.0-rc.2",
     "normalize-newline": "^3.0.0",
     "nyc": "^13.1.0",
-    "shelljs": "0.8.0"
+    "shelljs": "^0.8.3",
+    "standard": "^12.0.1"
   },
   "dependencies": {
-    "abstract-syntax-tree": "^1.0.3",
+    "abstract-syntax-tree": "^1.1.2",
     "array-uniq": "^1.0.3",
-    "commander": "^2.13.0",
-    "glob": "^7.1.2",
+    "commander": "^2.19.0",
+    "glob": "^7.1.3",
     "mkdirp": "^0.5.1",
     "pure-utilities": "^1.1.4"
+  },
+  "standard": {
+    "ignore": [
+      "test/fixture"
+    ]
   }
 }
