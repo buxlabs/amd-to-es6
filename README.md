@@ -1,13 +1,27 @@
-# AMD to ES6 converter
+# AMD to ES converter
 
-[![Codeship](https://img.shields.io/codeship/f6299130-6721-0134-f3f9-02d00f1d3243/master.svg)](https://app.codeship.com/projects/176125)
-[![Build Status](https://travis-ci.org/buxlabs/amd-to-es6.svg?branch=master)](https://travis-ci.org/buxlabs/amd-to-es6)
+![npm](https://img.shields.io/npm/v/@buxlabs/amd-to-es6.svg) [![Codeship](https://img.shields.io/codeship/f6299130-6721-0134-f3f9-02d00f1d3243/master.svg)](https://app.codeship.com/projects/176125)
 
-## Installation
+> AMD (Asynchronous Module Definition) to ES (EcmaScript) Module converter
 
-`npm install @buxlabs/amd-to-es6`
+## Table of Contents
 
-If you'd like to use it in the cli consider installing globally or use `npx`
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+
+## Background
+
+AMD was very popular and used in many big applications worldwide. ES Module standard was created much later and with the rise of various bundlers and transpilers it became possible to write modern code with more concise syntax. This tool was created to fill the migration gap, as other tools were not handling some of the edge cases. It should handle most of existing code out of the box.
+
+This tool exposes both a cli and a programmatic interface.
+
+## Install
 
 `npm install -g @buxlabs/amd-to-es6`
 
@@ -31,6 +45,24 @@ Convert multiple files and replace them with:
 
 `amdtoes6 --src=src --replace`
 
+### Options
+```sh
+
+  Usage: amdtoes6 [options]
+
+  Options:
+
+    -s, --src <dirname>     Directory of the source files
+    -d, --dest <dirname>    Directory of the destination files
+    -g, --glob [glob]       Glob pattern for the src to match for input files
+    -r, --recursive         Set glob pattern to **/*.js with no hassle
+    -b, --beautify          Beautify the output
+    --replace           Replace the input files with results
+    --suffix <string>   Replace suffix of the files
+    --quotes            Single, double or auto quotes in the output
+
+```
+
 ### node
 
 Convert a single file with:
@@ -41,7 +73,7 @@ const source = 'define({ hello: 'world' });';
 const result = amdtoes6(source); // export default { hello: 'world' };
 ```
 
-## Examples:
+## Examples
 
 **AMD**
 
@@ -59,7 +91,7 @@ define([
 });
 ```
 
-**ES6**
+**ES**
 
 ```javascript
 import View from 'core/view';
@@ -86,7 +118,7 @@ define(function (require) {
 });
 ```
 
-**ES6**
+**ES**
 
 ```javascript
 import Marionette from 'marionette';
@@ -100,24 +132,20 @@ export default Marionette.Object.extend({
 
 There are more examples in the test/fixture directory
 
-### Options
-```sh
+## Maintainers
 
-  Usage: amdtoes6 [options]
+[@emilos](https://github.com/emilos).
 
-  Options:
+## Contributing
 
-    -s, --src <dirname>     Directory of the source files
-    -d, --dest <dirname>    Directory of the destination files
-    -g, --glob [glob]       Glob pattern for the src to match for input files
-    -r, --recursive         Set glob pattern to **/*.js with no hassle
-    -b, --beautify          Beautify the output
-    --replace           Replace the input files with results
-    --suffix <string>   Replace suffix of the files
-    --quotes            Single, double or auto quotes in the output
+All contributions are highly appreciated! Open an issue or a submit PR.
 
-```
+The lib follows the tdd approach and is expected to have a high code coverage.
 
-## Inspired by:
+## Credits
 
 https://github.com/jonbretman/amd-to-as6
+
+## License
+
+MIT © buxlabs
