@@ -325,6 +325,10 @@ test('(convert) it does not break on files with async await', assert => {
   assert.truthy(convert('define/async-await'))
 })
 
+test.skip('(convert) it does not create multiple default exports', assert => {
+  assert.truthy(convert('define/if-statement-and-exports-default'))
+})
+
 test.skip('it leaves single line comments if required', assert => {
   assert.truthy(convert('define/single-line-comments', { comments: true }))
 })
