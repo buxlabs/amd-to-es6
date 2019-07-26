@@ -37,10 +37,12 @@ class Module extends AbstractSyntaxTree {
     this.importer = new Importer(this.ast, { analyzer: this.analyzer })
     this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
   }
+
   static parse (source, options) {
     options.next = true
     return AbstractSyntaxTree.parse(source, options)
   }
+
   convert (options) {
     const define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
@@ -126,7 +128,7 @@ class Module extends AbstractSyntaxTree {
   }
 
   wrapMultipleReturns (node) {
-    let args = getDefineCallbackArguments(node)
+    const args = getDefineCallbackArguments(node)
     if (args.body.type === 'BlockStatement') {
       const types = args.body.body.map(leaf => leaf.type)
       if (!types.includes('ReturnStatement') && types.includes('IfStatement')) {
@@ -136,7 +138,7 @@ class Module extends AbstractSyntaxTree {
   }
 
   getBody (node) {
-    let args = getDefineCallbackArguments(node)
+    const args = getDefineCallbackArguments(node)
     if (args.body.type === 'BlockStatement') {
       return args.body.body
     }

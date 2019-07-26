@@ -15,6 +15,7 @@ module.exports = class Importer extends AbstractSyntaxTree {
     super(source, options)
     this.analyzer = options.analyzer
   }
+
   harvest () {
     const node = this.first('CallExpression[callee.name="define"]')
     if (!isDefineWithDependencies(node)) { return [] }
@@ -22,9 +23,11 @@ module.exports = class Importer extends AbstractSyntaxTree {
       this.getRequireSugarDependencies()
     )
   }
+
   getDefineDependencies (node) {
     return generateImports(getDefineDependencies(node))
   }
+
   getRequireSugarDependencies () {
     const nodes = []
     this.walk(node => {
@@ -40,14 +43,17 @@ module.exports = class Importer extends AbstractSyntaxTree {
     })
     return nodes
   }
+
   getExpressionStatementRequire (node) {
     return getImportDeclaration(node.expression.arguments[0].value)
   }
+
   getVariableDeclaratorRequire (node) {
     var param = node.id.type === 'ObjectPattern' ? node.id : node.id.name
     var element = node.init && node.init.arguments && node.init.arguments[0].value
     return getImportDeclaration(element, param)
   }
+
   getMemberExpressionRequire (node) {
     const identifier = this.analyzer.createIdentifier()
     node.callee.object.replacement = {
@@ -56,6 +62,7 @@ module.exports = class Importer extends AbstractSyntaxTree {
     }
     return getImportDeclaration(node.callee.object.arguments[0].value, identifier)
   }
+
   getAssignmentExpressionRequire (node) {
     const identifier = this.analyzer.createIdentifier()
     node.right.replacement = {

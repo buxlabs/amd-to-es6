@@ -9,9 +9,11 @@ module.exports = class Analyzer extends AbstractSyntaxTree {
     super(source, options)
     this.identifiers = this.getIdentifiers()
   }
+
   getIdentifiers () {
     return unique(this.find('Identifier').map(identifier => identifier.name))
   }
+
   createIdentifier () {
     const identifier = utils.array.identifier(this.identifiers)
     this.identifiers.push(identifier)

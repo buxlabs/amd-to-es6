@@ -9,11 +9,13 @@ module.exports = class Exporter extends AbstractSyntaxTree {
     super(source, options)
     this.analyzer = options.analyzer
   }
+
   harvest () {
     const node = this.first('CallExpression[callee.name="define"]')
     if (!isDefineWithExports(node)) { return [] }
     return this.getExports()
   }
+
   getExports () {
     const nodes = this.find('AssignmentExpression')
     const exports = []
@@ -36,8 +38,8 @@ module.exports = class Exporter extends AbstractSyntaxTree {
         kind: 'var'
       })
       used.push(node.left.property.name)
-      let index = used.indexOf(node.left.property.name)
-      let specifier = {
+      const index = used.indexOf(node.left.property.name)
+      const specifier = {
         type: 'ExportSpecifier',
         local: { type: 'Identifier', name: identifier },
         exported: { type: 'Identifier', name: node.left.property.name }
