@@ -4,7 +4,7 @@
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
-    "test": "ava \"test/spec/**/*.js\"",
+    "test": "ava test/spec/convert.js test/spec/class/Analyzer.js test/spec/bin/cli.js",
     "coverage": "nyc npm test",
     "lint": "standard"
   },
@@ -30,9 +30,9 @@
   },
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
-    "ava": "^1.0.0-rc.2",
+    "ava": "^2.2.0",
     "normalize-newline": "^3.0.0",
-    "nyc": "^13.1.0",
+    "nyc": "^14.1.1",
     "shelljs": "^0.8.3",
     "standard": "^12.0.1"
   },
