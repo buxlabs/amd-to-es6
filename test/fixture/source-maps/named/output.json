@@ -1,4 +1,0 @@
-{
-  "source": "import alpha from \"alpha\";\nexport default {\n  verb: function () {\n    return alpha.verb() + 2;\n  }\n};",
-  "map": "{\"version\":3,\"sources\":[\"file1.js\"],\"names\":[\"verb\",\"alpha\"],\"mappings\":\";;EAEIA,MAAM;WACGC,MAAMD,SAAS\",\"file\":\"file1.js\"}"
-}

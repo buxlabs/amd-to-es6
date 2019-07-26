@@ -229,10 +229,6 @@ test('(convert) it returns sourcemaps', assert => {
   assert.truthy(convertWithMap('source-maps/unnamed', { sourceMap: true }))
 })
 
-test('(convert) it returns sourcemaps with file reference', assert => {
-  assert.truthy(convertWithMap('source-maps/named', { sourceMap: true, sourceFile: 'file1.js', sourceRoot: 'path/to/file' }))
-})
-
 test('(convert) it handles destructuring', assert => {
   assert.truthy(convert('define/destructuring'))
 })

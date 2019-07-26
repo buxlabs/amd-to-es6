@@ -14,13 +14,13 @@ module.exports = function (source, options) {
     module.convert(options)
   }
 
-  let code = module.toSource(options)
+  let code = module.source
+  code = revertDynamicImportConversion(code)
 
-  if (typeof code === 'string') {
-    code = revertDynamicImportConversion(code)
-  } else if (typeof code === 'object') {
-    code.source = revertDynamicImportConversion(code.source)
-    code.map = revertDynamicImportConversion(code.map)
+  if (options.sourceMap) {
+    let map = module.map
+    map = revertDynamicImportConversion(map)
+    return { source: code, map }
   }
 
   return code

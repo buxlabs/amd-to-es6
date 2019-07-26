@@ -32,10 +32,9 @@ function getImmediatelyInvokedFunctionExpression (body) {
 class Module extends AbstractSyntaxTree {
   constructor (source, options) {
     super(source, options)
-    this.transform(options)
-    this.analyzer = new Analyzer(this.ast)
-    this.importer = new Importer(this.ast, { analyzer: this.analyzer })
-    this.exporter = new Exporter(this.ast, { analyzer: this.analyzer })
+    this.analyzer = new Analyzer(this._tree)
+    this.importer = new Importer(this._tree, { analyzer: this.analyzer })
+    this.exporter = new Exporter(this._tree, { analyzer: this.analyzer })
   }
 
   static parse (source, options) {
@@ -46,7 +45,7 @@ class Module extends AbstractSyntaxTree {
   convert (options) {
     const define = this.first('CallExpression[callee.name=define]')
     if (isDefineWithObjectExpression(define)) {
-      this.ast.body = [{
+      this._tree.body = [{
         type: 'ExportDefaultDeclaration',
         declaration: define.arguments[0]
       }]
@@ -56,7 +55,7 @@ class Module extends AbstractSyntaxTree {
       const exports = this.exporter.harvest()
       const body = this.getBody(define)
       const code = this.getCode(body, options)
-      this.ast.body = imports.concat(code, exports)
+      this._tree.body = imports.concat(code, exports)
       this.clean()
     }
   }
@@ -206,41 +205,6 @@ class Module extends AbstractSyntaxTree {
         value: 'use strict'
       }
     })
-  }
-
-  transform (options) {
-    this.transformations = []
-    if (options.jsx) {
-      this.transformJsxNodes()
-    }
-  }
-
-  transformJsxNodes () {
-    let count = 0
-    this.replace({
-      enter: node => {
-        if (node.type === 'JSXElement') {
-          count += 1
-          const name = '$$JSXElement_' + count + '$$'
-          this.transformations.push({
-            node: node,
-            name: name
-          })
-          return { type: 'Identifier', name: name }
-        }
-        return node
-      }
-    })
-  }
-
-  toSource (options) {
-    let source = super.toSource(options)
-    this.transformations.forEach(transformation => {
-      // jsxcodegen will be used in the line below
-      const code = transformation.node
-      source = source.replace(transformation.name, code)
-    })
-    return source
   }
 }
 
