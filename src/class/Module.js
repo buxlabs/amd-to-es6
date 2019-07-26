@@ -126,11 +126,17 @@ class Module extends AbstractSyntaxTree {
     })
   }
 
+  hasExportsDefault () {
+    return this.find('MemberExpression[object.name="exports"][property.name="default"]').length > 0
+  }
+
   wrapMultipleReturns (node) {
     const args = getDefineCallbackArguments(node)
     if (args.body.type === 'BlockStatement') {
       const types = args.body.body.map(leaf => leaf.type)
-      if (!types.includes('ReturnStatement') && types.includes('IfStatement')) {
+      if (this.hasExportsDefault() && types.includes('IfStatement')) {
+        args.body.body = [getImmediatelyInvokedFunctionExpression(args.body.body)]
+      } else if (!types.includes('ReturnStatement') && types.includes('IfStatement')) {
         args.body.body = [{ type: 'ReturnStatement', argument: getImmediatelyInvokedFunctionExpression(args.body.body) }]
       }
     }
