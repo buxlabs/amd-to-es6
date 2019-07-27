@@ -1,5 +1,8 @@
 define(["require", "exports"], function (require, exports) {
   "use strict";
-  if (false) {}
-  exports.default = function foo() {};
+  if (false) {
+    alert("baz");
+  }
+  var Foo = function () {};
+  exports.default = Foo;
 });
