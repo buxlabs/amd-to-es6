@@ -1,4 +1,4 @@
-module.exports = function isAssignmentMemberExpression (node) {
+module.exports = function isRequireMemberExpressionAssignment (node) {
   return node.type === 'AssignmentExpression' &&
     node.left.type === 'MemberExpression' &&
     node.right.type === 'CallExpression' &&

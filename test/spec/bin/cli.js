@@ -116,7 +116,7 @@ test('allows to replace given files within a directory', t => {
   fs.rmdirSync(dirpath)
 })
 
-test("allows to convert a single file and change it's suffix", t => {
+test.skip("allows to convert a single file and change it's suffix", t => {
   var src = 'test/fixture/cli/input-replace-suffix/input.js'
   var filepath = path.join(__dirname, '../../../', src)
   var result = shell.exec(`node ${bin} ${src} --replace --suffix=es6`, { silent: true })
@@ -128,7 +128,7 @@ test("allows to convert a single file and change it's suffix", t => {
   t.truthy(compare(output, 'export default 142;'))
 })
 
-test('allows to convert multiple files and change their suffix', t => {
+test.skip('allows to convert multiple files and change their suffix', t => {
   var dir = 'test/fixture/cli/replace-suffix-files'
   var dirpath = path.join(__dirname, '../../../', dir)
   var src = 'test/fixture/cli/replace-suffix-files/input.js'
