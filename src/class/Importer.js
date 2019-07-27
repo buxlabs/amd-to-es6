@@ -7,7 +7,7 @@ const generateImports = require('../lib/generateImports')
 const getImportDeclaration = require('../lib/getImportDeclaration')
 const isRequireCallExpression = require('../lib/isRequireCallExpression')
 const isRequireSugarVariableDeclarator = require('../lib/isRequireSugarVariableDeclarator')
-const isMemberRequireCallExpression = require('../lib/isMemberRequireCallExpression')
+const isRequireMemberCallExpression = require('../lib/isRequireMemberCallExpression')
 const isRequireMemberExpressionAssignment = require('../lib/isRequireMemberExpressionAssignment')
 
 module.exports = class Importer extends AbstractSyntaxTree {
@@ -35,7 +35,7 @@ module.exports = class Importer extends AbstractSyntaxTree {
         nodes.push(this.getVariableDeclaratorRequire(node))
       } else if (isRequireCallExpression(node)) {
         nodes.push(this.getExpressionStatementRequire(node))
-      } else if (isMemberRequireCallExpression(node)) {
+      } else if (isRequireMemberCallExpression(node)) {
         nodes.push(this.getMemberExpressionRequire(node))
       } else if (isRequireMemberExpressionAssignment(node)) {
         nodes.push(this.getAssignmentExpressionRequire(node))
