@@ -6,7 +6,7 @@
   "scripts": {
     "test": "ava test/spec/convert.js test/spec/class/Analyzer.js test/spec/bin/cli.js",
     "coverage": "nyc npm test",
-    "lint": "standard"
+    "lint": "echo todo"
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
@@ -33,8 +33,7 @@
     "ava": "^2.2.0",
     "normalize-newline": "^3.0.0",
     "nyc": "^14.1.1",
-    "shelljs": "^0.8.3",
-    "standard": "^13.1.0"
+    "shelljs": "^0.8.3"
   },
   "dependencies": {
     "abstract-syntax-tree": "^2.4.0",
@@ -43,10 +42,5 @@
     "glob": "^7.1.3",
     "mkdirp": "^0.5.1",
     "pure-utilities": "^1.1.4"
-  },
-  "standard": {
-    "ignore": [
-      "test/fixture"
-    ]
   }
 }
