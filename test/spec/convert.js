@@ -177,6 +177,18 @@ test('(convert) it converts require sugar correctly', assert => {
   assert.truthy(convert('define/require-sugar'))
 })
 
+test('(convert) it converts require sugar proxy correctly', assert => {
+  assert.truthy(convert('define/require-sugar-proxy'))
+})
+
+test('(convert) it converts require sugar proxy with member expression correctly', assert => {
+  assert.truthy(convert('define/require-sugar-proxy-inline'))
+})
+
+test('(convert) it converts require sugar proxy with nested member expressions correctly', assert => {
+  assert.truthy(convert('define/require-sugar-proxy-inline-nested'))
+})
+
 test('(convert) it converts require sugar with side effects correctly', assert => {
   assert.truthy(convert('define/require-sugar-with-side-effect'))
 })
