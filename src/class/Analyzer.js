@@ -2,7 +2,6 @@
 
 const AbstractSyntaxTree = require('abstract-syntax-tree')
 const utils = require('pure-utilities')
-const unique = require('array-uniq')
 
 module.exports = class Analyzer extends AbstractSyntaxTree {
   constructor (source, options) {
@@ -11,7 +10,7 @@ module.exports = class Analyzer extends AbstractSyntaxTree {
   }
 
   getIdentifiers () {
-    return unique(this.find('Identifier').map(identifier => identifier.name))
+    return [...new Set(this.find('Identifier').map(identifier => identifier.name))]
   }
 
   createIdentifier () {
