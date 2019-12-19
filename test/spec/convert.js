@@ -65,6 +65,18 @@ test('(convert) it converts quotes correctly', assert => {
   assert.truthy(convert('define/quotes'))
 })
 
+test.skip('(convert) it converts single quotes correctly', assert => {
+  assert.truthy(convert('quotes/single', { quotes: 'single' }))
+})
+
+test.skip('(convert) it converts double quotes correctly', assert => {
+  assert.truthy(convert('quotes/double', { quotes: 'double' }))
+})
+
+test('(convert) it converts auto quotes correctly', assert => {
+  assert.truthy(convert('quotes/auto', { quotes: 'auto' }))
+})
+
 test('(convert) it converts define with an object in callback only correctly', assert => {
   assert.truthy(convert('define/object-only'))
 })
