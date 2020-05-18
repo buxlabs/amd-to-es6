@@ -1,12 +1,11 @@
 {
   "name": "@buxlabs/amd-to-es6",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "convert amd to es6",
   "main": "index.js",
   "scripts": {
     "test": "ava test/spec/convert.js test/spec/class/Analyzer.js test/spec/bin/cli.js",
-    "coverage": "nyc npm test",
-    "lint": "echo todo"
+    "coverage": "nyc npm test"
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
