@@ -1,5 +1,5 @@
-import test from 'ava'
-import Analyzer from '../../../src/class/Analyzer'
+const test = require('ava')
+const Analyzer = require('../../../src/class/Analyzer')
 
 test('it returns all identifiers from given ast', assert => {
   const source = 'var x = 0'

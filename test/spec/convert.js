@@ -1,5 +1,5 @@
-import test from 'ava'
-import { convert, convertWithMap } from '../helper/spec'
+const test = require('ava')
+const { convert, convertWithMap } = require('../helper/spec')
 
 test('(convert) it works for an anonymous module', assert => {
   assert.truthy(convert('amdjs-api/anonymous-module'))

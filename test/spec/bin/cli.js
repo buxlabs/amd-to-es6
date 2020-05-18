@@ -1,8 +1,8 @@
-import test from 'ava'
-import fs from 'fs'
-import shell from 'shelljs'
-import path from 'path'
-import os from 'os'
+const test = require('ava')
+const fs = require('fs')
+const shell = require('shelljs')
+const path = require('path')
+const os = require('os')
 
 const bin = path.join(__dirname, '../../../bin/cli.js')
 
