@@ -1,5 +1,8 @@
 # @buxlabs/amd-to-es6 changelog
 
+## 0.15.2
+* edit: update .npmignore
+
 ## 0.15.1
 * edit: update dependencies
 
