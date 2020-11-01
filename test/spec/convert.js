@@ -349,6 +349,10 @@ test('(convert) it does not create multiple default exports', assert => {
   assert.truthy(convert('define/if-statement-and-exports-default'))
 })
 
+test.skip('(convert) it handles optional chaining', assert => {
+  assert.truthy(convert('define/optional-chaining'))
+})
+
 test.skip('it leaves single line comments if required', assert => {
   assert.truthy(convert('define/single-line-comments', { comments: true }))
 })
