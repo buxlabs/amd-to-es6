@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "ava test/spec/convert.js test/spec/class/Analyzer.js test/spec/bin/cli.js",
-    "coverage": "nyc npm test"
+    "coverage": "nyc npm test",
+    "lint": "standard"
   },
   "bin": {
     "amdtoes6": "./bin/cli.js"
   },
   "engines": {
-    "node": ">=8.11.4"
+    "node": ">=14.15.0"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,8 @@
     "ava": "^3.13.0",
     "normalize-newline": "^3.0.0",
     "nyc": "^15.1.0",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "standard": "^16.0.1"
   },
   "dependencies": {
     "abstract-syntax-tree": "^2.12.0",
@@ -40,5 +42,10 @@
     "glob": "^7.1.6",
     "mkdirp": "^1.0.4",
     "pure-utilities": "^1.2.0"
+  },
+  "standard": {
+    "ignore": [
+      "test/fixture/**/*"
+    ]
   }
 }

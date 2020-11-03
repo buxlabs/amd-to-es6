@@ -55,8 +55,8 @@ module.exports = class Importer extends AbstractSyntaxTree {
   }
 
   getVariableDeclaratorRequire (node) {
-    var param = node.id.type === 'ObjectPattern' ? node.id : node.id.name
-    var element = node.init && node.init.arguments && node.init.arguments[0].value
+    const param = node.id.type === 'ObjectPattern' ? node.id : node.id.name
+    const element = node.init && node.init.arguments && node.init.arguments[0].value
     return getImportDeclaration(element, param)
   }
 

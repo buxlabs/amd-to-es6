@@ -17,9 +17,9 @@ function getFunctionParameters (node) {
 
 module.exports = function (node) {
   if (!isDefineWithArrayAndCallback(node)) { return [] }
-  var length = node.arguments.length
-  var elements = getArrayExpressionValues(node.arguments[length - 2])
-  var params = getFunctionParameters(node.arguments[length - 1])
+  const length = node.arguments.length
+  const elements = getArrayExpressionValues(node.arguments[length - 2])
+  const params = getFunctionParameters(node.arguments[length - 1])
   return elements.map((element, index) => {
     return {
       element: element,

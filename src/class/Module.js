@@ -187,12 +187,12 @@ class Module extends AbstractSyntaxTree {
   }
 
   removeEsModuleConvention () {
-    var object = '[expression.callee.object.name=Object]'
-    var property = '[expression.callee.property.name=defineProperty]'
-    var selector = `ExpressionStatement${object}${property}`
-    var nodes = this.find(selector)
+    const object = '[expression.callee.object.name=Object]'
+    const property = '[expression.callee.property.name=defineProperty]'
+    const selector = `ExpressionStatement${object}${property}`
+    const nodes = this.find(selector)
     nodes.forEach(node => {
-      var args = node.expression.arguments
+      const args = node.expression.arguments
       if (args.length > 2 &&
         args[0].type === 'Identifier' && args[0].name === 'exports' &&
         args[1].type === 'Literal' && args[1].value === '__esModule'
