@@ -18,6 +18,8 @@ program
   .option('--quotes <type>', 'Single, double or auto quotes in the output', /^(single|double|auto)$/i, 'single')
   .parse(process.argv)
 
+const settings = program.opts()
+
 function replaceSuffix (filename, suffix) {
   return suffix ? filename.replace(/\.js$/, '.' + suffix) : filename
 }
@@ -26,7 +28,7 @@ function getGlob (options) {
   if (options.recursive) {
     return '**/*.js'
   }
-  return program.glob || '*.js'
+  return settings.glob || '*.js'
 }
 
 function convertFile (file, options) {
@@ -58,19 +60,19 @@ function convertFiles (files, options) {
   })
 }
 
-if (!program.src) {
+if (!settings.src) {
   const file = program.args[0]
-  convertFile(file, program)
+  convertFile(file, settings)
   process.exit(0)
 }
 
-if (program.dest) {
-  mkdirp.sync(program.dest)
+if (settings.dest) {
+  mkdirp.sync(settings.dest)
 }
 
-if (program.src && (program.dest || program.replace)) {
-  const files = glob.sync(getGlob(program), { cwd: program.src })
-  convertFiles(files, program)
+if (settings.src && (settings.dest || settings.replace)) {
+  const files = glob.sync(getGlob(settings), { cwd: settings.src })
+  convertFiles(files, settings)
   process.exit(0)
 }
 
