@@ -1,13 +1,16 @@
 const fs = require('fs')
 const path = require('path')
-const normalize = require('normalize-newline')
 const AbstractSyntaxTree = require('abstract-syntax-tree')
 const converter = require('../../index')
 const Analyzer = require('../../src/class/Analyzer')
 const Importer = require('../../src/class/Importer')
 
+function normalize (string) {
+  return string.replace(/\s+/g, '')
+}
+
 function compare (result, output) {
-  return normalize(result).replace(/\s+/g, '') === normalize(output).replace(/\s+/g, '')
+  return normalize(result) === normalize(output)
 }
 
 module.exports = {
