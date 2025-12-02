@@ -30,17 +30,16 @@
   },
   "homepage": "https://github.com/buxlabs/amd-to-es6#readme",
   "devDependencies": {
-    "ava": "^4.0.1",
-    "nyc": "15.1.0",
-    "shelljs": "^0.8.5",
-    "standard": "16.0.4"
+    "ava": "^6.4.1",
+    "nyc": "^17.1.0",
+    "shelljs": "^0.10.0"
   },
   "dependencies": {
-    "abstract-syntax-tree": "^2.20.5",
-    "commander": "8.3.0",
-    "glob": "7.2.0",
-    "mkdirp": "1.0.4",
-    "pure-utilities": "1.2.4"
+    "abstract-syntax-tree": "^2.22.0",
+    "commander": "^14.0.2",
+    "glob": "^13.0.0",
+    "mkdirp": "^3.0.1",
+    "pure-utilities": "^1.4.6"
   },
   "standard": {
     "ignore": [
